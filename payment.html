@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoFarm Connect - Payment</title>
+
+    <link rel="stylesheet" href="./payment.css">
+</head>
+
+<body>
+
+<div class="payment-container">
+
+    <div class="payment-box">
+
+        <div class="payment-header">
+            <h1>EcoFarm Connect</h1>
+            <p>Ընտրեք վճարման եղանակը</p>
+        </div>
+
+        <div class="order-info">
+
+            <span>Ընտրված պլան</span>
+
+            <strong id="selected-plan">
+                Eco Start
+            </strong>
+
+            <strong id="selected-price">
+                $9 / ամիս
+            </strong>
+
+        </div>
+
+
+        <div class="payment-methods">
+
+            <button class="payment-method"
+                    onclick="payWith('Google Pay')">
+
+                <span class="payment-icon google">
+                    G
+                </span>
+
+                <span>Google Pay</span>
+
+                <span>›</span>
+
+            </button>
+
+
+            <button class="payment-method"
+                    onclick="payWith('Apple Pay')">
+
+                <span class="payment-icon apple">
+                    
+                </span>
+
+                <span>Apple Pay</span>
+
+                <span>›</span>
+
+            </button>
+
+
+            <button class="payment-method"
+                    onclick="payWith('Visa')">
+
+                <span class="card-logo visa">
+                    VISA
+                </span>
+
+                <span>Visa</span>
+
+                <span>›</span>
+
+            </button>
+
+
+            <button class="payment-method"
+                    onclick="payWith('Mastercard')">
+
+                <span class="card-logo mastercard">
+                    MC
+                </span>
+
+                <span>Mastercard</span>
+
+                <span>›</span>
+
+            </button>
+
+
+            <button class="payment-method"
+                    onclick="payWith('ArCa')">
+
+                <span class="card-logo arca">
+                    ArCa
+                </span>
+
+                <span>ArCa</span>
+
+                <span>›</span>
+
+            </button>
+
+        </div>
+
+
+        <button class="back-btn"
+                onclick="history.back()">
+
+            ← Վերադառնալ
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="./payment.js"></script>
+
+</body>
+</html>

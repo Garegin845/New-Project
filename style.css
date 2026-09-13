@@ -1,0 +1,389 @@
+/* =========================
+   GENERAL
+========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f8f3;
+    color: #263528;
+    line-height: 1.6;
+}
+
+/* =========================
+   HEADER
+========================= */
+
+header {
+    width: 100%;
+    background: #ffffff;
+    padding: 18px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: 700;
+    color: #2e7d32;
+    letter-spacing: 0.5px;
+}
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #374a38;
+    font-weight: 600;
+    transition: 0.3s;
+}
+
+nav a:hover {
+    color: #2e7d32;
+}
+
+.lang-select {
+    padding: 8px 12px;
+    border: 1px solid #c8d8c8;
+    border-radius: 8px;
+    background: #f8fbf7;
+    color: #2e7d32;
+    font-weight: 600;
+    cursor: pointer;
+    outline: none;
+}
+
+/* =========================
+   CONTAINER
+========================= */
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 60px 0;
+}
+
+/* =========================
+   SECTION TITLES
+========================= */
+
+.section-title {
+    text-align: center;
+    font-size: 32px;
+    margin: 55px 0 35px;
+    color: #245c29;
+    position: relative;
+}
+
+.section-title::after {
+    content: "";
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: #66bb6a;
+    border-radius: 10px;
+    margin: 12px auto 0;
+}
+
+/* =========================
+   PRICING
+========================= */
+
+.pricing-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+    align-items: stretch;
+}
+
+.price-card {
+    background: #ffffff;
+    border-radius: 18px;
+    padding: 35px 28px;
+    text-align: center;
+    border: 1px solid #e1ebe0;
+    box-shadow: 0 8px 25px rgba(35, 80, 40, 0.08);
+    transition: 0.3s ease;
+    position: relative;
+}
+
+.price-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(35, 80, 40, 0.15);
+}
+
+.price-card.popular {
+    border: 2px solid #43a047;
+    transform: scale(1.03);
+}
+
+.price-card.popular:hover {
+    transform: scale(1.03) translateY(-8px);
+}
+
+.price-card h3 {
+    font-size: 23px;
+    color: #2e7d32;
+    margin-bottom: 20px;
+}
+
+.price {
+    font-size: 42px;
+    font-weight: 700;
+    color: #1b5e20;
+    margin-bottom: 25px;
+}
+
+.per-year {
+    font-size: 15px;
+    font-weight: normal;
+    color: #777;
+}
+
+.price-features {
+    list-style: none;
+    text-align: left;
+    margin: 25px 0;
+}
+
+.price-features li {
+    padding: 10px 0;
+    border-bottom: 1px solid #edf2ec;
+    color: #536154;
+}
+
+.price-features li::first-letter {
+    color: #43a047;
+}
+
+/* Popular badge */
+
+.popular-badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #43a047;
+    color: white;
+    padding: 6px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+/* =========================
+   BUTTONS
+========================= */
+
+.btn {
+    width: 100%;
+    border: none;
+    border-radius: 10px;
+    padding: 13px 20px;
+    background: #43a047;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.btn:hover {
+    background: #2e7d32;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(46, 125, 50, 0.25);
+}
+
+/* =========================
+   FORM
+========================= */
+
+.form-section {
+    max-width: 750px;
+    margin: auto;
+    background: #ffffff;
+    padding: 40px;
+    border-radius: 18px;
+    box-shadow: 0 8px 30px rgba(35, 80, 40, 0.09);
+    border: 1px solid #e1ebe0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #344635;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 13px 14px;
+    border: 1px solid #ccd9cc;
+    border-radius: 9px;
+    background: #fbfdfb;
+    color: #263528;
+    font-size: 15px;
+    outline: none;
+    transition: 0.3s;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: #43a047;
+    box-shadow: 0 0 0 3px rgba(67, 160, 71, 0.12);
+}
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.form-group input[type="file"] {
+    padding: 10px;
+    background: #f7faf7;
+    cursor: pointer;
+}
+
+/* =========================
+   PRODUCTS
+========================= */
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+}
+
+.product-card {
+    background: #ffffff;
+    border-radius: 16px;
+    overflow: hidden;
+    border: 1px solid #e1ebe0;
+    box-shadow: 0 7px 22px rgba(35, 80, 40, 0.08);
+    transition: 0.3s ease;
+}
+
+.product-card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 14px 30px rgba(35, 80, 40, 0.14);
+}
+
+.product-img {
+    height: 220px;
+    background: linear-gradient(
+        135deg,
+        #dcedc8,
+        #a5d6a7
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #245c29;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.product-info {
+    padding: 22px;
+}
+
+.product-info h4 {
+    font-size: 20px;
+    margin-bottom: 8px;
+    color: #2d3f2e;
+}
+
+.farmer-tag {
+    color: #5f7561;
+    font-size: 14px;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+
+@media (max-width: 900px) {
+
+    .pricing-container {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: auto;
+    }
+
+    .price-card.popular {
+        transform: scale(1);
+    }
+
+    .price-card.popular:hover {
+        transform: translateY(-8px);
+    }
+
+    .products-grid {
+        grid-template-columns: 1fr;
+        max-width: 500px;
+        margin: auto;
+    }
+}
+
+@media (max-width: 600px) {
+
+    header {
+        padding: 15px 5%;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    nav {
+        gap: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    .logo {
+        font-size: 22px;
+    }
+
+    .container {
+        width: 92%;
+        padding: 35px 0;
+    }
+
+    .section-title {
+        font-size: 26px;
+        margin-top: 40px;
+    }
+
+    .form-section {
+        padding: 25px 18px;
+    }
+
+    .price {
+        font-size: 36px;
+    }
+}

@@ -1,0 +1,96 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=7">
+    <title>EcoFarm Connect</title>
+    <link rel="stylesheet" href="./style.css">
+
+  </head>
+    
+  <body>
+  <script src="https://stripe.com"></script>
+<header>
+    <div class="logo">EcoFarm Connect</div>
+    <nav>   
+        <a href="#pricing" id="nav-pricing">Սակագներ</a>
+        <a href="#register" id="nav-register">Գրանցվել</a>
+        <select class="lang-select" onchange="changeLanguage(this.value)">
+            <option value="hy">AM</option>
+            <option value="en">EN</option>
+            <option value="es">ES</option>
+        </select>
+    </nav>
+</header>
+<div class="container">
+    <h2 class="section-title" id="title-pricing">Մեր Սակագնային Պլանները</h2>
+    <div class="pricing-container" id="pricing">
+        <div class="price-card">
+            <h3>Eco Start</h3>
+            <div class="price">$9<span class="per-year">/ամիս</span></div>
+            <ul class="price-features">
+                <li id="f1">✓ Մինչև 5 ապրանքի տեղադրում</li>
+                <li id="f2">✓ Հիմնական պրոֆիլ</li>
+                <li id="f3">✓ Ստանդարտ տեսանելիություն</li>
+            </ul>
+            <button class="btn select-btn" onclick="selectPlan('Eco Start')">Ընտրել</button>
+        </div>
+        <div class="price-card popular">
+            <div class="popular-badge" id="badge-popular">Հանրաճանաչ</div>
+            <h3>Eco Grow</h3>
+            <div class="price">$24<span class="per-year">/ամիս</span></div>
+            <ul class="price-features">
+                <li id="f4">✓ Անսահմանափակ ապրանքներ</li>
+                <li id="f5">✓ Վստահելի ֆերմերի նշան</li>
+                <li id="f6">✓ Առաջնահերթություն որոնման մեջ</li>
+            </ul>
+            <button class="btn select-btn" onclick="selectPlan('Eco Grow')">Ընտրել</button>
+        </div>
+        <div class="price-card">
+            <h3>Eco Premium</h3>
+            <div class="price">$49<span class="per-year">/ամիս</span></div>
+            <ul class="price-features">
+                <li id="f7">✓ Ներառված են Grow-ի բոլոր ֆունկցիաները</li>
+                <li id="f8">✓ Անհատական մարքեթինգային աջակցություն</li>
+                <li id="f9">✓ Գովազդ գլխավոր էջում</li>
+            </ul>
+            <button class="btn select-btn" onclick="selectPlan('Eco Premium')">Ընտրել</button>
+        </div>
+    </div>
+    <h2 class="section-title" id="title-register">Ֆերմերի Գրանցում և Ցուցադրություն</h2>
+    <div class="form-section" id="register">
+        <form onsubmit="event.preventDefault(); handlePayment();">
+            <div class="form-group"><label id="lbl-name">Անուն / Ազգանուն կամ Բրենդ</label><input type="text" required></div>
+            <div class="form-group"><label id="lbl-country">Երկիր</label><input type="text" required></div>
+            <div class="form-group"><label id="lbl-email">Էլ. Փոստ</label><input type="email" required></div>
+            <div class="form-group">
+                <label id="lbl-plan">Ընտրված Սակագնային Պլան</label>
+                <select id="plan-select">
+                    <option value="Eco Start">Eco Start ($9)</option>
+                    <option value="Eco Grow">Eco Grow ($24)</option>
+                    <option value="Eco Premium">Eco Premium ($49)</option>
+                </select>
+            </div>
+            <div class="form-group"><label id="lbl-product">Էկո Արտադրանքի Նկարագրություն</label><textarea rows="3" required></textarea></div>
+            <div class="form-group"><label id="lbl-file">Ապրանքի Լուսանկար</label><input type="file" accept="image/*"></div>
+            <button type="submit" class="btn" id="btn-submit" style="background-color: #2e7d32;">Անցնել Վճարման</button>
+        </form>
+    </div>
+    <h2 class="section-title" id="title-showcase">Մեր Ֆերմերների Արտադրանքը</h2>
+    <div class="products-grid">
+        <div class="product-card"><div class="product-img">Eco Olive Oil</div><div class="product-info"><h4>Premium Olive Oil</h4><div class="farmer-tag" id="farm1">Ֆերմեր՝ Ալեխանդրո (Իսպանիա)</div></div></div>
+ <div class="product-card"><div class="product-img">Organic Honey</div><div class="product-info"><h4>Wildflower Honey</h4><div class="farmer-tag" id="farm2">Ֆերմեր՝ Արամ (Հայաստան)</div></div></div>
+        <div class="product-card"><div class="product-img">Fresh Avocado</div><div class="product-info"><h4>Bio Avocado</h4><div class="farmer-tag" id="farm3">Ֆերմեր՝ Ջոն (ԱՄՆ)</div></div></div>
+    </div>
+</div>
+    <script  src="./script.js"></script>
+<form onsubmit="event.preventDefault(); handlePayment();">
+    ...
+    <button type="submit" class="btn" id="btn-submit">
+        Անցնել Վճարման
+    </button>
+</form>
+  </body>
+  
+</html>

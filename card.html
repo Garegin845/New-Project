@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="hy">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>EcoFarm Connect - Card Payment</title>
+
+    <link rel="stylesheet" href="./card.css">
+</head>
+
+<body>
+
+<div class="card-page">
+
+    <div class="card-payment-box">
+
+        <div class="payment-top">
+            <h1>EcoFarm Connect</h1>
+            <p>Անվտանգ վճարում</p>
+        </div>
+
+
+        <div class="selected-plan">
+
+            <div>
+                <span>Ընտրված պլան</span>
+                <strong id="plan-name">Eco Start</strong>
+            </div>
+
+            <strong id="plan-price">$9 / ամիս</strong>
+
+        </div>
+
+
+        <!-- Card visual -->
+
+        <div class="credit-card">
+
+            <div class="card-top">
+                <span>EcoFarm</span>
+                <span id="card-brand">CARD</span>
+            </div>
+
+            <div class="card-number">
+                •••• •••• •••• ••••
+            </div>
+
+            <div class="card-bottom">
+
+                <div>
+                    <small>CARD HOLDER</small>
+                    <span>YOUR NAME</span>
+                </div>
+
+                <div>
+                    <small>EXPIRES</small>
+                    <span>MM/YY</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <form id="payment-form">
+
+            <div class="form-group">
+
+                <label>
+                    Քարտի համար
+                </label>
+
+                <input
+                    type="text"
+                    placeholder="•••• •••• •••• ••••"
+                    maxlength="19"
+                    autocomplete="off"
+                    id="card-number"
+                >
+
+            </div>
+
+
+            <div class="form-row">
+
+                <div class="form-group">
+
+                    <label>
+                        Ժամկետ
+                    </label>
+
+                    <input
+                        type="text"
+                        placeholder="MM/YY"
+                        maxlength="5"
+                        id="expiry"
+                    >
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        CVV
+                    </label>
+
+                    <input
+                        type="password"
+                        placeholder="•••"
+                        maxlength="4"
+                        id="cvv"
+                    >
+
+                </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Քարտապանի անունը
+                </label>
+
+                <input
+                    type="text"
+                    placeholder="CARDHOLDER NAME"
+                    id="card-holder"
+                >
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="pay-button"
+                id="pay-button"
+            >
+                Վճարել
+                <span id="button-price">$9</span>
+            </button>
+
+        </form>
+
+
+        <div class="secure-info">
+            🔒 Ձեր վճարումը պաշտպանված է
+        </div>
+
+
+        <button
+            class="back-button"
+            onclick="history.back()"
+        >
+            ← Վերադառնալ
+        </button>
+
+    </div>
+
+</div>
+
+
+<script src="./card.js"></script>
+
+</body>
+
+</html>
