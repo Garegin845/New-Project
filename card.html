@@ -1,164 +1,411 @@
 <!DOCTYPE html>
 <html lang="hy">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EcoFarm Connect - Card Payment</title>
+    <title>EcoFarm Connect — Secure Payment</title>
 
     <link rel="stylesheet" href="./card.css">
 </head>
 
 <body>
 
-<div class="card-page">
+<div class="page">
 
-    <div class="card-payment-box">
+    <div class="payment-wrapper">
 
-        <div class="payment-top">
-            <h1>EcoFarm Connect</h1>
-            <p>Անվտանգ վճարում</p>
-        </div>
+        <!-- LEFT SIDE -->
 
+        <div class="payment-left">
 
-        <div class="selected-plan">
-
-            <div>
-                <span>Ընտրված պլան</span>
-                <strong id="plan-name">Eco Start</strong>
-            </div>
-
-            <strong id="plan-price">$9 / ամիս</strong>
-
-        </div>
-
-
-        <!-- Card visual -->
-
-        <div class="credit-card">
-
-            <div class="card-top">
-                <span>EcoFarm</span>
-                <span id="card-brand">CARD</span>
-            </div>
-
-            <div class="card-number">
-                •••• •••• •••• ••••
-            </div>
-
-            <div class="card-bottom">
+            <div class="brand">
+                <div class="brand-icon">🌱</div>
 
                 <div>
-                    <small>CARD HOLDER</small>
-                    <span>YOUR NAME</span>
+                    <strong>EcoFarm</strong>
+                    <span>Connect</span>
                 </div>
-
-                <div>
-                    <small>EXPIRES</small>
-                    <span>MM/YY</span>
-                </div>
-
             </div>
 
-        </div>
+            <div class="secure-label">
+                <span class="lock">🔒</span>
+                Secure checkout
+            </div>
 
 
-        <form id="payment-form">
+            <!-- CARD PREVIEW -->
 
-            <div class="form-group">
+            <div class="credit-card" id="credit-card">
 
-                <label>
-                    Քարտի համար
-                </label>
+                <div class="card-shine"></div>
 
-                <input
-                    type="text"
-                    placeholder="•••• •••• •••• ••••"
-                    maxlength="19"
-                    autocomplete="off"
-                    id="card-number"
+                <div class="card-header">
+
+                    <span class="card-brand-name">
+                        ECOFARM
+                    </span>
+
+                    <span
+                        class="card-type"
+                        id="card-type"
+                    >
+                        CARD
+                    </span>
+
+                </div>
+
+
+                <div class="chip">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </div>
+
+
+                <div
+                    class="visual-number"
+                    id="visual-number"
                 >
+                    •••• •••• •••• ••••
+                </div>
+
+
+                <div class="visual-bottom">
+
+                    <div>
+                        <small>CARD HOLDER</small>
+
+                        <span id="visual-name">
+                            YOUR NAME
+                        </span>
+                    </div>
+
+
+                    <div>
+                        <small>EXPIRES</small>
+
+                        <span id="visual-expiry">
+                            MM/YY
+                        </span>
+                    </div>
+
+                </div>
 
             </div>
 
 
-            <div class="form-row">
+            <!-- SECURITY -->
+
+            <div class="security-box">
+
+                <div class="security-item">
+                    <span>🔒</span>
+
+                    <div>
+                        <strong>Secure payment</strong>
+
+                        <p>
+                            Ձեր վճարումը պաշտպանված է
+                            ժամանակակից անվտանգության
+                            համակարգերով։
+                        </p>
+                    </div>
+                </div>
+
+
+                <div class="security-item">
+
+                    <span>🛡️</span>
+
+                    <div>
+                        <strong>3-D Secure</strong>
+
+                        <p>
+                            Բանկը կարող է պահանջել SMS
+                            կամ հավելյալ հաստատում։
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- RIGHT SIDE -->
+
+        <div class="payment-right">
+
+            <div class="payment-title">
+
+                <span class="step">
+                    STEP 2 OF 2
+                </span>
+
+                <h1>
+                    Վճարման տվյալներ
+                </h1>
+
+                <p>
+                    Մուտքագրեք ձեր քարտի տվյալները
+                </p>
+
+            </div>
+
+
+            <!-- ORDER -->
+
+            <div class="order-summary">
+
+                <div class="order-row">
+
+                    <span>
+                        Սակագնային պլան
+                    </span>
+
+                    <strong id="plan-name">
+                        Eco Start
+                    </strong>
+
+                </div>
+
+
+                <div class="order-row total">
+
+                    <span>
+                        Ընդհանուր
+                    </span>
+
+                    <strong id="plan-price">
+                        $9 / ամիս
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM -->
+
+            <form id="payment-form">
 
                 <div class="form-group">
 
-                    <label>
-                        Ժամկետ
+                    <label for="card-number">
+                        Քարտի համար
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <span class="input-icon">
+                            💳
+                        </span>
+
+                        <input
+                            id="card-number"
+                            type="text"
+                            inputmode="numeric"
+                            autocomplete="cc-number"
+                            placeholder="1234 5678 9012 3456"
+                            maxlength="19"
+                        >
+
+                        <span
+                            class="detected-card"
+                            id="detected-card"
+                        ></span>
+
+                    </div>
+
+                    <small
+                        class="error"
+                        id="card-error"
+                    ></small>
+
+                </div>
+
+
+
+                <div class="form-row">
+
+                    <div class="form-group">
+
+                        <label for="expiry">
+                            Ժամկետ
+                        </label>
+
+                        <input
+                            id="expiry"
+                            type="text"
+                            inputmode="numeric"
+                            autocomplete="cc-exp"
+                            placeholder="MM / YY"
+                            maxlength="5"
+                        >
+
+                        <small
+                            class="error"
+                            id="expiry-error"
+                        ></small>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label for="cvv">
+                            CVV
+                        </label>
+
+                        <div class="cvv-wrapper">
+
+                            <input
+                                id="cvv"
+                                type="password"
+                                inputmode="numeric"
+                                autocomplete="cc-csc"
+                                placeholder="•••"
+                                maxlength="4"
+                            >
+
+                            <button
+                                type="button"
+                                id="toggle-cvv"
+                                class="eye-button"
+                            >
+                                👁
+                            </button>
+
+                        </div>
+
+                        <small class="hint">
+                            3 կամ 4 նիշ
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-group">
+
+                    <label for="card-holder">
+                        Քարտապանի անունը
                     </label>
 
                     <input
+                        id="card-holder"
                         type="text"
-                        placeholder="MM/YY"
-                        maxlength="5"
-                        id="expiry"
+                        autocomplete="cc-name"
+                        placeholder="YOUR NAME"
                     >
 
                 </div>
 
 
-                <div class="form-group">
 
-                    <label>
-                        CVV
-                    </label>
+                <div class="agreement">
 
-                    <input
-                        type="password"
-                        placeholder="•••"
-                        maxlength="4"
-                        id="cvv"
-                    >
+                    <span class="check-icon">
+                        ✓
+                    </span>
+
+                    <span>
+                        Վճարումը կատարվում է
+                        պաշտպանված կապով։
+                    </span>
 
                 </div>
 
-            </div>
 
 
-            <div class="form-group">
-
-                <label>
-                    Քարտապանի անունը
-                </label>
-
-                <input
-                    type="text"
-                    placeholder="CARDHOLDER NAME"
-                    id="card-holder"
+                <button
+                    type="submit"
+                    class="pay-button"
+                    id="pay-button"
                 >
+
+                    <span class="button-lock">
+                        🔒
+                    </span>
+
+                    <span>
+                        Վճարել
+                    </span>
+
+                    <strong id="button-price">
+                        $9
+                    </strong>
+
+                </button>
+
+
+                <div
+                    class="processing"
+                    id="processing"
+                >
+
+                    <div class="spinner"></div>
+
+                    <span>
+                        Վճարումը մշակվում է...
+                    </span>
+
+                </div>
+
+            </form>
+
+
+
+            <!-- PAYMENT METHODS -->
+
+            <div class="accepted">
+
+                <span>
+                    Ընդունվում են
+                </span>
+
+                <div class="payment-logos">
+
+                    <span class="visa">
+                        VISA
+                    </span>
+
+                    <span class="mastercard">
+                        ●●
+                    </span>
+
+                    <span class="arca">
+                        ArCa
+                    </span>
+
+                </div>
 
             </div>
 
 
             <button
-                type="submit"
-                class="pay-button"
-                id="pay-button"
+                class="back-button"
+                onclick="history.back()"
             >
-                Վճարել
-                <span id="button-price">$9</span>
+                ← Վերադառնալ
             </button>
 
-        </form>
-
-
-        <div class="secure-info">
-            🔒 Ձեր վճարումը պաշտպանված է
         </div>
 
-
-        <button
-            class="back-button"
-            onclick="history.back()"
-        >
-            ← Վերադառնալ
-        </button>
-
     </div>
+
+
+    <footer>
+
+        🔐 Protected payment ·
+        EcoFarm Connect
+
+    </footer>
 
 </div>
 
@@ -166,5 +413,4 @@
 <script src="./card.js"></script>
 
 </body>
-
 </html>

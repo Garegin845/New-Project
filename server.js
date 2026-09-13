@@ -1,20 +1,26 @@
+
 const express = require("express");
-const path = require("path");
 require("dotenv").config();
 
 const app = express();
 
 const PORT = 3000;
 
+// =========================
+// MIDDLEWARE
+// =========================
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
 
 // Frontend files
 app.use(express.static(__dirname));
 
 
-// Plans
+// =========================
+// PLANS
+// =========================
+
 const plans = {
     "Eco Start": 9,
     "Eco Grow": 24,
@@ -22,7 +28,10 @@ const plans = {
 };
 
 
-// Create payment
+// =========================
+// CREATE PAYMENT
+// =========================
+
 app.post("/api/create-payment", async (req, res) => {
 
     try {
@@ -36,7 +45,9 @@ app.post("/api/create-payment", async (req, res) => {
         } = req.body;
 
 
-        // Validation
+        // =========================
+        // VALIDATION
+        // =========================
 
         if (!name || !country || !email || !plan) {
 
@@ -47,6 +58,10 @@ app.post("/api/create-payment", async (req, res) => {
         }
 
 
+        // =========================
+        // CHECK PLAN
+        // =========================
+
         if (!plans[plan]) {
 
             return res.status(400).json({
@@ -56,8 +71,16 @@ app.post("/api/create-payment", async (req, res) => {
         }
 
 
+        // =========================
+        // PRICE
+        // =========================
+
         const amount = plans[plan];
 
+
+        // =========================
+        // SERVER LOG
+        // =========================
 
         console.log("New payment request:");
 
@@ -71,35 +94,33 @@ app.post("/api/create-payment", async (req, res) => {
         });
 
 
-        /*
-        ==========================================
-        ARCA PAYMENT WILL GO HERE
-        ==========================================
+        // =========================
+        // TEMPORARY PAYMENT PAGE
+        // =========================
 
-        1. Generate unique order number
-        2. Send request to ArCa
-        3. Receive orderId + formUrl
-        4. Return formUrl to frontend
-        */
+        const paymentUrl =
+            `/payment.html?plan=${encodeURIComponent(plan)}`;
 
 
-        res.json({
+        return res.json({
+
             success: true,
 
-            // TEMPORARY
-            // Later this will be ArCa formUrl
+            paymentUrl: paymentUrl
 
-            paymentUrl:
-                `/payment.html?plan=${encodeURIComponent(plan)}`
         });
-
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Payment creation error:",
+            error
+        );
 
-        res.status(500).json({
+        return res.status(500).json({
+
             error: "Payment creation failed"
+
         });
 
     }
@@ -107,23 +128,15 @@ app.post("/api/create-payment", async (req, res) => {
 });
 
 
+// =========================
+// START SERVER
+// =========================
+
 app.listen(PORT, () => {
 
     console.log(
         `EcoFarm server running at http://localhost:${PORT}`
     );
 
-// Քո server.js
+});
 
-app.post("/api/create-payment", async (req, res) => {
-
-    // 1. Ստանում ենք ընտրված պլանը
-    const { name, email, plan } = req.body;
-
-    // 2. Payment provider-ում ստեղծում ենք order
-    // 3. Ստանում ենք secure payment URL
-
-    res.json({
-        paymentUrl: "SECURE_PAYMENT_URL"
-    });
-});});

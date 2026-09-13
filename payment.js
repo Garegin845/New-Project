@@ -1,38 +1,30 @@
-const prices = {
-    "Eco Start": 9,
-    "Eco Grow": 24,
-    "Eco Premium": 49
-};
-
-const params =
-    new URLSearchParams(window.location.search);
-
-const plan =
-    params.get("plan") ||
-    localStorage.getItem("selectedPlan") ||
-    "Eco Start";
-
-const price =
-    prices[plan] || 9;
-
-document.getElementById("selected-plan")
-    .textContent = plan;
-
-document.getElementById("selected-price")
-    .textContent = `$${price} / ամիս`;
-
-localStorage.setItem("selectedPlan", plan);
-
-
 function payWith(method) {
 
-    // Ընտրված վճարման մեթոդը պահում ենք
-    localStorage.setItem("paymentMethod", method);
+    // Վճարման կոճակները ժամանակավորապես անջատում ենք
+    const buttons = document.querySelectorAll(".payment-method");
 
-    // Գնում ենք քարտի էջ
-    window.location.href =
-        "card.html?plan=" +
-        encodeURIComponent(plan) +
-        "&method=" +
-        encodeURIComponent(method);
+    buttons.forEach(button => {
+        button.disabled = true;
+        button.style.opacity = "0.6";
+        button.style.cursor = "not-allowed";
+    });
+
+    // Փոքր loading
+    const selectedPlan = document.getElementById("selected-plan");
+    const selectedPrice = document.getElementById("selected-price");
+
+    selectedPlan.textContent = "Վճարումը մշակվում է...";
+    selectedPrice.textContent = "";
+
+    // Դեմո վճարում
+    setTimeout(() => {
+
+        // Պահպանում ենք, որ վճարումը հաջող է եղել
+        localStorage.setItem("paymentStatus", "success");
+        localStorage.setItem("paymentMethod", method);
+
+        // Գլխավոր էջ տեղափոխում
+        window.location.href = "home.html";
+
+    }, 1500);
 }

@@ -1,8 +1,10 @@
+
 /* =========================
    LANGUAGE SYSTEM
 ========================= */
 
 const translations = {
+
     hy: {
         navPricing: "Սակագներ",
         navRegister: "Գրանցվել",
@@ -164,6 +166,7 @@ const translations = {
         avocadoTitle: "Bio Avocado",
         avocadoFarmer: "Фермер: Джон (США)"
     }
+
 };
 
 
@@ -177,34 +180,14 @@ function changeLanguage(lang) {
 
     if (!t) return;
 
-    /* Navigation */
+    document.getElementById("nav-pricing").textContent = t.navPricing;
+    document.getElementById("nav-register").textContent = t.navRegister;
 
-    document.getElementById("nav-pricing").textContent =
-        t.navPricing;
+    document.getElementById("title-pricing").textContent = t.pricingTitle;
+    document.getElementById("title-register").textContent = t.registerTitle;
+    document.getElementById("title-showcase").textContent = t.showcaseTitle;
 
-    document.getElementById("nav-register").textContent =
-        t.navRegister;
-
-
-    /* Titles */
-
-    document.getElementById("title-pricing").textContent =
-        t.pricingTitle;
-
-    document.getElementById("title-register").textContent =
-        t.registerTitle;
-
-    document.getElementById("title-showcase").textContent =
-        t.showcaseTitle;
-
-
-    /* Popular */
-
-    document.getElementById("badge-popular").textContent =
-        t.popular;
-
-
-    /* Features */
+    document.getElementById("badge-popular").textContent = t.popular;
 
     document.getElementById("f1").textContent = t.f1;
     document.getElementById("f2").textContent = t.f2;
@@ -218,96 +201,57 @@ function changeLanguage(lang) {
     document.getElementById("f8").textContent = t.f8;
     document.getElementById("f9").textContent = t.f9;
 
-
-    /* Select buttons */
-
     document.querySelectorAll(".select-btn").forEach(button => {
         button.textContent = t.select;
     });
 
+    document.getElementById("lbl-name").textContent = t.name;
+    document.getElementById("lbl-country").textContent = t.country;
+    document.getElementById("lbl-email").textContent = t.email;
+    document.getElementById("lbl-plan").textContent = t.plan;
+    document.getElementById("lbl-product").textContent = t.product;
+    document.getElementById("lbl-file").textContent = t.file;
 
-    /* Form labels */
+    document.getElementById("btn-submit").textContent = t.payment;
 
-    document.getElementById("lbl-name").textContent =
-        t.name;
+    document.getElementById("farm1").textContent = t.oliveFarmer;
+    document.getElementById("farm2").textContent = t.honeyFarmer;
+    document.getElementById("farm3").textContent = t.avocadoFarmer;
 
-    document.getElementById("lbl-country").textContent =
-        t.country;
+    const productImages = document.querySelectorAll(".product-img");
 
-    document.getElementById("lbl-email").textContent =
-        t.email;
+    if (productImages.length >= 3) {
+        productImages[0].textContent = t.oliveImage;
+        productImages[1].textContent = t.honeyImage;
+        productImages[2].textContent = t.avocadoImage;
+    }
 
-    document.getElementById("lbl-plan").textContent =
-        t.plan;
+    const productTitles = document.querySelectorAll(".product-info h4");
 
-    document.getElementById("lbl-product").textContent =
-        t.product;
+    if (productTitles.length >= 3) {
+        productTitles[0].textContent = t.oliveTitle;
+        productTitles[1].textContent = t.honeyTitle;
+        productTitles[2].textContent = t.avocadoTitle;
+    }
 
-    document.getElementById("lbl-file").textContent =
-        t.file;
+    const cards = document.querySelectorAll(".price-card");
 
+    if (cards.length >= 3) {
 
-    /* Payment button */
+        cards[0].querySelector("h3").textContent = t.start;
+        cards[1].querySelector("h3").textContent = t.grow;
+        cards[2].querySelector("h3").textContent = t.premium;
 
-    document.getElementById("btn-submit").textContent =
-        t.payment;
+        cards.forEach(card => {
 
+            const yearText = card.querySelector(".per-year");
 
-    /* Farmers */
+            if (yearText) {
+                yearText.textContent = t.month;
+            }
 
-    document.getElementById("farm1").textContent =
-        t.oliveFarmer;
-
-    document.getElementById("farm2").textContent =
-        t.honeyFarmer;
-
-    document.getElementById("farm3").textContent =
-        t.avocadoFarmer;
-
-
-    /* Product images/text */
-
-    const productImages =
-        document.querySelectorAll(".product-img");
-
-    productImages[0].textContent = t.oliveImage;
-    productImages[1].textContent = t.honeyImage;
-    productImages[2].textContent = t.avocadoImage;
-
-
-    /* Product titles */
-
-    const productTitles =
-        document.querySelectorAll(".product-info h4");
-
-    productTitles[0].textContent = t.oliveTitle;
-    productTitles[1].textContent = t.honeyTitle;
-    productTitles[2].textContent = t.avocadoTitle;
-
-
-    /* Pricing */
-
-    const cards =
-        document.querySelectorAll(".price-card");
-
-    cards[0].querySelector("h3").textContent = t.start;
-    cards[1].querySelector("h3").textContent = t.grow;
-    cards[2].querySelector("h3").textContent = t.premium;
-
-
-    cards.forEach(card => {
-
-        const yearText =
-            card.querySelector(".per-year");
-
-        if (yearText) {
-            yearText.textContent = t.month;
-        }
-
-    });
-
-
-    /* Save language */
+        });
+    }
 
     localStorage.setItem("ecofarm-language", lang);
 
@@ -321,18 +265,19 @@ function changeLanguage(lang) {
 
 function selectPlan(plan) {
 
-    const select =
-        document.getElementById("plan-select");
+    const select = document.getElementById("plan-select");
 
     if (!select) return;
 
     select.value = plan;
 
-    /* Scroll to registration */
+    const register = document.getElementById("register");
 
-    document.getElementById("register").scrollIntoView({
-        behavior: "smooth"
-    });
+    if (register) {
+        register.scrollIntoView({
+            behavior: "smooth"
+        });
+    }
 }
 
 
@@ -341,30 +286,60 @@ function selectPlan(plan) {
 ========================= */
 
 async function handlePayment() {
-    const name =
-        document.querySelectorAll('.form-group input[type="text"]')[0].value;
 
-    const country =
-        document.querySelectorAll('.form-group input[type="text"]')[1].value;
+    const nameInput = document.querySelectorAll(
+        '.form-group input[type="text"]'
+    );
 
-    const email =
-        document.querySelector('.form-group input[type="email"]').value;
+    const emailInput = document.querySelector(
+        '.form-group input[type="email"]'
+    );
 
-    const plan =
-        document.getElementById("plan-select").value;
+    const textarea = document.querySelector("textarea");
 
-    const product =
-        document.querySelector("textarea").value;
+    const planSelect = document.getElementById("plan-select");
 
-    const button =
-        document.getElementById("btn-submit");
+    const button = document.getElementById("btn-submit");
+
+
+    if (!nameInput[0] || !nameInput[1] || !emailInput || !textarea || !planSelect) {
+
+        alert("Form-ի դաշտերը չեն գտնվել։");
+
+        return;
+    }
+
+
+    const name = nameInput[0].value.trim();
+
+    const country = nameInput[1].value.trim();
+
+    const email = emailInput.value.trim();
+
+    const plan = planSelect.value;
+
+    const product = textarea.value.trim();
+
+
+    if (!name || !country || !email || !plan || !product) {
+
+        alert("Խնդրում ենք լրացնել բոլոր պարտադիր դաշտերը։");
+
+        return;
+    }
+
 
     button.disabled = true;
+
     button.textContent = "Խնդրում ենք սպասել...";
+
 
     try {
 
+        console.log("Sending payment request...");
+
         const response = await fetch("/api/create-payment", {
+
             method: "POST",
 
             headers: {
@@ -372,158 +347,102 @@ async function handlePayment() {
             },
 
             body: JSON.stringify({
-                name,
-                country,
-                email,
-                plan,
-                product
+                name: name,
+                country: country,
+                email: email,
+                plan: plan,
+                product: product
             })
+
         });
 
-        const data = await response.json();
 
-        if (!response.ok) {
-            throw new Error(data.error);
-        }
-
-        localStorage.setItem("selectedPlan", plan);
-
-        // Գնում ենք payment.html
-        window.location.href =
-            data.paymentUrl;
-
-    } catch (error) {
-
-        console.error(error);
-
-        alert("Վճարման էջը բացել չհաջողվեց։");
-
-        button.disabled = false;
-        button.textContent = "Անցնել Վճարման";
-    }
-}
-
-/* =========================
-   LOAD SAVED LANGUAGE
-========================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-
-    const savedLanguage =
-        localStorage.getItem("ecofarm-language") || "hy";
-
-    const selector =
-        document.querySelector(".lang-select");
-
-    if (selector) {
-        selector.value = savedLanguage;
-    }
-
-    changeLanguage(savedLanguage);
-
-});
-async function handlePayment() {
-
-    const name =
-        document.querySelectorAll(
-            '.form-group input[type="text"]'
-        )[0].value;
-
-    const country =
-        document.querySelectorAll(
-            '.form-group input[type="text"]'
-        )[1].value;
-
-    const email =
-        document.querySelector(
-            '.form-group input[type="email"]'
-        ).value;
-
-    const plan =
-        document.getElementById("plan-select").value;
-
-    const product =
-        document.querySelector("textarea").value;
-
-
-    const button =
-        document.getElementById("btn-submit");
-
-
-    button.disabled = true;
-
-    button.textContent = "Խնդրում ենք սպասել...";
-
-
-    try {
-
-        const response = await fetch(
-            "/api/create-payment",
-            {
-                method: "POST",
-
-                headers: {
-                    "Content-Type": "application/json"
-                },
-
-                body: JSON.stringify({
-                    name,
-                    country,
-                    email,
-                    plan,
-                    product
-                })
-            }
-        );
+        console.log("HTTP status:", response.status);
 
 
         const data = await response.json();
+
+        console.log("Server response:", data);
 
 
         if (!response.ok) {
 
             throw new Error(
-                data.error || "Payment error"
+                data.error || "Server error"
             );
 
         }
 
 
-        if (data.paymentUrl) {
+        if (!data.paymentUrl) {
 
-            window.location.href =
-                data.paymentUrl;
+            throw new Error(
+                "paymentUrl չի ստացվել server-ից"
+            );
 
         }
 
 
+        localStorage.setItem(
+            "selectedPlan",
+            plan
+        );
+
+
+        console.log(
+            "Redirecting to:",
+            data.paymentUrl
+        );
+
+
+        window.location.href = data.paymentUrl;
+
+
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "PAYMENT ERROR:",
+            error
+        );
+
 
         alert(
-            "Վճարման էջը բացել չհաջողվեց։"
+            "Վճարման էջը բացել չհաջողվեց։\n\n" +
+            error.message
         );
 
 
         button.disabled = false;
 
         button.textContent =
-            "Անցնել Վճարման";
+            translations[
+                localStorage.getItem("ecofarm-language") || "hy"
+            ].payment;
     }
-    const response = await fetch("/api/create-payment", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        name,
-        email,
-        plan
-    })
-});
 
-const data = await response.json();
-
-window.location.href = data.paymentUrl; 
 }
+
+
+/* =========================
+   LOAD LANGUAGE
+========================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const savedLanguage =
+            localStorage.getItem("ecofarm-language") || "hy";
+
+        const selector =
+            document.querySelector(".lang-select");
+
+        if (selector) {
+            selector.value = savedLanguage;
+        }
+
+        changeLanguage(savedLanguage);
+
+    }
+);
+
