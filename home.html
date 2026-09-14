@@ -1,366 +1,1080 @@
+
 <!DOCTYPE html>
 <html lang="hy">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EcoFarm Connect</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="./home.css">
+    <title>EcoFarm Connect — Գրանցում</title>
+
+    <link rel="stylesheet"
+          href="./style.css">
+
 </head>
+
 
 <body>
 
-<header class="navbar">
+
+<!-- =====================================================
+     HEADER
+===================================================== -->
+
+<header class="main-header">
 
     <div class="logo">
-        🌱 EcoFarm <span>Connect</span>
+
+        <span class="logo-leaf">
+            🌱
+        </span>
+
+        <span>
+            EcoFarm <b>Connect</b>
+        </span>
+
     </div>
 
-  <nav>
 
-    <a href="#home">
+    <nav>
+
+        <a href="#pricing">
+            Սակագներ
+        </a>
+
+        <nav class="main-nav">
+
+    <a href="home.html">
         Գլխավոր
     </a>
 
-    <a href="#announcements">
+    <a href="announcements.html">
         Հայտարարություններ
     </a>
 
-    <a href="#news">
+    <a href="news.html">
         Նորություններ
     </a>
 
-    <a href="#profile">
+    <a href="profile.html">
         👤 Պրոֆիլ
     </a>
 
-    <a href="#pricing">
+    <a href="index.html#pricing">
         Սակագներ
     </a>
 
-    <!-- ԳՐԱՆՑՄԱՆ ԿՈՃԱԿ -->
-    <a href="index.html" class="register-btn">
-        Գրանցվել
-    </a>
+    <button
+        class="logout-btn"
+        onclick="logoutUser()">
 
-</nav>
+        Դուրս գալ
+
+    </button>
+
+</nav>  
+
+        <select
+            class="lang-select"
+            onchange="changeLanguage(this.value)">
+
+            <option value="hy">
+                AM
+            </option>
+
+            <option value="en">
+                EN
+            </option>
+
+            <option value="es">
+                ES
+            </option>
+
+        </select>
+
+    </nav>
 
 </header>
 
 
+
 <main>
 
-    <!-- HERO -->
 
-    <section class="hero" id="home">
+<!-- =====================================================
+     PRICING
+===================================================== -->
 
-        <div class="hero-content">
+<section
+    class="container"
+    id="pricing">
 
-            <span class="badge">
-                🌱 EcoFarm Connect
+
+    <div class="section-heading">
+
+        <span class="heading-badge">
+            🌿 EcoFarm Connect
+        </span>
+
+
+        <h1>
+
+            Ընտրեք ձեր
+
+            <span>
+                սակագնային պլանը
             </span>
 
-            <h1>
-                Բարի գալուստ
-                <span>EcoFarm Connect</span>
-            </h1>
+        </h1>
 
-            <p>
-                Միացեք գյուղատնտեսական համայնքին,
-                գտեք նոր հնարավորություններ և զարգացրեք
-                ձեր բիզնեսը։
+
+        <p>
+
+            Ընտրեք ձեր բիզնեսին համապատասխան պլանը
+            և սկսեք զարգացնել ձեր ֆերմերային գործունեությունը։
+
+        </p>
+
+    </div>
+
+
+
+    <div class="pricing-container">
+
+
+        <!-- ECO START -->
+
+        <div class="price-card">
+
+            <div class="plan-icon">
+                🌱
+            </div>
+
+
+            <h3>
+                Eco Start
+            </h3>
+
+
+            <div class="price">
+
+                $9
+
+                <span>
+                    / ամիս
+                </span>
+
+            </div>
+
+
+            <p class="plan-description">
+
+                Սկսնակ ֆերմերների համար
+
             </p>
 
-            <div class="hero-buttons">
 
-                <a href="#announcements" class="primary-btn">
-                    Դիտել հայտարարությունները →
-                </a>
+            <ul class="price-features">
 
-                <a href="#news" class="secondary-btn">
-                    Վերջին նորությունները
-                </a>
+                <li>
+                    ✓ Մինչև 5 ապրանքի տեղադրում
+                </li>
 
-            </div>
+                <li>
+                    ✓ Հիմնական պրոֆիլ
+                </li>
 
-        </div>
+                <li>
+                    ✓ Ստանդարտ տեսանելիություն
+                </li>
 
-    </section>
+            </ul>
 
 
-    <!-- ANNOUNCEMENTS -->
+            <button
+                type="button"
+                class="btn select-btn"
+                onclick="selectPlan('Eco Start')">
 
-    <section class="section" id="announcements">
+                Ընտրել պլանը
 
-        <div class="section-title">
-
-            <span>📢</span>
-
-            <div>
-                <h2>Վերջին հայտարարություններ</h2>
-
-                <p>
-                    Նոր առաջարկներ և հնարավորություններ
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="cards">
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🌾
-                </div>
-
-                <h3>
-                    Գյուղատնտեսական հողատարածք
-                </h3>
-
-                <p>
-                    Վարձակալության է տրվում
-                    բերրի հողատարածք։
-                </p>
-
-                <button>
-                    Դիտել →
-                </button>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🚜
-                </div>
-
-                <h3>
-                    Գյուղտեխնիկայի առաջարկ
-                </h3>
-
-                <p>
-                    Նոր և օգտագործված տեխնիկայի
-                    վաճառքի առաջարկներ։
-                </p>
-
-                <button>
-                    Դիտել →
-                </button>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🥬
-                </div>
-
-                <h3>
-                    Բերքի վաճառք
-                </h3>
-
-                <p>
-                    Թարմ գյուղատնտեսական
-                    արտադրանքի առաջարկներ։
-                </p>
-
-                <button>
-                    Դիտել →
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- NEWS -->
-
-    <section class="section news-section" id="news">
-
-        <div class="section-title">
-
-            <span>📰</span>
-
-            <div>
-                <h2>Նորություններ</h2>
-
-                <p>
-                    Վերջին նորությունները գյուղատնտեսության ոլորտից
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="news-list">
-
-            <article class="news-item">
-
-                <div class="news-date">
-                    13<br>
-                    ՍԵՊ
-                </div>
-
-                <div>
-
-                    <h3>
-                        Նոր հնարավորություններ ֆերմերների համար
-                    </h3>
-
-                    <p>
-                        EcoFarm Connect-ում ավելացվել են
-                        նոր գործիքներ և ծառայություններ։
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <article class="news-item">
-
-                <div class="news-date">
-                    10<br>
-                    ՍԵՊ
-                </div>
-
-                <div>
-
-                    <h3>
-                        Գյուղատնտեսական նոր ծրագրեր
-                    </h3>
-
-                    <p>
-                        Տեղեկացեք նոր ծրագրերի և
-                        հնարավորությունների մասին։
-                    </p>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </section>
-
-
-    <!-- PROFILE -->
-
-    <section class="profile-section" id="profile">
-
-        <div class="profile-card">
-
-            <div class="profile-avatar">
-                👤
-            </div>
-
-            <div>
-
-                <h2>
-                    Ձեր պրոֆիլը
-                </h2>
-
-                <p>
-                    Կառավարեք ձեր հաշիվը և հայտարարությունները։
-                </p>
-
-            </div>
-
-            <button>
-                Բացել պրոֆիլը
             </button>
 
         </div>
 
-    </section>
 
 
-    <!-- PRICING -->
+        <!-- ECO GROW -->
 
-    <section class="section pricing-section" id="pricing">
+        <div class="price-card popular">
 
-        <div class="section-title center">
+            <div class="popular-badge">
 
-            <span>💳</span>
+                ⭐ Հանրաճանաչ
 
-            <div>
-                <h2>Սակագներ</h2>
-
-                <p>
-                    Ընտրեք ձեզ հարմար պլանը
-                </p>
             </div>
+
+
+            <div class="plan-icon">
+                🚜
+            </div>
+
+
+            <h3>
+                Eco Grow
+            </h3>
+
+
+            <div class="price">
+
+                $24
+
+                <span>
+                    / ամիս
+                </span>
+
+            </div>
+
+
+            <p class="plan-description">
+
+                Ակտիվ զարգացող ֆերմերների համար
+
+            </p>
+
+
+            <ul class="price-features">
+
+                <li>
+                    ✓ Անսահմանափակ ապրանքներ
+                </li>
+
+                <li>
+                    ✓ Վստահելի ֆերմերի նշան
+                </li>
+
+                <li>
+                    ✓ Առաջնահերթություն որոնման մեջ
+                </li>
+
+            </ul>
+
+
+            <button
+                type="button"
+                class="btn select-btn"
+                onclick="selectPlan('Eco Grow')">
+
+                Ընտրել պլանը
+
+            </button>
 
         </div>
 
 
-        <div class="pricing-card">
 
-            <span class="plan-label">
-                Ձեր ընթացիկ պլանը
-            </span>
+        <!-- ECO PREMIUM -->
+
+        <div class="price-card">
+
+            <div class="plan-icon">
+                👑
+            </div>
+
+
+            <h3>
+                Eco Premium
+            </h3>
+
+
+            <div class="price">
+
+                $49
+
+                <span>
+                    / ամիս
+                </span>
+
+            </div>
+
+
+            <p class="plan-description">
+
+                Մեծ բիզնեսների և պրոֆեսիոնալների համար
+
+            </p>
+
+
+            <ul class="price-features">
+
+                <li>
+                    ✓ Grow-ի բոլոր հնարավորությունները
+                </li>
+
+                <li>
+                    ✓ Անհատական մարքեթինգային աջակցություն
+                </li>
+
+                <li>
+                    ✓ Գովազդ գլխավոր էջում
+                </li>
+
+            </ul>
+
+
+            <button
+                type="button"
+                class="btn select-btn"
+                onclick="selectPlan('Eco Premium')">
+
+                Ընտրել պլանը
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     AUTH SECTION
+===================================================== -->
+
+<section
+    class="auth-section"
+    id="register">
+
+
+    <div class="auth-wrapper">
+
+
+        <!-- LEFT -->
+
+        <div class="auth-info">
+
+
+            <div class="auth-brand">
+
+                🌱 EcoFarm Connect
+
+            </div>
+
 
             <h2>
-                Eco Start
+
+                Միացեք
+
+                <span>
+                    EcoFarm
+                </span>-ին
+
             </h2>
 
-            <strong>
-                $9 <small>/ ամիս</small>
-            </strong>
 
             <p>
-                Ձեր պլանը ակտիվ է և պատրաստ է օգտագործման։
+
+                Ստեղծեք ձեր հաշիվը և միացեք
+                ժամանակակից ֆերմերների ու էկո արտադրողների
+                համայնքին։
+
             </p>
 
-            <button>
-                Կառավարել պլանը
-            </button>
+
+
+            <div class="benefits">
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        🌱
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Ձեր ֆերմայի պրոֆիլը
+                        </strong>
+
+                        <p>
+                            Ստեղծեք պրոֆեսիոնալ ֆերմերային էջ։
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        📦
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Ապրանքների վաճառք
+                        </strong>
+
+                        <p>
+                            Ցուցադրեք ձեր արտադրանքը։
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="benefit">
+
+                    <div class="benefit-icon">
+                        🤝
+                    </div>
+
+
+                    <div>
+
+                        <strong>
+                            Նոր կապեր
+                        </strong>
+
+                        <p>
+                            Կապ հաստատեք գնորդների և ֆերմերների հետ։
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
 
         </div>
 
-    </section>
+
+
+        <!-- RIGHT -->
+
+        <div class="auth-card">
+
+
+            <!-- REGISTER -->
+
+            <div id="register-form">
+
+
+                <div class="auth-title">
+
+                    <h2>
+                        Ստեղծել հաշիվ
+                    </h2>
+
+                    <p>
+                        Գրանցվեք և սկսեք օգտագործել EcoFarm Connect-ը
+                    </p>
+
+                </div>
+
+
+
+                <!-- GOOGLE -->
+
+                <button
+                    type="button"
+                    class="google-btn"
+                    onclick="registerWithGoogle()">
+
+                    <span class="google-icon">
+                        G
+                    </span>
+
+                    <span>
+                        Շարունակել Google-ով
+                    </span>
+
+                </button>
+
+
+
+                <div class="divider">
+
+                    <span>
+                        կամ
+                    </span>
+
+                </div>
+
+
+
+                <!-- REGISTRATION FORM -->
+
+                <form
+                    id="registrationForm"
+                    onsubmit="registerUser(event)">
+
+
+                    <!-- COUNTRY -->
+
+                    <div class="input-group">
+
+                        <label for="country">
+                            Երկիր
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span>
+                                🌍
+                            </span>
+
+
+                            <select
+                                id="country"
+                                required>
+
+                                <option value="">
+                                    Ընտրեք երկիրը
+                                </option>
+
+                                <option value="Armenia">
+                                    Հայաստան
+                                </option>
+
+                                <option value="Georgia">
+                                    Վրաստան
+                                </option>
+
+                                <option value="Russia">
+                                    Ռուսաստան
+                                </option>
+
+                                <option value="USA">
+                                    ԱՄՆ
+                                </option>
+
+                                <option value="France">
+                                    Ֆրանսիա
+                                </option>
+
+                                <option value="Germany">
+                                    Գերմանիա
+                                </option>
+
+                                <option value="Spain">
+                                    Իսպանիա
+                                </option>
+
+                                <option value="Other">
+                                    Այլ
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PHONE -->
+
+                    <div class="input-group">
+
+                        <label for="phone">
+                            Հեռախոսահամար
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span>
+                                📱
+                            </span>
+
+
+                            <input
+                                type="tel"
+                                id="phone"
+                                name="phone"
+                                placeholder="+374 XX XX XX XX"
+                                autocomplete="tel"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="email">
+                            Էլ․ փոստ
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span>
+                                ✉️
+                            </span>
+
+
+                            <input
+                                type="email"
+                                id="email"
+                                placeholder="example@email.com"
+                                autocomplete="email"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="password">
+                            Գաղտնաբառ
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span>
+                                🔒
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="password"
+                                placeholder="Առնվազն 8 նիշ"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required>
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('password', this)">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- CONFIRM PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="confirm-password">
+                            Կրկնել գաղտնաբառը
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span>
+                                🔐
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="confirm-password"
+                                placeholder="Կրկնեք գաղտնաբառը"
+                                autocomplete="new-password"
+                                minlength="8"
+                                required>
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('confirm-password', this)">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PLAN -->
+
+                    <div class="input-group">
+
+                        <label for="plan-select">
+                            Սակագին
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span>
+                                💳
+                            </span>
+
+
+                            <select
+                                id="plan-select"
+                                required>
+
+                                <option value="">
+                                    Ընտրեք սակագինը
+                                </option>
+
+                                <option value="Eco Start">
+                                    Eco Start — $9 / ամիս
+                                </option>
+
+                                <option value="Eco Grow">
+                                    Eco Grow — $24 / ամիս
+                                </option>
+
+                                <option value="Eco Premium">
+                                    Eco Premium — $49 / ամիս
+                                </option>
+
+                            </select>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- TERMS -->
+
+                    <label class="terms">
+
+                        <input
+                            type="checkbox"
+                            id="terms"
+                            required>
+
+
+                        <span>
+
+                            Համաձայն եմ
+
+                            <a href="#">
+                                օգտագործման պայմաններին
+                            </a>
+
+                            և
+
+                            <a href="#">
+                                գաղտնիության քաղաքականությանը
+                            </a>
+
+                        </span>
+
+                    </label>
+
+
+
+                    <!-- SUBMIT -->
+
+                    <button
+                        type="submit"
+                        class="auth-submit">
+
+                        Ստեղծել հաշիվ
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- SWITCH LOGIN -->
+
+                <div class="auth-switch">
+
+                    Արդեն ունե՞ք հաշիվ։
+
+                    <button
+                        type="button"
+                        onclick="showLogin()">
+
+                        Մուտք գործել
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- =================================================
+                 LOGIN FORM
+            ================================================= -->
+
+            <div
+                id="login-form"
+                class="hidden">
+
+
+                <div class="auth-title">
+
+                    <h2>
+                        Բարի վերադարձ 👋
+                    </h2>
+
+                    <p>
+                        Մուտք գործեք ձեր EcoFarm Connect հաշիվ
+                    </p>
+
+                </div>
+
+
+
+                <!-- GOOGLE LOGIN -->
+
+                <button
+                    type="button"
+                    class="google-btn"
+                    onclick="loginWithGoogle()">
+
+                    <span class="google-icon">
+                        G
+                    </span>
+
+                    <span>
+                        Մուտք Google-ով
+                    </span>
+
+                </button>
+
+
+
+                <div class="divider">
+
+                    <span>
+                        կամ
+                    </span>
+
+                </div>
+
+
+
+                <!-- LOGIN FORM -->
+
+                <form
+                    id="loginForm"
+                    onsubmit="loginUser(event)">
+
+
+                    <!-- EMAIL -->
+
+                    <div class="input-group">
+
+                        <label for="login-email">
+                            Էլ․ փոստ
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span>
+                                ✉️
+                            </span>
+
+
+                            <input
+                                type="email"
+                                id="login-email"
+                                placeholder="example@email.com"
+                                autocomplete="email"
+                                required>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PASSWORD -->
+
+                    <div class="input-group">
+
+                        <label for="login-password">
+                            Գաղտնաբառ
+                        </label>
+
+
+                        <div class="input-box">
+
+                            <span>
+                                🔒
+                            </span>
+
+
+                            <input
+                                type="password"
+                                id="login-password"
+                                placeholder="Ձեր գաղտնաբառը"
+                                autocomplete="current-password"
+                                required>
+
+
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePassword('login-password', this)">
+
+                                👁
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- FORGOT PASSWORD -->
+
+                    <div class="forgot-row">
+
+                        <a
+                            href="#"
+                            id="forgotPassword"
+                            onclick="forgotPassword(event)">
+
+                            Մոռացե՞լ եք գաղտնաբառը
+
+                        </a>
+
+                    </div>
+
+
+
+                    <!-- LOGIN -->
+
+                    <button
+                        type="submit"
+                        class="auth-submit">
+
+                        Մուտք գործել
+
+                        <span>
+                            →
+                        </span>
+
+                    </button>
+
+
+                </form>
+
+
+
+                <!-- SWITCH REGISTER -->
+
+                <div class="auth-switch">
+
+                    Դեռ հաշիվ չունե՞ք։
+
+                    <button
+                        type="button"
+                        onclick="showRegister()">
+
+                        Գրանցվել
+
+                    </button>
+
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
 
 </main>
 
 
+
+<!-- =====================================================
+     FOOTER
+===================================================== -->
+
 <footer>
 
-    <div class="footer-logo">
-        🌱 EcoFarm Connect
+    <div>
+
+        🌱
+
+        <strong>
+            EcoFarm Connect
+        </strong>
+
     </div>
 
+
     <p>
-        © 2026 EcoFarm Connect. Բոլոր իրավունքները պաշտպանված են։
+
+        Միացնում ենք ֆերմերներին և գնորդներին։
+
     </p>
 
 </footer>
 
 
-<script>
 
-    // Ստուգում ենք՝ արդյոք վճարումը հաջողվել է
-    const paymentStatus =
-        localStorage.getItem("paymentStatus");
+<!-- =====================================================
+     FIREBASE / JAVASCRIPT
+===================================================== -->
 
-    if (paymentStatus === "success") {
-
-        console.log("Վճարումը հաջողությամբ կատարվել է");
-
-        // Միանգամից մաքրում ենք status-ը,
-        // որպեսզի ամեն refresh-ի ժամանակ չաշխատի
-        localStorage.removeItem("paymentStatus");
-
-    }
-
+<script
+    type="module"
+    src="./script.js">
 </script>
 
+
 </body>
+
 </html>
+

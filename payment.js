@@ -1,30 +1,147 @@
+/* =========================================================
+   ECOFARM CONNECT PAYMENT
+========================================================= */
+
+const planPrices = {
+    "Eco Start": 9,
+    "Eco Grow": 24,
+    "Eco Premium": 49
+};
+
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        const params =
+            new URLSearchParams(
+                window.location.search
+            );
+
+        const plan =
+            params.get("plan") ||
+            localStorage.getItem(
+                "selectedPlan"
+            ) ||
+            "Eco Start";
+
+
+        const price =
+            planPrices[plan] || 9;
+
+
+        document.getElementById(
+            "selected-plan"
+        ).textContent = plan;
+
+
+        document.getElementById(
+            "selected-price"
+        ).textContent =
+            `$${price} / ամիս`;
+
+    }
+);
+
+
+/* =========================================================
+   PAY
+========================================================= */
+
 function payWith(method) {
 
-    // Վճարման կոճակները ժամանակավորապես անջատում ենք
-    const buttons = document.querySelectorAll(".payment-method");
+    const buttons =
+        document.querySelectorAll(
+            ".payment-method"
+        );
 
-    buttons.forEach(button => {
-        button.disabled = true;
-        button.style.opacity = "0.6";
-        button.style.cursor = "not-allowed";
-    });
 
-    // Փոքր loading
-    const selectedPlan = document.getElementById("selected-plan");
-    const selectedPrice = document.getElementById("selected-price");
+    buttons.forEach(
+        button => {
 
-    selectedPlan.textContent = "Վճարումը մշակվում է...";
-    selectedPrice.textContent = "";
+            button.disabled = true;
 
-    // Դեմո վճարում
+            button.style.opacity =
+                "0.55";
+
+            button.style.pointerEvents =
+                "none";
+
+        }
+    );
+
+
+    const plan =
+        document.getElementById(
+            "selected-plan"
+        ).textContent;
+
+
+    const price =
+        document.getElementById(
+            "selected-price"
+        ).textContent;
+
+
+    const status =
+        document.getElementById(
+            "payment-status"
+        );
+
+
+    if (status) {
+
+        status.innerHTML = `
+            <div class="payment-loading">
+                <span class="loader"></span>
+                Վճարումը մշակվում է...
+            </div>
+        `;
+
+    }
+
+
+    /*
+       DEMO PAYMENT
+
+       Այստեղ իրական բանկային վճարում չկա։
+       Քո ներկայիս նախագիծը աշխատում է demo payment-ով։
+    */
+
     setTimeout(() => {
 
-        // Պահպանում ենք, որ վճարումը հաջող է եղել
-        localStorage.setItem("paymentStatus", "success");
-        localStorage.setItem("paymentMethod", method);
+        localStorage.setItem(
+            "paymentStatus",
+            "success"
+        );
 
-        // Գլխավոր էջ տեղափոխում
-        window.location.href = "home.html";
+        localStorage.setItem(
+            "paymentMethod",
+            method
+        );
+
+        localStorage.setItem(
+            "paidPlan",
+            plan
+        );
+
+        localStorage.setItem(
+            "paidPrice",
+            price
+        );
+
+
+        /*
+           Վճարումից հետո → INDEX
+        */
+
+        window.location.href =
+            "index.html";
 
     }, 1500);
+
 }
+
+
+window.payWith =
+    payWith;

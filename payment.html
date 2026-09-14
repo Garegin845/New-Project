@@ -2,32 +2,70 @@
 <html lang="hy">
 
 <head>
+
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>EcoFarm Connect - Payment</title>
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
 
-    <link rel="stylesheet" href="./payment.css">
+    <title>EcoFarm Connect — Payment</title>
+
+    <link rel="stylesheet"
+          href="./payment.css">
+
 </head>
 
 <body>
 
-<div class="payment-container">
+<div class="payment-page">
 
-    <div class="payment-box">
+    <div class="payment-card">
 
-        <div class="payment-header">
-            <h1>EcoFarm Connect</h1>
-            <p>Ընտրեք վճարման եղանակը</p>
+        <div class="payment-top">
+
+            <div class="payment-logo">
+                🌱
+            </div>
+
+            <span class="secure">
+                🔒 Secure Payment
+            </span>
+
         </div>
 
-        <div class="order-info">
 
-            <span>Ընտրված պլան</span>
+        <div class="payment-title">
 
-            <strong id="selected-plan">
-                Eco Start
-            </strong>
+            <span class="step">
+                STEP 2 OF 2
+            </span>
+
+            <h1>
+                Ընտրեք վճարման եղանակը
+            </h1>
+
+            <p>
+                Ավարտեք վճարումը՝ EcoFarm Connect-ը
+                օգտագործելու համար։
+            </p>
+
+        </div>
+
+
+        <div class="order-card">
+
+            <div>
+
+                <span>
+                    Ընտրված պլան
+                </span>
+
+                <strong id="selected-plan">
+                    Eco Start
+                </strong>
+
+            </div>
+
 
             <strong id="selected-price">
                 $9 / ամիս
@@ -36,82 +74,158 @@
         </div>
 
 
+        <div
+            id="payment-status"
+            class="payment-status">
+        </div>
+
+
         <div class="payment-methods">
 
-            <button class="payment-method"
-                    onclick="payWith('Google Pay')">
 
-                <span class="payment-icon google">
+            <button
+                class="payment-method"
+                onclick="payWith('Google Pay')">
+
+                <div class="method-icon google">
                     G
-                </span>
+                </div>
 
-                <span>Google Pay</span>
+                <div class="method-info">
 
-                <span>›</span>
+                    <strong>
+                        Google Pay
+                    </strong>
+
+                    <span>
+                        Վճարել Google Pay-ով
+                    </span>
+
+                </div>
+
+                <b>›</b>
 
             </button>
 
 
-            <button class="payment-method"
-                    onclick="payWith('Apple Pay')">
+            <button
+                class="payment-method"
+                onclick="payWith('Apple Pay')">
 
-                <span class="payment-icon apple">
+                <div class="method-icon apple">
                     
-                </span>
+                </div>
 
-                <span>Apple Pay</span>
+                <div class="method-info">
 
-                <span>›</span>
+                    <strong>
+                        Apple Pay
+                    </strong>
+
+                    <span>
+                        Արագ և անվտանգ վճարում
+                    </span>
+
+                </div>
+
+                <b>›</b>
 
             </button>
 
 
-            <button class="payment-method"
-                    onclick="payWith('Visa')">
+            <button
+                class="payment-method"
+                onclick="payWith('Visa')">
 
-                <span class="card-logo visa">
+                <div class="method-icon visa">
                     VISA
-                </span>
+                </div>
 
-                <span>Visa</span>
+                <div class="method-info">
 
-                <span>›</span>
+                    <strong>
+                        Visa
+                    </strong>
+
+                    <span>
+                        Վճարում քարտով
+                    </span>
+
+                </div>
+
+                <b>›</b>
 
             </button>
 
 
-            <button class="payment-method"
-                    onclick="payWith('Mastercard')">
+            <button
+                class="payment-method"
+                onclick="payWith('Mastercard')">
 
-                <span class="card-logo mastercard">
+                <div class="method-icon mastercard">
                     MC
-                </span>
+                </div>
 
-                <span>Mastercard</span>
+                <div class="method-info">
 
-                <span>›</span>
+                    <strong>
+                        Mastercard
+                    </strong>
+
+                    <span>
+                        Վճարում Mastercard քարտով
+                    </span>
+
+                </div>
+
+                <b>›</b>
 
             </button>
 
 
-            <button class="payment-method"
-                    onclick="payWith('ArCa')">
+            <button
+                class="payment-method"
+                onclick="payWith('ArCa')">
 
-                <span class="card-logo arca">
+                <div class="method-icon arca">
                     ArCa
-                </span>
+                </div>
 
-                <span>ArCa</span>
+                <div class="method-info">
 
-                <span>›</span>
+                    <strong>
+                        ArCa
+                    </strong>
+
+                    <span>
+                        Վճարում ArCa քարտով
+                    </span>
+
+                </div>
+
+                <b>›</b>
 
             </button>
 
         </div>
 
 
-        <button class="back-btn"
-                onclick="history.back()">
+        <div class="payment-security">
+
+            🔐 Ձեր տվյալները պաշտպանված են
+
+            <span>
+                •
+            </span>
+
+            EcoFarm Connect Secure Checkout
+
+        </div>
+
+
+        <button
+            class="back-btn"
+            onclick="history.back()">
 
             ← Վերադառնալ
 

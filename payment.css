@@ -1,516 +1,9 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family:
-        Inter,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        Arial,
-        sans-serif;
-
-    min-height: 100vh;
-
-    background:
-        radial-gradient(
-            circle at top left,
-            rgba(46, 125, 50, 0.12),
-            transparent 35%
-        ),
-        linear-gradient(
-            135deg,
-            #f5faf6,
-            #eef6ef
-        );
-
-    color: #1e2d22;
-}
-
-
-/* =========================
-   MAIN
-========================= */
-
-.payment-page {
-    min-height: 100vh;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    padding: 40px 20px;
-}
-
-
-/* =========================
-   CONTAINER
-========================= */
-
-.payment-container {
-    width: 100%;
-    max-width: 900px;
-
-    background: rgba(255, 255, 255, 0.95);
-
-    border: 1px solid rgba(46, 125, 50, 0.1);
-
-    border-radius: 28px;
-
-    padding: 42px;
-
-    box-shadow:
-        0 25px 70px rgba(30, 80, 40, 0.12),
-        0 5px 20px rgba(0, 0, 0, 0.04);
-
-    backdrop-filter: blur(20px);
-
-    animation: fadeIn 0.5s ease;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.payment-header {
-    text-align: center;
-    margin-bottom: 35px;
-}
-
-.payment-logo {
-    width: 58px;
-    height: 58px;
-
-    margin: 0 auto 18px;
-
-    border-radius: 18px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: linear-gradient(
-        135deg,
-        #2e7d32,
-        #43a047
-    );
-
-    color: white;
-
-    font-size: 27px;
-    font-weight: 800;
-
-    box-shadow:
-        0 10px 25px rgba(46, 125, 50, 0.25);
-}
-
-.payment-header h1 {
-    font-size: 30px;
-    font-weight: 750;
-
-    color: #17251b;
-
-    margin-bottom: 8px;
-}
-
-.payment-header p {
-    font-size: 15px;
-    color: #728074;
-}
-
-
-/* =========================
-   PLAN CARD
-========================= */
-
-.plan-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 23px 25px;
-
-    margin-bottom: 32px;
-
-    border-radius: 20px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #f0f8f1,
-            #f8fcf8
-        );
-
-    border: 1px solid #dcebdd;
-}
-
-.plan-info {
-    display: flex;
-    flex-direction: column;
-
-    gap: 6px;
-}
-
-.plan-label {
-    font-size: 12px;
-
-    color: #7a897d;
-
-    text-transform: uppercase;
-
-    letter-spacing: 0.8px;
-
-    font-weight: 700;
-}
-
-#selected-plan {
-    font-size: 21px;
-
-    font-weight: 750;
-
-    color: #256b2a;
-}
-
-.plan-price {
-    text-align: right;
-}
-
-.plan-price span {
-    display: block;
-
-    font-size: 12px;
-
-    color: #829087;
-}
-
-#selected-price {
-    font-size: 26px;
-
-    font-weight: 800;
-
-    color: #17251b;
-}
-
-
-/* =========================
-   TITLE
-========================= */
-
-.methods-title {
-    font-size: 18px;
-
-    font-weight: 700;
-
-    margin-bottom: 18px;
-
-    color: #233327;
-}
-
-
-/* =========================
-   PAYMENT METHODS
-========================= */
-
-.payment-methods {
-    display: grid;
-
-    grid-template-columns:
-        repeat(2, 1fr);
-
-    gap: 15px;
-}
-
-.payment-method {
-    position: relative;
-
-    min-height: 90px;
-
-    border: 1px solid #dce4de;
-
-    border-radius: 18px;
-
-    background: white;
-
-    cursor: pointer;
-
-    padding: 18px;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    text-align: left;
-
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease;
-}
-
-.payment-method:hover {
-    transform: translateY(-3px);
-
-    border-color: #56a15b;
-
-    background: #fbfefb;
-
-    box-shadow:
-        0 10px 25px rgba(46, 125, 50, 0.10);
-}
-
-.payment-method:active {
-    transform: scale(0.98);
-}
-
-.payment-icon {
-    width: 52px;
-    height: 52px;
-
-    flex-shrink: 0;
-
-    border-radius: 14px;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    background: #f1f6f2;
-
-    font-size: 23px;
-
-    font-weight: 800;
-
-    color: #2e7d32;
-}
-
-.payment-info {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-}
-
-.payment-name {
-    font-size: 15px;
-
-    font-weight: 700;
-
-    color: #26352a;
-}
-
-.payment-description {
-    font-size: 12px;
-
-    color: #87928a;
-}
-
-
-/* =========================
-   PAYMENT LOGOS
-========================= */
-
-.visa-icon {
-    color: #1434cb;
-}
-
-.mastercard-icon {
-    color: #eb001b;
-}
-
-.arca-icon {
-    color: #126b3a;
-}
-
-.google-icon {
-    color: #4285f4;
-}
-
-.apple-icon {
-    color: #111;
-}
-
-
-/* =========================
-   SECURE MESSAGE
-========================= */
-
-.secure-box {
-    margin-top: 27px;
-
-    padding: 15px 18px;
-
-    border-radius: 14px;
-
-    background: #f5faf6;
-
-    border: 1px solid #e1eee2;
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 12px;
-
-    color: #617065;
-
-    font-size: 13px;
-}
-
-.secure-icon {
-    width: 32px;
-    height: 32px;
-
-    border-radius: 10px;
-
-    background: #e2f1e4;
-
-    color: #2e7d32;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    font-size: 16px;
-}
-
-
-/* =========================
-   BACK BUTTON
-========================= */
-
-.back-button {
-    width: 100%;
-
-    margin-top: 20px;
-
-    padding: 14px;
-
-    border: none;
-
-    border-radius: 14px;
-
-    background: transparent;
-
-    color: #68766c;
-
-    font-size: 14px;
-
-    font-weight: 600;
-
-    cursor: pointer;
-
-    transition: 0.2s ease;
-}
-
-.back-button:hover {
-    background: #f2f6f3;
-
-    color: #2e7d32;
-}
-
-
-/* =========================
-   LOADING
-========================= */
-
-.payment-method.loading {
-    opacity: 0.55;
-
-    pointer-events: none;
-}
-
-.payment-method.loading::after {
-    content: "";
-
-    width: 18px;
-    height: 18px;
-
-    border: 2px solid #d5e4d7;
-
-    border-top-color: #2e7d32;
-
-    border-radius: 50%;
-
-    animation: spin 0.7s linear infinite;
-
-    margin-left: auto;
-}
-
-
-/* =========================
-   ANIMATIONS
-========================= */
-
-@keyframes fadeIn {
-
-    from {
-        opacity: 0;
-        transform: translateY(15px);
-    }
-
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes spin {
-
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-
-/* =========================
-   MOBILE
-========================= */
-
-@media (max-width: 650px) {
-
-    .payment-page {
-        padding: 20px 12px;
-    }
-
-    .payment-container {
-        padding: 25px 18px;
-
-        border-radius: 22px;
-    }
-
-    .payment-header h1 {
-        font-size: 25px;
-    }
-
-    .payment-methods {
-        grid-template-columns: 1fr;
-    }
-
-    .plan-card {
-        padding: 18px;
-    }
-
-    #selected-plan {
-        font-size: 18px;
-    }
-
-    #selected-price {
-        font-size: 23px;
-    }
-    /* =========================================
-   ECOFARM CONNECT — PAYMENT
-   FIXED DESKTOP DESIGN
-========================================= */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* =====================================================
+   ECOFARM CONNECT
+   PREMIUM PAYMENT DESIGN
+===================================================== */
 
 * {
     margin: 0;
@@ -526,146 +19,257 @@ body {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background:
-        radial-gradient(circle at 20% 20%, rgba(91, 170, 104, 0.12), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(53, 120, 69, 0.10), transparent 30%),
-        #f2f7f2;
+    font-family: "Inter", Arial, sans-serif;
 
-    color: #253528;
+    color: #1f2d24;
+
+    background:
+        radial-gradient(
+            circle at 15% 15%,
+            rgba(91, 164, 99, 0.16),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 85% 85%,
+            rgba(65, 132, 74, 0.12),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #f7faf7 0%,
+            #eef5ef 100%
+        );
+
     overflow-x: auto;
 }
 
 
-/* =========================================
-   MAIN CONTAINER
-========================================= */
+/* =====================================================
+   MAIN PAGE
+===================================================== */
 
 .payment-container {
     width: 100%;
+    min-width: 1100px;
     min-height: 100vh;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    padding: 40px;
+    padding: 50px;
 }
 
 
-/* =========================================
-   PAYMENT BOX
-========================================= */
+/* =====================================================
+   PAYMENT CARD
+===================================================== */
 
 .payment-box {
-    width: 560px;
-    min-width: 560px;
+    position: relative;
 
-    background: rgba(255, 255, 255, 0.96);
+    width: 580px;
+    min-width: 580px;
 
-    border: 1px solid rgba(66, 126, 74, 0.12);
+    padding: 42px;
 
-    border-radius: 26px;
+    border-radius: 30px;
 
-    padding: 38px;
+    background: rgba(255, 255, 255, 0.94);
+
+    border: 1px solid rgba(76, 132, 83, 0.14);
 
     box-shadow:
-        0 30px 80px rgba(38, 75, 43, 0.12),
-        0 8px 25px rgba(38, 75, 43, 0.06);
+        0 35px 90px rgba(31, 69, 37, 0.13),
+        0 12px 35px rgba(31, 69, 37, 0.07);
 
-    position: relative;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    overflow: hidden;
 }
 
 
-/* =========================================
+/* Decorative glow */
+
+.payment-box::before {
+    content: "";
+
+    position: absolute;
+
+    width: 240px;
+    height: 240px;
+
+    top: -130px;
+    right: -100px;
+
+    border-radius: 50%;
+
+    background: rgba(84, 157, 93, 0.12);
+
+    pointer-events: none;
+}
+
+.payment-box::after {
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    bottom: -120px;
+    left: -90px;
+
+    border-radius: 50%;
+
+    background: rgba(74, 139, 82, 0.08);
+
+    pointer-events: none;
+}
+
+
+/* =====================================================
    HEADER
-========================================= */
+===================================================== */
 
 .payment-header {
+    position: relative;
+    z-index: 2;
+
     text-align: center;
-    margin-bottom: 28px;
+
+    margin-bottom: 30px;
 }
+
+
+/* Logo */
 
 .logo {
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
-    gap: 7px;
+    gap: 6px;
+
+    margin-bottom: 17px;
 
     font-size: 24px;
-    margin-bottom: 18px;
+    font-weight: 800;
 }
 
 .logo span {
-    font-size: 27px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 42px;
+    height: 42px;
+
+    margin-right: 3px;
+
+    border-radius: 13px;
+
+    background: linear-gradient(
+        145deg,
+        #e7f6e9,
+        #d5edd9
+    );
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8),
+        0 6px 18px rgba(63, 132, 72, 0.12);
+
+    font-size: 22px;
 }
 
 .logo strong {
-    color: #263b2b;
+    color: #203126;
 }
 
 .logo b {
-    color: #4d9d5e;
+    color: #4c9b59;
 }
+
+
+/* Secure badge */
 
 .secure {
     display: inline-flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
 
-    padding: 7px 13px;
+    gap: 7px;
 
-    border-radius: 50px;
+    padding: 8px 14px;
 
-    background: #edf8ef;
-    color: #3d8750;
+    border-radius: 100px;
 
-    font-size: 12px;
+    background: #eff9f1;
+
+    border: 1px solid #d9eddc;
+
+    color: #43834c;
+
+    font-size: 11px;
     font-weight: 700;
 
-    margin-bottom: 20px;
+    letter-spacing: 0.2px;
+
+    margin-bottom: 19px;
 }
 
 .payment-header h1 {
-    font-size: 29px;
-    line-height: 1.2;
+    font-size: 30px;
+    font-weight: 800;
 
-    color: #26382a;
+    letter-spacing: -0.8px;
+
+    color: #203026;
 
     margin-bottom: 8px;
 }
 
 .payment-header p {
-    color: #718076;
-    font-size: 14px;
+    color: #7a877e;
+
+    font-size: 13px;
+
+    line-height: 1.5;
 }
 
 
-/* =========================================
-   ORDER INFO
-========================================= */
+/* =====================================================
+   ORDER SUMMARY
+===================================================== */
 
 .order-info {
+    position: relative;
+    z-index: 2;
+
     width: 100%;
 
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
 
-    padding: 20px 21px;
+    padding: 21px 22px;
 
-    background: linear-gradient(
-        135deg,
-        #f4faf5,
-        #eef7f0
-    );
+    border-radius: 18px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #f5faf6,
+            #edf7ef
+        );
 
     border: 1px solid #dcecdf;
 
-    border-radius: 17px;
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8);
 
-    margin-bottom: 22px;
+    margin-bottom: 23px;
 }
 
 .order-left,
@@ -675,7 +279,7 @@ body {
 }
 
 .order-left {
-    gap: 6px;
+    gap: 7px;
 }
 
 .order-price {
@@ -684,75 +288,133 @@ body {
 }
 
 .order-info span {
-    color: #77837a;
-    font-size: 12px;
+    color: #7b887f;
+
+    font-size: 11px;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
 }
 
 .order-info strong {
-    color: #29452f;
+    color: #29422f;
+
     font-size: 17px;
+    font-weight: 700;
 }
 
 .order-price strong {
-    color: #3e9150;
-    font-size: 18px;
+    color: #398447;
+
+    font-size: 19px;
+    font-weight: 800;
 }
 
 
-/* =========================================
+/* =====================================================
    PAYMENT METHODS
-========================================= */
+===================================================== */
 
 .payment-methods {
+    position: relative;
+    z-index: 2;
+
     display: flex;
     flex-direction: column;
 
-    gap: 11px;
+    gap: 12px;
 
-    margin-bottom: 22px;
+    margin-bottom: 23px;
 }
 
+
+/* Individual payment button */
+
 .payment-method {
+    position: relative;
+
     width: 100%;
-    height: 68px;
-
-    border: 1px solid #e1e9e2;
-
-    background: #ffffff;
-
-    border-radius: 15px;
-
-    padding: 0 18px;
+    height: 70px;
 
     display: flex;
     align-items: center;
     justify-content: space-between;
 
-    cursor: pointer;
+    padding: 0 18px;
+
+    border: 1px solid #e2e9e3;
+
+    border-radius: 17px;
+
+    background: #ffffff;
+
+    color: #26362b;
 
     font-family: inherit;
 
-    transition:
-        transform 0.2s ease,
-        border-color 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
-}
-
-.payment-method:hover {
-    transform: translateY(-2px);
-
-    border-color: #75ae7d;
-
-    background: #fbfefb;
+    cursor: pointer;
 
     box-shadow:
-        0 8px 22px rgba(55, 110, 64, 0.10);
+        0 3px 10px rgba(36, 65, 40, 0.035);
+
+    transition:
+        transform 0.22s ease,
+        border-color 0.22s ease,
+        box-shadow 0.22s ease,
+        background 0.22s ease;
 }
 
-.payment-method:active {
-    transform: translateY(0);
+
+/* Green line */
+
+.payment-method::before {
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    top: 50%;
+
+    width: 3px;
+    height: 0;
+
+    border-radius: 0 5px 5px 0;
+
+    background: #4c9a58;
+
+    transform: translateY(-50%);
+
+    transition: height 0.22s ease;
 }
+
+
+/* Hover */
+
+.payment-method:hover {
+    transform: translateY(-3px);
+
+    border-color: #9fc9a5;
+
+    background: #fcfffc;
+
+    box-shadow:
+        0 13px 28px rgba(48, 104, 56, 0.10);
+}
+
+.payment-method:hover::before {
+    height: 34px;
+}
+
+
+/* Click */
+
+.payment-method:active {
+    transform: translateY(-1px);
+}
+
+
+/* Left side */
 
 .method-left {
     display: flex;
@@ -762,99 +424,156 @@ body {
 }
 
 .method-name {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 700;
 
-    color: #2c3b30;
+    color: #2b392f;
 }
 
 
-/* =========================================
+/* =====================================================
    PAYMENT ICONS
-========================================= */
+===================================================== */
 
 .payment-icon {
-    width: 38px;
-    height: 38px;
+    width: 42px;
+    height: 42px;
 
-    border-radius: 10px;
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
+
+    border-radius: 12px;
 
     font-size: 19px;
     font-weight: 800;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.7);
 }
+
+
+/* Google */
 
 .google {
-    background: #f1f4f7;
     color: #4285f4;
 
-    border: 1px solid #e2e7ec;
+    background:
+        linear-gradient(
+            145deg,
+            #f7f9fb,
+            #edf2f7
+        );
+
+    border: 1px solid #e2e8ee;
 }
+
+
+/* Apple */
 
 .apple {
-    background: #171717;
-    color: white;
+    color: #ffffff;
 
-    font-size: 21px;
+    background:
+        linear-gradient(
+            145deg,
+            #2c2c2c,
+            #0e0e0e
+        );
+
+    font-size: 22px;
+
+    box-shadow:
+        0 5px 12px rgba(0,0,0,0.15);
 }
 
 
-/* =========================================
+/* =====================================================
    CARD LOGOS
-========================================= */
+===================================================== */
 
 .card-logo {
-    width: 52px;
-    height: 35px;
+    width: 55px;
+    height: 38px;
 
-    border-radius: 8px;
+    flex-shrink: 0;
 
     display: flex;
     align-items: center;
     justify-content: center;
 
-    font-weight: 900;
+    border-radius: 9px;
+
     font-size: 11px;
+    font-weight: 900;
+
+    letter-spacing: 0.3px;
 }
+
+
+/* VISA */
 
 .visa {
-    background: #172d72;
-    color: white;
+    color: #ffffff;
 
-    letter-spacing: 0.5px;
+    background:
+        linear-gradient(
+            145deg,
+            #243e94,
+            #172b70
+        );
+
+    box-shadow:
+        0 5px 13px rgba(27, 52, 130, 0.20);
 }
+
+
+/* Mastercard */
 
 .mastercard {
-    background: #f4f4f4;
+    color: #222222;
 
-    color: #222;
+    background:
+        linear-gradient(
+            145deg,
+            #ffffff,
+            #f0f0f0
+        );
 
-    border: 1px solid #e0e0e0;
+    border: 1px solid #dedede;
 
-    font-size: 12px;
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.06);
 }
 
+
+/* ArCa */
+
 .arca {
-    background: #e9f6eb;
+    color: #28743a;
 
-    color: #28733a;
+    background:
+        linear-gradient(
+            145deg,
+            #effaf1,
+            #dff1e2
+        );
 
-    border: 1px solid #cde7d2;
+    border: 1px solid #cce4d0;
 
     font-size: 13px;
 }
 
 
-/* =========================================
+/* =====================================================
    ARROW
-========================================= */
+===================================================== */
 
 .arrow {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
 
     display: flex;
     align-items: center;
@@ -864,40 +583,55 @@ body {
 
     background: #f2f7f3;
 
-    color: #5d7863;
+    color: #69806e;
 
-    font-size: 24px;
+    font-size: 23px;
+    font-weight: 400;
 
-    line-height: 1;
+    transition:
+        transform 0.2s ease,
+        background 0.2s ease,
+        color 0.2s ease;
+}
+
+.payment-method:hover .arrow {
+    transform: translateX(3px);
+
+    background: #e6f3e8;
+
+    color: #3f8b4b;
 }
 
 
-/* =========================================
-   SECURITY INFO
-========================================= */
+/* =====================================================
+   SECURITY
+===================================================== */
 
 .security-info {
+    position: relative;
+    z-index: 2;
+
     width: 100%;
 
     display: flex;
     align-items: center;
 
-    gap: 12px;
+    gap: 13px;
 
-    padding: 15px 17px;
+    padding: 16px 17px;
 
-    border-radius: 14px;
+    border-radius: 16px;
 
-    background: #f8fbf8;
+    background: #fafcfb;
 
-    border: 1px solid #e5eee6;
+    border: 1px solid #e5ece6;
 
-    margin-bottom: 22px;
+    margin-bottom: 21px;
 }
 
 .security-info > span {
-    width: 36px;
-    height: 36px;
+    width: 39px;
+    height: 39px;
 
     flex-shrink: 0;
 
@@ -905,51 +639,57 @@ body {
     align-items: center;
     justify-content: center;
 
+    border-radius: 11px;
+
     background: #eaf6ec;
 
-    border-radius: 10px;
-
     font-size: 17px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,0.8);
 }
 
 .security-info strong {
     display: block;
 
-    color: #36513b;
+    color: #344c39;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    margin-bottom: 3px;
+    margin-bottom: 4px;
 }
 
 .security-info p {
-    color: #7a857c;
+    color: #818b84;
 
-    font-size: 11px;
+    font-size: 10px;
 
-    line-height: 1.4;
+    line-height: 1.5;
 }
 
 
-/* =========================================
+/* =====================================================
    BACK BUTTON
-========================================= */
+===================================================== */
 
 .back-btn {
+    position: relative;
+    z-index: 2;
+
     width: 100%;
     height: 48px;
 
     border: none;
 
+    border-radius: 13px;
+
     background: transparent;
 
-    color: #55715b;
-
-    border-radius: 12px;
+    color: #5d7062;
 
     font-family: inherit;
 
-    font-size: 14px;
+    font-size: 13px;
     font-weight: 700;
 
     cursor: pointer;
@@ -962,39 +702,45 @@ body {
 .back-btn:hover {
     background: #f1f7f2;
 
-    color: #347642;
+    color: #357542;
 }
 
 
-/* =========================================
-   DISABLED PAYMENT BUTTON
-========================================= */
+/* =====================================================
+   FOCUS
+===================================================== */
+
+.payment-method:focus-visible,
+.back-btn:focus-visible {
+    outline: 3px solid rgba(77, 157, 94, 0.20);
+
+    outline-offset: 3px;
+}
+
+
+/* =====================================================
+   DISABLED
+===================================================== */
 
 .payment-method:disabled {
     cursor: not-allowed;
 
     transform: none !important;
 
-    opacity: 0.55;
+    opacity: 0.5;
 
-    box-shadow: none !important;
+    box-shadow: none;
+}
+
+.payment-method:disabled::before {
+    display: none;
 }
 
 
-/* =========================================
-   SELECTION EFFECT
-========================================= */
-
-.payment-method:focus-visible {
-    outline: 3px solid rgba(77, 157, 94, 0.22);
-
-    outline-offset: 2px;
-}
-
-
-/* =========================================
-   KEEP SAME DESKTOP SIZE
-========================================= */
+/* =====================================================
+   FIXED DESIGN ON SMALL SCREENS
+   LAYOUT DOES NOT CHANGE
+===================================================== */
 
 @media (max-width: 1100px) {
 
@@ -1006,20 +752,15 @@ body {
     .payment-container {
         width: 1100px;
         min-width: 1100px;
-        justify-content: center;
+
+        padding: 50px;
     }
 
     .payment-box {
-        width: 560px;
-        min-width: 560px;
+        width: 580px;
+        min-width: 580px;
     }
 }
-
-
-/* =========================================
-   SMALL DEVICES
-   DO NOT CHANGE LAYOUT
-========================================= */
 
 @media (max-width: 600px) {
 
@@ -1031,13 +772,10 @@ body {
     .payment-container {
         width: 1100px;
         min-width: 1100px;
-
-        padding: 40px;
     }
 
     .payment-box {
-        width: 560px;
-        min-width: 560px;
+        width: 580px;
+        min-width: 580px;
     }
-}
 }
