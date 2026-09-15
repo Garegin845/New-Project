@@ -1,366 +1,57 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hy">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>EcoFarm Connect</title>
-
-    <link rel="stylesheet" href="./home.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>EcoFarm Connect — Գրանցում</title>
+  <link rel="stylesheet" href="app.css">
 </head>
+<body class="auth-page">
+  <div class="auth-shell">
+    <a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a>
+    <div class="auth-grid">
+      <section class="auth-intro">
+        <span class="eyebrow">FARMER PLATFORM</span>
+        <h1>Աճեցրեք ձեր բիզնեսը՝ մեկ հարթակում։</h1>
+        <p>Գտեք գնորդներ, տեղադրեք հայտարարություններ, կառավարեք ձեր պրոֆիլը և միացեք գյուղատնտեսական համայնքին։</p>
+        <div class="feature-list">
+          <div>✓ Պրոֆեսիոնալ ֆերմայի էջ</div>
+          <div>✓ Հայտարարությունների marketplace</div>
+          <div>✓ Անվտանգ մուտք և հաստատումներ</div>
+          <div>✓ Սակագին + վճարում + ակտիվացում</div>
+        </div>
+      </section>
 
-<body>
+      <section class="auth-card">
+        <div id="registerView">
+          <div class="section-head">
+            <span class="eyebrow">CREATE ACCOUNT</span>
+            <h2>Ստեղծել հաշիվ</h2>
+            <p>Գրանցվեք՝ սկսելու համար։</p>
+          </div>
 
-<header class="navbar">
+          <button id="googleRegister" class="oauth">G <span>Շարունակել Google-ով</span></button>
+          <div class="or"><span>կամ</span></div>
 
-    <div class="logo">
-        🌱 EcoFarm <span>Connect</span>
+          <form id="registerForm">
+            <label>Անուն / ֆերմայի անուն<input id="regName" required placeholder="Օր․ Green Farm"></label>
+            <label>Երկիր<select id="regCountry" required><option value="">Ընտրեք</option><option>Հայաստան</option><option>Վրաստան</option><option>Ռուսաստան</option><option>ԱՄՆ</option><option>Ֆրանսիա</option><option>Գերմանիա</option><option>Իսպանիա</option><option>Այլ</option></select></label>
+            <label>Հեռախոս<input id="regPhone" type="tel" required placeholder="+374 XX XX XX XX"></label>
+            <label>Էլ․ փոստ<input id="regEmail" type="email" required placeholder="example@email.com"></label>
+            <label>Գաղտնաբառ<div class="password"><input id="regPassword" type="password" minlength="8" required placeholder="Առնվազն 8 նիշ"><button type="button" data-toggle="regPassword">👁</button></div></label>
+            <label>Կրկնել գաղտնաբառը<input id="regPassword2" type="password" minlength="8" required></label>
+            <label>Սակագին<select id="regPlan" required><option value="">Ընտրեք սակագինը</option><option>Eco Start — $9 / ամիս</option><option>Eco Grow — $24 / ամիս</option><option>Eco Premium — $49 / ամիս</option></select></label>
+            <label class="check"><input id="terms" type="checkbox" required><span>Համաձայն եմ օգտագործման պայմաններին և գաղտնիության քաղաքականությանը։</span></label>
+            <button class="primary" type="submit">Ստեղծել հաշիվ →</button>
+          </form>
+          <p class="switch">Արդեն ունե՞ք հաշիվ։ <a href="login.html">Մուտք գործել</a></p>
+        </div>
+      </section>
     </div>
-
-  <nav>
-
-    <a href="#home">
-        Գլխավոր
-    </a>
-
-    <a href="#announcements">
-        Հայտարարություններ
-    </a>
-
-    <a href="#news">
-        Նորություններ
-    </a>
-
-    <a href="#profile">
-        👤 Պրոֆիլ
-    </a>
-
-    <a href="#pricing">
-        Սակագներ
-    </a>
-
-    <!-- ԳՐԱՆՑՄԱՆ ԿՈՃԱԿ -->
-    <a href="home.html" class="register-btn">
-        Գրանցվել
-    </a>
-
-</nav>
-
-</header>
-
-
-<main>
-
-    <!-- HERO -->
-
-    <section class="hero" id="home">
-
-        <div class="hero-content">
-
-            <span class="badge">
-                🌱 EcoFarm Connect
-            </span>
-
-            <h1>
-                Բարի գալուստ
-                <span>EcoFarm Connect</span>
-            </h1>
-
-            <p>
-                Միացեք գյուղատնտեսական համայնքին,
-                գտեք նոր հնարավորություններ և զարգացրեք
-                ձեր բիզնեսը։
-            </p>
-
-            <div class="hero-buttons">
-
-                <a href="#announcements" class="primary-btn">
-                    Դիտել հայտարարությունները →
-                </a>
-
-                <a href="#news" class="secondary-btn">
-                    Վերջին նորությունները
-                </a>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- ANNOUNCEMENTS -->
-
-    <section class="section" id="announcements">
-
-        <div class="section-title">
-
-            <span>📢</span>
-
-            <div>
-                <h2>Վերջին հայտարարություններ</h2>
-
-                <p>
-                    Նոր առաջարկներ և հնարավորություններ
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="cards">
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🌾
-                </div>
-
-                <h3>
-                    Գյուղատնտեսական հողատարածք
-                </h3>
-
-                <p>
-                    Վարձակալության է տրվում
-                    բերրի հողատարածք։
-                </p>
-
-                <button>
-                    Դիտել →
-                </button>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🚜
-                </div>
-
-                <h3>
-                    Գյուղտեխնիկայի առաջարկ
-                </h3>
-
-                <p>
-                    Նոր և օգտագործված տեխնիկայի
-                    վաճառքի առաջարկներ։
-                </p>
-
-                <button>
-                    Դիտել →
-                </button>
-
-            </div>
-
-
-            <div class="card">
-
-                <div class="card-icon">
-                    🥬
-                </div>
-
-                <h3>
-                    Բերքի վաճառք
-                </h3>
-
-                <p>
-                    Թարմ գյուղատնտեսական
-                    արտադրանքի առաջարկներ։
-                </p>
-
-                <button>
-                    Դիտել →
-                </button>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-    <!-- NEWS -->
-
-    <section class="section news-section" id="news">
-
-        <div class="section-title">
-
-            <span>📰</span>
-
-            <div>
-                <h2>Նորություններ</h2>
-
-                <p>
-                    Վերջին նորությունները գյուղատնտեսության ոլորտից
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="news-list">
-
-            <article class="news-item">
-
-                <div class="news-date">
-                    13<br>
-                    ՍԵՊ
-                </div>
-
-                <div>
-
-                    <h3>
-                        Նոր հնարավորություններ ֆերմերների համար
-                    </h3>
-
-                    <p>
-                        EcoFarm Connect-ում ավելացվել են
-                        նոր գործիքներ և ծառայություններ։
-                    </p>
-
-                </div>
-
-            </article>
-
-
-            <article class="news-item">
-
-                <div class="news-date">
-                    10<br>
-                    ՍԵՊ
-                </div>
-
-                <div>
-
-                    <h3>
-                        Գյուղատնտեսական նոր ծրագրեր
-                    </h3>
-
-                    <p>
-                        Տեղեկացեք նոր ծրագրերի և
-                        հնարավորությունների մասին։
-                    </p>
-
-                </div>
-
-            </article>
-
-        </div>
-
-    </section>
-
-
-    <!-- PROFILE -->
-
-    <section class="profile-section" id="profile">
-
-        <div class="profile-card">
-
-            <div class="profile-avatar">
-                👤
-            </div>
-
-            <div>
-
-                <h2>
-                    Ձեր պրոֆիլը
-                </h2>
-
-                <p>
-                    Կառավարեք ձեր հաշիվը և հայտարարությունները։
-                </p>
-
-            </div>
-
-            <button>
-                Բացել պրոֆիլը
-            </button>
-
-        </div>
-
-    </section>
-
-
-    <!-- PRICING -->
-
-    <section class="section pricing-section" id="pricing">
-
-        <div class="section-title center">
-
-            <span>💳</span>
-
-            <div>
-                <h2>Սակագներ</h2>
-
-                <p>
-                    Ընտրեք ձեզ հարմար պլանը
-                </p>
-            </div>
-
-        </div>
-
-
-        <div class="pricing-card">
-
-            <span class="plan-label">
-                Ձեր ընթացիկ պլանը
-            </span>
-
-            <h2>
-                Eco Start
-            </h2>
-
-            <strong>
-                $9 <small>/ ամիս</small>
-            </strong>
-
-            <p>
-                Ձեր պլանը ակտիվ է և պատրաստ է օգտագործման։
-            </p>
-
-            <button>
-                Կառավարել պլանը
-            </button>
-
-        </div>
-
-    </section>
-
-</main>
-
-
-<footer>
-
-    <div class="footer-logo">
-        🌱 EcoFarm Connect
-    </div>
-
-    <p>
-        © 2026 EcoFarm Connect. Բոլոր իրավունքները պաշտպանված են։
-    </p>
-
-</footer>
-
-
-<script>
-
-    // Ստուգում ենք՝ արդյոք վճարումը հաջողվել է
-    const paymentStatus =
-        localStorage.getItem("paymentStatus");
-
-    if (paymentStatus === "success") {
-
-        console.log("Վճարումը հաջողությամբ կատարվել է");
-
-        // Միանգամից մաքրում ենք status-ը,
-        // որպեսզի ամեն refresh-ի ժամանակ չաշխատի
-        localStorage.removeItem("paymentStatus");
-
-    }
-
-</script>
-
+  </div>
+  <div id="toast" class="toast"></div>
+  <div id="authBoot" style="position:fixed;left:50%;bottom:14px;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:#fff3cd;color:#664d03;font:600 13px Arial;z-index:9999">Firebase-ը բեռնվում է…</div>
+  <script type="module" src="auth.js"></script>
+  <script>setTimeout(function(){var x=document.getElementById("authBoot"); if(x && !window.EcoFarmAuthLoaded){x.textContent="Firebase-ը չի բեռնվել։ Բացեք կայքը http://localhost:3000-ով։";} else if(x){x.remove();}},4000);</script>
 </body>
 </html>

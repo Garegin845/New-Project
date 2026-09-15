@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="hy">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EcoFarm Connect — Մուտք</title><link rel="stylesheet" href="app.css"></head>
+<body class="auth-page">
+<div class="auth-shell">
+  <a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a>
+  <div class="auth-grid single">
+    <section class="auth-intro">
+      <span class="eyebrow">WELCOME BACK</span>
+      <h1>Բարի վերադարձ 👋</h1>
+      <p>Մուտք գործեք և շարունակեք կառավարել ձեր ֆերմայի գործունեությունը։</p>
+      <div class="feature-list"><div>✓ Հայտարարություններ</div><div>✓ Պրոֆիլ և կարգավորումներ</div><div>✓ Սակագին և վճարումներ</div></div>
+    </section>
+    <section class="auth-card">
+      <div class="section-head"><span class="eyebrow">SIGN IN</span><h2>Մուտք գործել</h2><p>Օգտագործեք ձեր email-ը և գաղտնաբառը։</p></div>
+      <button id="googleLogin" class="oauth">G <span>Մուտք Google-ով</span></button>
+      <div class="or"><span>կամ</span></div>
+      <form id="loginForm">
+        <label>Էլ․ փոստ<input id="loginEmail" type="email" required placeholder="example@email.com"></label>
+        <label>Գաղտնաբառ<div class="password"><input id="loginPassword" type="password" required><button type="button" data-toggle="loginPassword">👁</button></div></label>
+        <div class="forgot"><button type="button" id="forgotPassword">Մոռացե՞լ եք գաղտնաբառը</button></div>
+        <button class="primary" type="submit">Մուտք գործել →</button>
+      </form>
+      <p class="switch">Դեռ հաշիվ չունե՞ք։ <a href="index.html">Գրանցվել</a></p>
+    </section>
+  </div>
+</div>
+<div id="toast" class="toast"></div>
+  <div id="authBoot" style="position:fixed;left:50%;bottom:14px;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:#fff3cd;color:#664d03;font:600 13px Arial;z-index:9999">Firebase-ը բեռնվում է…</div>
+<script type="module" src="auth.js"></script>
+  <script>setTimeout(function(){var x=document.getElementById("authBoot"); if(x && !window.EcoFarmAuthLoaded){x.textContent="Firebase-ը չի բեռնվել։ Բացեք կայքը http://localhost:3000-ով։";} else if(x){x.remove();}},4000);</script>
+</body>
+</html>

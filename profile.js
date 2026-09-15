@@ -1,0 +1,22 @@
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+import { getAuth, onAuthStateChanged, updateProfile, updateEmail, sendPasswordResetEmail } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+import { firebaseConfig } from "./firebase-config.js";
+const app=initializeApp(firebaseConfig),auth=getAuth(app),db=getFirestore(app),$=id=>document.getElementById(id);
+const toast=m=>{const t=$("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),3500)};
+function theme(){document.documentElement.dataset.theme=localStorage.getItem("ecofarm-theme")||"light"} theme();
+$("themeToggle").onclick=()=>{localStorage.setItem("ecofarm-theme",(localStorage.getItem("ecofarm-theme")||"light")==="light"?"dark":"light");theme()};
+$("avatarBtn").onclick=()=>$("avatarInput").click();
+$("avatarInput").onchange=e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{localStorage.setItem("ecofarm-avatar",r.result);$("avatar").innerHTML=`<img src="${r.result}" alt="">`};r.readAsDataURL(f)};
+const avatar=localStorage.getItem("ecofarm-avatar");if(avatar)$("avatar").innerHTML=`<img src="${avatar}" alt="">`;
+onAuthStateChanged(auth,async user=>{
+ if(!user)return location.href="login.html";
+ const ref=doc(db,"users",user.uid),snap=await getDoc(ref),d=snap.exists()?snap.data():{};
+ $("profileName").textContent=d.name||user.displayName||"EcoFarm User";$("profileEmail").textContent=user.email||"";
+ $("pName").value=d.name||user.displayName||"";$("pCountry").value=d.country||"";$("pPhone").value=d.phone||"";$("pEmail").value=user.email||"";
+ $("currentPlan").textContent=d.plan||"Free";$("planBadge").textContent=d.plan||"Free";$("planStatus").textContent=d.subscriptionActive?"Պլանը ակտիվ է։":"Հայտարարություն տեղադրելու համար ակտիվացրեք պլան։";
+});
+$("profileForm").onsubmit=async e=>{e.preventDefault();const u=auth.currentUser;if(!u)return;try{await updateProfile(u,{displayName:$("pName").value.trim()});await setDoc(doc(db,"users",u.uid),{name:$("pName").value.trim(),country:$("pCountry").value,phone:$("pPhone").value,updatedAt:new Date()},{merge:true});toast("Պրոֆիլը պահպանվեց։")}catch(e){toast("Չհաջողվեց պահպանել տվյալները։")}};
+$("passwordReset").onclick=async()=>{const u=auth.currentUser;if(u?.email){await sendPasswordResetEmail(auth,u.email);toast("Գաղտնաբառի փոփոխման հղումը ուղարկվեց email-ին։")}};
+$("emailVerifyBtn").onclick=()=>location.href="verify.html";
+$("phoneVerifyBtn").onclick=async()=>{const phone=$("pPhone").value.trim();if(!phone)return toast("Մուտքագրեք հեռախոսահամար։");try{const r=await fetch("/api/otp/phone/send",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({phone})});const d=await r.json();toast(d.message)}catch{toast("SMS ծառայությունը հասանելի չէ։")}};
