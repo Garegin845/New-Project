@@ -290,61 +290,147 @@ async function saveUser(
 // =========================================================
 // GOOGLE LOGIN
 // =========================================================
+// =========================================================
+// GOOGLE LOGIN
+// =========================================================
 
-async function googleLogin(
-    button
-) {
+async function googleLogin() {
 
-    setBusy(
-        button,
-        true,
-        "Միացում Google-ին..."
-    );
+    console.log("🟢 GOOGLE BUTTON CLICKED");
+
+    const button = $("googleLoginBtn");
+
+    if (!button) {
+        console.error("❌ googleLoginBtn NOT FOUND");
+        return;
+    }
+
+    // Prevent double click
+    if (button.disabled) {
+        return;
+    }
+
+    const oldHTML = button.innerHTML;
+
+    button.disabled = true;
+
+    button.innerHTML = `
+        <span class="auth-spinner"></span>
+        Միացում Google-ին...
+    `;
 
     try {
 
+        console.log("🔵 Creating Google provider...");
+
+        const provider =
+            new GoogleAuthProvider();
+
+        provider.setCustomParameters({
+            prompt: "select_account"
+        });
+
         console.log(
-            "🔵 Google login started..."
+            "🔵 Opening Google popup..."
         );
 
         const result =
             await signInWithPopup(
                 auth,
-                googleProvider
+                provider
             );
+
+        console.log(
+            "✅ GOOGLE LOGIN SUCCESS"
+        );
 
         const user =
             result.user;
 
         console.log(
-            "✅ Google login successful:",
+            "👤 Google user:",
             user.email
         );
 
-        // Firestore-ը չպետք է պահի
-        // login-ը։
-        saveUser(user).catch(
-            console.warn
+
+        // =================================================
+        // SAVE USER
+        // =================================================
+
+        try {
+
+            await saveUser(
+                user,
+                {
+                    name:
+                        user.displayName ||
+                        "",
+
+                    plan: "Free",
+
+                    subscriptionActive:
+                        false
+                }
+            );
+
+            console.log(
+                "✅ Google user saved"
+            );
+
+        } catch (firestoreError) {
+
+            console.warn(
+                "⚠️ Firestore save failed:",
+                firestoreError
+            );
+
+            // Login-ը դրա պատճառով
+            // ՉԻ կանգնում։
+        }
+
+
+        // =================================================
+        // REDIRECT
+        // =================================================
+
+        console.log(
+            "➡️ Redirecting to home.html..."
         );
 
-        location.replace(
-            "home.html"
-        );
+        window.location.href =
+            "home.html";
+
 
     } catch (error) {
 
         console.error(
-            "❌ Google Auth Error:",
+            "❌ GOOGLE LOGIN ERROR"
+        );
+
+        console.error(
+            "Error code:",
+            error?.code
+        );
+
+        console.error(
+            "Error message:",
+            error?.message
+        );
+
+        console.error(
+            "Full error:",
             error
         );
 
+
+        button.disabled = false;
+
+        button.innerHTML =
+            oldHTML;
+
+
         toast(
             firebaseMessage(error)
-        );
-
-        setBusy(
-            button,
-            false
         );
     }
 }
@@ -354,24 +440,59 @@ async function googleLogin(
 // GOOGLE BUTTON
 // =========================================================
 
-const googleButton =
-    $("googleLoginBtn");
+function initGoogleButton() {
 
-if (googleButton) {
+    const button =
+        $("googleLoginBtn");
 
-    googleButton.addEventListener(
+    if (!button) {
+
+        console.warn(
+            "⚠️ googleLoginBtn not found"
+        );
+
+        return;
+    }
+
+    console.log(
+        "✅ Google button found"
+    );
+
+
+    button.addEventListener(
         "click",
-        () => {
+        function (event) {
 
-            googleLogin(
-                googleButton
-            );
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            googleLogin();
 
         }
     );
-
 }
 
+
+// =========================================================
+// WAIT FOR HTML
+// =========================================================
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initGoogleButton
+    );
+
+} else {
+
+    initGoogleButton();
+
+}
 
 // =========================================================
 // REGISTRATION
@@ -910,7 +1031,7 @@ document
 
 
 // =========================================================
-// FINISHED
+// FINISHED GOOGLE LOGIN
 // =========================================================
 
 console.log(
