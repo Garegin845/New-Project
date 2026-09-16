@@ -1,25 +1,365 @@
 <!doctype html>
 <html lang="hy">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EcoFarm Connect — Գլխավոր</title><link rel="stylesheet" href="app.css"></head>
+
+<head>
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>EcoFarm Connect — Գլխավոր</title>
+
+    <link
+        rel="stylesheet"
+        href="app.css"
+    >
+</head>
+
 <body>
+
 <header class="navbar">
-  <a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a>
-  <nav>
-    <a class="active" href="home.html">Գլխավոր</a><a href="announcements.html">Հայտարարություններ</a><a href="news.html">Նորություններ</a><a href="profile.html">👤 Պրոֆիլ</a><a href="index.html#pricing">Սակագներ</a>
-  </nav>
-  <div class="nav-actions"><a id="loginLink" class="ghost small" href="login.html">Մուտք</a><a id="registerLink" class="primary small" href="index.html">Գրանցվել</a><button id="logoutBtn" class="ghost small hidden">Դուրս գալ</button><button id="themeBtn" class="icon-btn">☼</button></div>
+
+    <!-- LOGO -->
+    <a
+        class="brand"
+        href="home.html"
+    >
+        🌱
+        <span>
+            EcoFarm <b>Connect</b>
+        </span>
+    </a>
+
+
+    <!-- NAVIGATION -->
+    <nav>
+
+        <a
+            class="active"
+            href="home.html"
+        >
+            Գլխավոր
+        </a>
+
+        <a href="announcements.html">
+            Հայտարարություններ
+        </a>
+
+        <a href="news.html">
+            Նորություններ
+        </a>
+
+        <a href="profile.html">
+            👤 Պրոֆիլ
+        </a>
+
+        <a href="index.html#pricing">
+            Սակագներ
+        </a>
+
+    </nav>
+
+
+    <!-- ACTIONS -->
+    <div class="nav-actions">
+
+        <!-- Logged OUT -->
+        <a
+            id="loginLink"
+            class="ghost small"
+            href="login.html"
+        >
+            Մուտք
+        </a>
+
+        <a
+            id="registerLink"
+            class="primary small"
+            href="index.html"
+        >
+            Գրանցվել
+        </a>
+
+
+        <!-- Logged IN -->
+        <button
+            id="logoutBtn"
+            class="logout-btn hidden"
+            type="button"
+        >
+            ↪ Ելք
+        </button>
+
+
+        <!-- THEME -->
+        <button
+            id="themeBtn"
+            class="icon-btn"
+            type="button"
+            title="Փոխել թեման"
+            aria-label="Փոխել թեման"
+        >
+            ☼
+        </button>
+
+    </div>
+
 </header>
+
+
+<!-- =====================================================
+     MAIN
+===================================================== -->
+
 <main>
-<section class="hero-pro">
-  <div><span class="eyebrow">🌿 SMART FARMING COMMUNITY</span><h1>Գյուղատնտեսությունը՝ <span>ավելի խելացի</span> և հասանելի։</h1><p>Միացեք ֆերմերներին, գնորդներին և գյուղատնտեսական բիզնեսներին մեկ ժամանակակից marketplace-ում։</p><div class="hero-actions"><a class="primary" href="announcements.html">Դիտել հայտարարությունները →</a><a class="secondary" href="index.html#pricing">Ընտրել սակագին</a></div><div class="hero-stats"><div><b>1,200+</b><span>ֆերմեր</span></div><div><b>4,800+</b><span>ապրանք</span></div><div><b>18</b><span>մարզ / տարածաշրջան</span></div></div></div>
-  <div class="hero-orbit"><div class="orbit-card main">🌱<b>EcoFarm</b><span>Connect</span></div><div class="orbit-card o1">🚜 Գյուղտեխնիկա</div><div class="orbit-card o2">🥬 Թարմ արտադրանք</div><div class="orbit-card o3">🤝 Նոր կապեր</div></div>
-</section>
-<section class="section">
-  <div class="section-head centered"><span class="eyebrow">MARKETPLACE</span><h2>Ամեն ինչ մեկ հարթակում</h2><p>Գտեք, հրապարակեք և զարգացրեք ձեր գյուղատնտեսական բիզնեսը։</p></div>
-  <div class="feature-grid"><a href="announcements.html" class="feature-card"><div>📢</div><h3>Հայտարարություններ</h3><p>Հող, տեխնիկա, բերք, կենդանիներ, աշխատանք և ծառայություններ։</p><span>Բացել →</span></a><a href="news.html" class="feature-card"><div>📰</div><h3>Նորություններ</h3><p>Տեխնոլոգիաներ, շուկաներ, ջրային ռեսուրսներ և ոլորտային զարգացումներ։</p><span>Կարդալ →</span></a><a href="profile.html" class="feature-card"><div>👤</div><h3>Պրոֆիլ</h3><p>Կառավարեք ձեր տվյալները, հաստատումները, նկարն ու կարգավորումները։</p><span>Բացել →</span></a></div>
-</section>
-<section class="cta"><div><span class="eyebrow">GROW WITH ECOFARM</span><h2>Պատրա՞ստ եք հաջորդ քայլին։</h2><p>Ընտրեք պլան և ստացեք հայտարարություն տեղադրելու հնարավորություն։</p></div><a class="primary" href="index.html#pricing">Սկսել հիմա →</a></section>
+
+    <!-- HERO -->
+    <section class="hero-pro">
+
+        <div>
+
+            <span class="eyebrow">
+                🌿 SMART FARMING COMMUNITY
+            </span>
+
+            <h1>
+                Գյուղատնտեսությունը՝
+                <span>ավելի խելացի</span>
+                և հասանելի։
+            </h1>
+
+            <p>
+                Միացեք ֆերմերներին, գնորդներին և
+                գյուղատնտեսական բիզնեսներին մեկ
+                ժամանակակից marketplace-ում։
+            </p>
+
+
+            <div class="hero-actions">
+
+                <a
+                    class="primary"
+                    href="announcements.html"
+                >
+                    Դիտել հայտարարությունները →
+                </a>
+
+                <a
+                    class="secondary"
+                    href="index.html#pricing"
+                >
+                    Ընտրել սակագին
+                </a>
+
+            </div>
+
+
+            <div class="hero-stats">
+
+                <div>
+                    <b>1,200+</b>
+                    <span>ֆերմեր</span>
+                </div>
+
+                <div>
+                    <b>4,800+</b>
+                    <span>ապրանք</span>
+                </div>
+
+                <div>
+                    <b>18</b>
+                    <span>մարզ / տարածաշրջան</span>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ORBIT -->
+        <div class="hero-orbit">
+
+            <div class="orbit-card main">
+                🌱
+                <b>EcoFarm</b>
+                <span>Connect</span>
+            </div>
+
+            <div class="orbit-card o1">
+                🚜 Գյուղտեխնիկա
+            </div>
+
+            <div class="orbit-card o2">
+                🥬 Թարմ արտադրանք
+            </div>
+
+            <div class="orbit-card o3">
+                🤝 Նոր կապեր
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- MARKETPLACE -->
+    <section class="section">
+
+        <div class="section-head centered">
+
+            <span class="eyebrow">
+                MARKETPLACE
+            </span>
+
+            <h2>
+                Ամեն ինչ մեկ հարթակում
+            </h2>
+
+            <p>
+                Գտեք, հրապարակեք և զարգացրեք
+                ձեր գյուղատնտեսական բիզնեսը։
+            </p>
+
+        </div>
+
+
+        <div class="feature-grid">
+
+            <a
+                href="announcements.html"
+                class="feature-card"
+            >
+
+                <div>📢</div>
+
+                <h3>
+                    Հայտարարություններ
+                </h3>
+
+                <p>
+                    Հող, տեխնիկա, բերք, կենդանիներ,
+                    աշխատանք և ծառայություններ։
+                </p>
+
+                <span>
+                    Բացել →
+                </span>
+
+            </a>
+
+
+            <a
+                href="news.html"
+                class="feature-card"
+            >
+
+                <div>📰</div>
+
+                <h3>
+                    Նորություններ
+                </h3>
+
+                <p>
+                    Տեխնոլոգիաներ, շուկաներ,
+                    ջրային ռեսուրսներ և ոլորտային զարգացումներ։
+                </p>
+
+                <span>
+                    Կարդալ →
+                </span>
+
+            </a>
+
+
+            <a
+                href="profile.html"
+                class="feature-card"
+            >
+
+                <div>👤</div>
+
+                <h3>
+                    Պրոֆիլ
+                </h3>
+
+                <p>
+                    Կառավարեք ձեր տվյալները,
+                    հաստատումները, նկարն ու կարգավորումները։
+                </p>
+
+                <span>
+                    Բացել →
+                </span>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- CTA -->
+    <section class="cta">
+
+        <div>
+
+            <span class="eyebrow">
+                GROW WITH ECOFARM
+            </span>
+
+            <h2>
+                Պատրա՞ստ եք հաջորդ քայլին։
+            </h2>
+
+            <p>
+                Ընտրեք պլան և ստացեք
+                հայտարարություն տեղադրելու հնարավորություն։
+            </p>
+
+        </div>
+
+        <a
+            class="primary"
+            href="index.html#pricing"
+        >
+            Սկսել հիմա →
+        </a>
+
+    </section>
+
 </main>
-<footer>🌱 <b>EcoFarm Connect</b><span>© 2026 — Բոլոր իրավունքները պաշտպանված են։</span></footer>
-<script type="module" src="app.js"></script>
-</body></html>
+
+
+<!-- FOOTER -->
+
+<footer>
+
+    <span>
+        🌱 <b>EcoFarm Connect</b>
+    </span>
+
+    <span>
+        © 2026 — Բոլոր իրավունքները պաշտպանված են։
+    </span>
+
+</footer>
+
+
+<!-- TOAST -->
+
+<div
+    id="toast"
+    class="toast"
+></div>
+
+
+<!-- APP -->
+
+<script
+    type="module"
+    src="app.js"
+></script>
+
+</body>
+</html>
