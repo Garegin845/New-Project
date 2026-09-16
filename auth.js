@@ -7,17 +7,13 @@
 
 import { initializeApp } from
     "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
-
 import {
     getAuth,
     GoogleAuthProvider,
     signInWithPopup,
-    createUserWithEmailAndPassword,
-    signInWithEmailAndPassword,
-    sendPasswordResetEmail,
-    updateProfile,
-    signOut
-} from
+    signInWithRedirect,
+    getRedirectResult,
+    createUserWithEmailAndPassword, from
     "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
 
 import {
@@ -291,37 +287,26 @@ async function saveUser(
 // GOOGLE LOGIN
 // =========================================================
 // =========================================================
-// GOOGLE LOGIN
+// GOOGLE LOGIN — REDIRECT
 // =========================================================
 
 async function googleLogin() {
 
-    console.log("🟢 GOOGLE BUTTON CLICKED");
+    console.log("🟢 GOOGLE LOGIN STARTED");
 
     const button = $("googleLoginBtn");
 
-    if (!button) {
-        console.error("❌ googleLoginBtn NOT FOUND");
-        return;
+    if (button) {
+
+        button.disabled = true;
+
+        button.innerHTML = `
+            <span class="auth-spinner"></span>
+            Միացում Google-ին...
+        `;
     }
-
-    // Prevent double click
-    if (button.disabled) {
-        return;
-    }
-
-    const oldHTML = button.innerHTML;
-
-    button.disabled = true;
-
-    button.innerHTML = `
-        <span class="auth-spinner"></span>
-        Միացում Google-ին...
-    `;
 
     try {
-
-        console.log("🔵 Creating Google provider...");
 
         const provider =
             new GoogleAuthProvider();
@@ -331,167 +316,35 @@ async function googleLogin() {
         });
 
         console.log(
-            "🔵 Opening Google popup..."
+            "🔵 Redirecting to Google..."
         );
 
-        const result =
-            await signInWithPopup(
-                auth,
-                provider
-            );
-
-        console.log(
-            "✅ GOOGLE LOGIN SUCCESS"
+        await signInWithRedirect(
+            auth,
+            provider
         );
-
-        const user =
-            result.user;
-
-        console.log(
-            "👤 Google user:",
-            user.email
-        );
-
-
-        // =================================================
-        // SAVE USER
-        // =================================================
-
-        try {
-
-            await saveUser(
-                user,
-                {
-                    name:
-                        user.displayName ||
-                        "",
-
-                    plan: "Free",
-
-                    subscriptionActive:
-                        false
-                }
-            );
-
-            console.log(
-                "✅ Google user saved"
-            );
-
-        } catch (firestoreError) {
-
-            console.warn(
-                "⚠️ Firestore save failed:",
-                firestoreError
-            );
-
-            // Login-ը դրա պատճառով
-            // ՉԻ կանգնում։
-        }
-
-
-        // =================================================
-        // REDIRECT
-        // =================================================
-
-        console.log(
-            "➡️ Redirecting to home.html..."
-        );
-
-        window.location.href =
-            "home.html";
-
 
     } catch (error) {
 
         console.error(
-            "❌ GOOGLE LOGIN ERROR"
-        );
-
-        console.error(
-            "Error code:",
-            error?.code
-        );
-
-        console.error(
-            "Error message:",
-            error?.message
-        );
-
-        console.error(
-            "Full error:",
+            "❌ GOOGLE REDIRECT ERROR:",
             error
         );
 
+        if (button) {
 
-        button.disabled = false;
+            button.disabled = false;
 
-        button.innerHTML =
-            oldHTML;
-
+            button.innerHTML = `
+                <span>G</span>
+                Շարունակել Google-ով
+            `;
+        }
 
         toast(
             firebaseMessage(error)
         );
     }
-}
-
-
-// =========================================================
-// GOOGLE BUTTON
-// =========================================================
-
-function initGoogleButton() {
-
-    const button =
-        $("googleLoginBtn");
-
-    if (!button) {
-
-        console.warn(
-            "⚠️ googleLoginBtn not found"
-        );
-
-        return;
-    }
-
-    console.log(
-        "✅ Google button found"
-    );
-
-
-    button.addEventListener(
-        "click",
-        function (event) {
-
-            event.preventDefault();
-
-            event.stopPropagation();
-
-            googleLogin();
-
-        }
-    );
-}
-
-
-// =========================================================
-// WAIT FOR HTML
-// =========================================================
-
-if (
-    document.readyState ===
-    "loading"
-) {
-
-    document.addEventListener(
-        "DOMContentLoaded",
-        initGoogleButton
-    );
-
-} else {
-
-    initGoogleButton();
-
 }
 
 // =========================================================
