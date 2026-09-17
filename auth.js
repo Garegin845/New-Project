@@ -2,19 +2,33 @@
 // ECOFARM CONNECT
 // FIREBASE AUTHENTICATION
 // Email + Password
-// Google
+// Google Redirect
 // =========================================================
 
-import { initializeApp } from
+
+// =========================================================
+// FIREBASE IMPORTS
+// =========================================================
+
+import {
+    initializeApp
+} from
     "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+
+
 import {
     getAuth,
     GoogleAuthProvider,
-    signInWithPopup,
     signInWithRedirect,
     getRedirectResult,
-    createUserWithEmailAndPassword, from
+    createUserWithEmailAndPassword,
+    signInWithEmailAndPassword,
+    sendPasswordResetEmail,
+    updateProfile,
+    signOut
+} from
     "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
+
 
 import {
     getFirestore,
@@ -24,21 +38,35 @@ import {
 } from
     "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
-import { firebaseConfig } from "./firebase-config.js";
+
+import {
+    firebaseConfig
+} from "./firebase-config.js";
 
 
 // =========================================================
-// FIREBASE INIT
+// FIREBASE INITIALIZATION
 // =========================================================
 
-const app = initializeApp(firebaseConfig);
+const app =
+    initializeApp(firebaseConfig);
 
-const auth = getAuth(app);
 
-const db = getFirestore(app);
+const auth =
+    getAuth(app);
+
+
+const db =
+    getFirestore(app);
+
+
+// =========================================================
+// GOOGLE PROVIDER
+// =========================================================
 
 const googleProvider =
     new GoogleAuthProvider();
+
 
 googleProvider.setCustomParameters({
     prompt: "select_account"
@@ -46,7 +74,7 @@ googleProvider.setCustomParameters({
 
 
 // =========================================================
-// HELPERS
+// HELPER
 // =========================================================
 
 const $ = (id) =>
@@ -58,6 +86,7 @@ const $ = (id) =>
 // =========================================================
 
 window.EcoFarmAuthLoaded = true;
+
 
 console.log(
     "🌱 EcoFarm Firebase Auth loaded successfully"
@@ -73,22 +102,35 @@ function toast(
     type = "error"
 ) {
 
-    const element = $("toast");
+    const element =
+        $("toast");
+
 
     if (!element) {
+
         alert(message);
+
         return;
     }
 
-    element.textContent = message;
 
-    element.dataset.type = type;
+    element.textContent =
+        message;
 
-    element.classList.add("show");
+
+    element.dataset.type =
+        type;
+
+
+    element.classList.add(
+        "show"
+    );
+
 
     clearTimeout(
         window.__ecoToastTimer
     );
+
 
     window.__ecoToastTimer =
         setTimeout(() => {
@@ -111,14 +153,23 @@ function setBusy(
     text = "Խնդրում ենք սպասել..."
 ) {
 
-    if (!button) return;
+    if (!button) {
+        return;
+    }
+
 
     if (busy) {
 
-        button.dataset.oldText =
-            button.innerHTML;
+        if (!button.dataset.oldText) {
 
-        button.disabled = true;
+            button.dataset.oldText =
+                button.innerHTML;
+        }
+
+
+        button.disabled =
+            true;
+
 
         button.innerHTML = `
             <span class="auth-spinner"></span>
@@ -127,13 +178,16 @@ function setBusy(
 
     } else {
 
-        button.disabled = false;
+        button.disabled =
+            false;
+
 
         if (button.dataset.oldText) {
 
             button.innerHTML =
                 button.dataset.oldText;
 
+            delete button.dataset.oldText;
         }
     }
 }
@@ -147,6 +201,7 @@ function firebaseMessage(error) {
 
     const code =
         error?.code || "";
+
 
     const messages = {
 
@@ -171,15 +226,6 @@ function firebaseMessage(error) {
         "auth/invalid-email":
             "Email հասցեն սխալ է։",
 
-        "auth/popup-closed-by-user":
-            "Google-ի պատուհանը փակվեց։",
-
-        "auth/popup-blocked":
-            "Google-ի popup-ը արգելափակվել է։ Թույլատրեք popup-ները։",
-
-        "auth/cancelled-popup-request":
-            "Google մուտքը չեղարկվեց։",
-
         "auth/operation-not-allowed":
             "Firebase Console-ում այս մուտքի մեթոդը միացված չէ։",
 
@@ -196,8 +242,15 @@ function firebaseMessage(error) {
             "Firebase API key-ը սխալ է։",
 
         "auth/configuration-not-found":
-            "Firebase Authentication-ի կարգավորումները չեն գտնվել։"
+            "Firebase Authentication-ի կարգավորումները չեն գտնվել։",
+
+        "auth/popup-blocked":
+            "Google-ի պատուհանը արգելափակվել է։",
+
+        "auth/cancelled-popup-request":
+            "Google մուտքը չեղարկվեց։"
     };
+
 
     return (
         messages[code] ||
@@ -226,7 +279,8 @@ async function saveUser(
             ),
             {
 
-                uid: user.uid,
+                uid:
+                    user.uid,
 
                 name:
                     extra.name ??
@@ -266,6 +320,7 @@ async function saveUser(
             }
         );
 
+
         console.log(
             "✅ User saved to Firestore"
         );
@@ -277,51 +332,50 @@ async function saveUser(
             error
         );
 
-        // Authentication-ը դրա պատճառով
-        // ՉԻ կանգնում։
+        // Firestore-ի խնդիրը
+        // Authentication-ը չի կանգնեցնում։
     }
 }
 
 
 // =========================================================
 // GOOGLE LOGIN
-// =========================================================
-// =========================================================
-// GOOGLE LOGIN — REDIRECT
+// REDIRECT METHOD
 // =========================================================
 
 async function googleLogin() {
 
-    console.log("🟢 GOOGLE LOGIN STARTED");
+    console.log(
+        "🟢 GOOGLE LOGIN CLICKED"
+    );
 
-    const button = $("googleLoginBtn");
 
-    if (button) {
+    const button =
+        $("googleLoginBtn");
 
-        button.disabled = true;
 
-        button.innerHTML = `
-            <span class="auth-spinner"></span>
-            Միացում Google-ին...
-        `;
-    }
+    setBusy(
+        button,
+        true,
+        "Միացում Google-ին..."
+    );
+
 
     try {
 
-        const provider =
-            new GoogleAuthProvider();
-
-        provider.setCustomParameters({
-            prompt: "select_account"
-        });
-
         console.log(
-            "🔵 Redirecting to Google..."
+            "🔵 Starting Google redirect..."
         );
+
 
         await signInWithRedirect(
             auth,
-            provider
+            googleProvider
+        );
+
+
+        console.log(
+            "🔵 Google redirect requested"
         );
 
     } catch (error) {
@@ -331,15 +385,106 @@ async function googleLogin() {
             error
         );
 
-        if (button) {
 
-            button.disabled = false;
+        toast(
+            firebaseMessage(error)
+        );
 
-            button.innerHTML = `
-                <span>G</span>
-                Շարունակել Google-ով
-            `;
+
+        setBusy(
+            button,
+            false
+        );
+    }
+}
+
+
+// =========================================================
+// CHECK GOOGLE REDIRECT RESULT
+// =========================================================
+
+async function checkGoogleRedirect() {
+
+    console.log(
+        "🔄 Checking Google redirect..."
+    );
+
+
+    try {
+
+        const result =
+            await getRedirectResult(
+                auth
+            );
+
+
+        if (!result) {
+
+            console.log(
+                "ℹ️ No Google redirect result"
+            );
+
+            return;
         }
+
+
+        const user =
+            result.user;
+
+
+        console.log(
+            "✅ GOOGLE LOGIN SUCCESS:",
+            user.email
+        );
+
+
+        // =================================================
+        // SAVE GOOGLE USER
+        // =================================================
+
+        await saveUser(
+            user,
+            {
+
+                name:
+                    user.displayName ||
+                    "",
+
+                country:
+                    "",
+
+                phone:
+                    "",
+
+                plan:
+                    "Free",
+
+                subscriptionActive:
+                    false
+            }
+        );
+
+
+        // =================================================
+        // REDIRECT HOME
+        // =================================================
+
+        console.log(
+            "➡️ Redirecting to home.html..."
+        );
+
+
+        window.location.replace(
+            "home.html"
+        );
+
+    } catch (error) {
+
+        console.error(
+            "❌ GOOGLE REDIRECT RESULT ERROR:",
+            error
+        );
+
 
         toast(
             firebaseMessage(error)
@@ -347,12 +492,82 @@ async function googleLogin() {
     }
 }
 
+
+// =========================================================
+// RUN GOOGLE REDIRECT CHECK
+// =========================================================
+
+checkGoogleRedirect();
+
+
+// =========================================================
+// GOOGLE BUTTON
+// =========================================================
+
+function initGoogleButton() {
+
+    const button =
+        $("googleLoginBtn");
+
+
+    if (!button) {
+
+        console.log(
+            "ℹ️ Google button is not on this page"
+        );
+
+        return;
+    }
+
+
+    console.log(
+        "✅ Google button found"
+    );
+
+
+    button.addEventListener(
+        "click",
+        function (event) {
+
+            event.preventDefault();
+
+            event.stopPropagation();
+
+            googleLogin();
+
+        }
+    );
+}
+
+
+// =========================================================
+// DOM READY
+// =========================================================
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initGoogleButton
+    );
+
+} else {
+
+    initGoogleButton();
+
+}
+
+
 // =========================================================
 // REGISTRATION
 // =========================================================
 
 const registerForm =
     $("registerForm");
+
 
 if (registerForm) {
 
@@ -362,34 +577,53 @@ if (registerForm) {
 
             event.preventDefault();
 
+
             const button =
                 registerForm.querySelector(
                     'button[type="submit"]'
                 );
 
+
             const name =
-                $("regName")?.value.trim();
+                $("regName")
+                    ?.value
+                    .trim();
+
 
             const email =
-                $("regEmail")?.value.trim();
+                $("regEmail")
+                    ?.value
+                    .trim();
+
 
             const phone =
-                $("regPhone")?.value.trim();
+                $("regPhone")
+                    ?.value
+                    .trim();
+
 
             const country =
-                $("regCountry")?.value;
+                $("regCountry")
+                    ?.value;
+
 
             const password =
-                $("regPassword")?.value ||
+                $("regPassword")
+                    ?.value ||
                 "";
+
 
             const password2 =
-                $("regPassword2")?.value ||
+                $("regPassword2")
+                    ?.value ||
                 "";
 
+
             const planRaw =
-                $("regPlan")?.value ||
+                $("regPlan")
+                    ?.value ||
                 "";
+
 
             const plan =
                 planRaw
@@ -397,9 +631,9 @@ if (registerForm) {
                     .trim();
 
 
-            // ================================
+            // =================================================
             // VALIDATION
-            // ================================
+            // =================================================
 
             if (!name) {
 
@@ -410,6 +644,7 @@ if (registerForm) {
                 return;
             }
 
+
             if (!email) {
 
                 toast(
@@ -418,6 +653,7 @@ if (registerForm) {
 
                 return;
             }
+
 
             if (!phone) {
 
@@ -428,6 +664,7 @@ if (registerForm) {
                 return;
             }
 
+
             if (!country) {
 
                 toast(
@@ -436,6 +673,7 @@ if (registerForm) {
 
                 return;
             }
+
 
             if (!plan) {
 
@@ -446,7 +684,10 @@ if (registerForm) {
                 return;
             }
 
-            if (password.length < 8) {
+
+            if (
+                password.length < 8
+            ) {
 
                 toast(
                     "Գաղտնաբառը պետք է լինի առնվազն 8 նիշ։"
@@ -455,9 +696,9 @@ if (registerForm) {
                 return;
             }
 
+
             if (
-                password !==
-                password2
+                password !== password2
             ) {
 
                 toast(
@@ -468,15 +709,16 @@ if (registerForm) {
             }
 
 
-            // ================================
+            // =================================================
             // CREATE ACCOUNT
-            // ================================
+            // =================================================
 
             setBusy(
                 button,
                 true,
                 "Հաշիվը ստեղծվում է..."
             );
+
 
             try {
 
@@ -487,50 +729,65 @@ if (registerForm) {
                         password
                     );
 
+
                 const user =
                     credential.user;
 
 
-                // ================================
-                // PROFILE
-                // ================================
+                // =================================================
+                // UPDATE PROFILE
+                // =================================================
 
                 await updateProfile(
                     user,
                     {
-                        displayName: name
+                        displayName:
+                            name
                     }
                 );
 
 
-                // ================================
+                // =================================================
                 // FIRESTORE
-                // ================================
+                // =================================================
 
                 await saveUser(
                     user,
                     {
-                        name,
-                        phone,
-                        country,
-                        plan
+
+                        name:
+                            name,
+
+                        phone:
+                            phone,
+
+                        country:
+                            country,
+
+                        plan:
+                            plan,
+
+                        subscriptionActive:
+                            false
                     }
                 );
 
 
-                // ================================
+                // =================================================
                 // SESSION
-                // ================================
+                // =================================================
 
                 sessionStorage.setItem(
                     "pendingVerificationEmail",
                     email
                 );
 
+
                 sessionStorage.setItem(
                     "pendingVerificationUid",
                     user.uid
                 );
+
 
                 sessionStorage.setItem(
                     "pendingVerificationPlan",
@@ -538,9 +795,9 @@ if (registerForm) {
                 );
 
 
-                // ================================
+                // =================================================
                 // OPTIONAL OTP
-                // ================================
+                // =================================================
 
                 try {
 
@@ -548,16 +805,20 @@ if (registerForm) {
                         await fetch(
                             "/api/otp/email/send",
                             {
-                                method: "POST",
+
+                                method:
+                                    "POST",
 
                                 headers: {
                                     "Content-Type":
                                         "application/json"
                                 },
 
-                                body: JSON.stringify({
-                                    email
-                                })
+                                body:
+                                    JSON.stringify({
+                                        email:
+                                            email
+                                    })
                             }
                         );
 
@@ -576,9 +837,11 @@ if (registerForm) {
                             "📧 Email OTP created"
                         );
 
-                        location.replace(
+
+                        window.location.replace(
                             "verify.html"
                         );
+
 
                         return;
                     }
@@ -592,16 +855,16 @@ if (registerForm) {
                 }
 
 
-                // ================================
-                // IF OTP IS NOT AVAILABLE
-                // ACCOUNT IS STILL CREATED
-                // ================================
+                // =================================================
+                // OTP UNAVAILABLE
+                // =================================================
 
                 console.log(
                     "✅ Registration successful"
                 );
 
-                location.replace(
+
+                window.location.replace(
                     "home.html"
                 );
 
@@ -612,28 +875,29 @@ if (registerForm) {
                     error
                 );
 
+
                 toast(
                     firebaseMessage(error)
                 );
+
 
                 setBusy(
                     button,
                     false
                 );
             }
-
         }
     );
-
 }
 
 
 // =========================================================
-// LOGIN
+// EMAIL LOGIN
 // =========================================================
 
 const loginForm =
     $("loginForm");
+
 
 if (loginForm) {
 
@@ -643,21 +907,28 @@ if (loginForm) {
 
             event.preventDefault();
 
+
             const button =
                 loginForm.querySelector(
                     'button[type="submit"]'
                 );
+
 
             const email =
                 $("loginEmail")
                     ?.value
                     .trim();
 
+
             const password =
                 $("loginPassword")
                     ?.value ||
                 "";
 
+
+            // =================================================
+            // VALIDATION
+            // =================================================
 
             if (!email) {
 
@@ -667,6 +938,7 @@ if (loginForm) {
 
                 return;
             }
+
 
             if (!password) {
 
@@ -694,8 +966,10 @@ if (loginForm) {
                         password
                     );
 
+
                 const user =
                     credential.user;
+
 
                 console.log(
                     "✅ Email login successful:",
@@ -703,12 +977,12 @@ if (loginForm) {
                 );
 
 
-                saveUser(user).catch(
-                    console.warn
+                await saveUser(
+                    user
                 );
 
 
-                location.replace(
+                window.location.replace(
                     "home.html"
                 );
 
@@ -719,19 +993,19 @@ if (loginForm) {
                     error
                 );
 
+
                 toast(
                     firebaseMessage(error)
                 );
+
 
                 setBusy(
                     button,
                     false
                 );
             }
-
         }
     );
-
 }
 
 
@@ -741,6 +1015,7 @@ if (loginForm) {
 
 const forgotPassword =
     $("forgotPassword");
+
 
 if (forgotPassword) {
 
@@ -753,6 +1028,7 @@ if (forgotPassword) {
                     ?.value
                     .trim();
 
+
             if (!email) {
 
                 toast(
@@ -762,12 +1038,14 @@ if (forgotPassword) {
                 return;
             }
 
+
             try {
 
                 await sendPasswordResetEmail(
                     auth,
                     email
                 );
+
 
                 toast(
                     "Գաղտնաբառը վերականգնելու նամակը ուղարկվեց։",
@@ -777,8 +1055,10 @@ if (forgotPassword) {
             } catch (error) {
 
                 console.error(
+                    "❌ Password reset error:",
                     error
                 );
+
 
                 toast(
                     firebaseMessage(error)
@@ -786,7 +1066,6 @@ if (forgotPassword) {
             }
         }
     );
-
 }
 
 
@@ -799,23 +1078,40 @@ window.logoutUser =
 
         try {
 
-            await signOut(auth);
+            await signOut(
+                auth
+            );
 
-            location.replace(
+
+            sessionStorage.clear();
+
+
+            localStorage.removeItem(
+                "selectedPlan"
+            );
+
+
+            localStorage.removeItem(
+                "paymentStatus"
+            );
+
+
+            window.location.replace(
                 "login.html"
             );
 
         } catch (error) {
 
             console.error(
+                "❌ Logout error:",
                 error
             );
+
 
             toast(
                 firebaseMessage(error)
             );
         }
-
     };
 
 
@@ -826,24 +1122,15 @@ window.logoutUser =
 window.loginWithGoogle =
     function () {
 
-        const button =
-            $("googleLoginBtn");
-
-        if (button) {
-            googleLogin(button);
-        }
+        googleLogin();
 
     };
+
 
 window.registerWithGoogle =
     function () {
 
-        const button =
-            $("googleLoginBtn");
-
-        if (button) {
-            googleLogin(button);
-        }
+        googleLogin();
 
     };
 
@@ -868,23 +1155,25 @@ document
                             button.dataset.toggle
                         );
 
-                    if (!input) return;
+
+                    if (!input) {
+                        return;
+                    }
+
 
                     input.type =
                         input.type ===
                         "password"
                             ? "text"
                             : "password";
-
                 }
             );
-
         }
     );
 
 
 // =========================================================
-// FINISHED GOOGLE LOGIN
+// FINISHED
 // =========================================================
 
 console.log(
