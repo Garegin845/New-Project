@@ -53,8 +53,23 @@
     </div>
   </div>
   <div id="toast" class="toast"></div>
-  <div id="authBoot" style="position:fixed;left:50%;bottom:14px;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:#fff3cd;color:#664d03;font:600 13px Arial;z-index:9999">Firebase-ը բեռնվում է…</div>
-  <script type="module" src="auth.js"></script>
-  <script>setTimeout(function(){var x=document.getElementById("authBoot"); if(x && !window.EcoFarmAuthLoaded){x.textContent="Firebase-ը չի բեռնվել։ Բացեք կայքը http://localhost:3000-ով։";} else if(x){x.remove();}},4000);</script>
+
+<div id="authBoot" style="position:fixed;left:50%;bottom:14px;transform:translateX(-50%);padding:8px 14px;border-radius:999px;background:#fff3cd;color:#664d03;font:600 13px Arial;z-index:9999">
+    Firebase-ը բեռնվում է…
+</div>
+
+<!-- ✅ ՄԻԱՅՆ auth.js — app.js ՊԵՏՔ ՉԷ index.html-ում -->
+<script type="module" src="auth.js"></script>
+
+<script>
+    setTimeout(function () {
+        var x = document.getElementById("authBoot");
+        if (x && !window.EcoFarmAuthLoaded) {
+            x.textContent = "Firebase-ը չի բեռնվել։ Բացեք http://localhost:3000-ով։";
+        } else if (x) {
+            x.remove();
+        }
+    }, 4000);
+</script>
 </body>
 </html>

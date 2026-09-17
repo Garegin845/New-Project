@@ -1,367 +1,93 @@
 // =========================================================
-// ECOFARM CONNECT
-// APP
-// Navigation + Auth + Theme
+// ECOFARM CONNECT — APP (Navigation + Theme)
 // =========================================================
 
 import {
-    initializeApp
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-app.js";
+    auth, db, onAuthStateChanged, signOut,
+    doc, getDoc
+} from "./firebase.js";
 
-import {
-    getAuth,
-    onAuthStateChanged,
-    signOut
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-auth.js";
-
-import {
-    getFirestore,
-    doc,
-    getDoc
-} from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
-import {
-    firebaseConfig
-} from "./firebase-config.js";
-
-
-// =========================================================
-// FIREBASE
-// =========================================================
-
-const app =
-    initializeApp(firebaseConfig);
-
-const auth =
-    getAuth(app);
-
-const db =
-    getFirestore(app);
-
-
-// =========================================================
-// HELPERS
-// =========================================================
-
-const $ = (id) =>
-    document.getElementById(id);
-
-
-// =========================================================
-// ELEMENTS
-// =========================================================
-
-const loginLink =
-    $("loginLink");
-
-const registerLink =
-    $("registerLink");
-
-const logoutBtn =
-    $("logoutBtn");
-
-const themeBtn =
-    $("themeBtn");
-
+const $ = (id) => document.getElementById(id);
 
 // =========================================================
 // THEME
 // =========================================================
 
 function applyTheme() {
+    const theme = localStorage.getItem("ecofarm-theme") || "light";
+    document.documentElement.dataset.theme = theme;
 
-    const theme =
-        localStorage.getItem(
-            "ecofarm-theme"
-        ) || "light";
-
-    document.documentElement.dataset.theme =
-        theme;
-
-
+    const themeBtn = $("themeBtn");
     if (themeBtn) {
-
-        if (theme === "dark") {
-
-            themeBtn.textContent = "☀";
-
-            themeBtn.title =
-                "Անցնել բաց թեմայի";
-
-        } else {
-
-            themeBtn.textContent = "☾";
-
-            themeBtn.title =
-                "Անցնել մուգ թեմայի";
-        }
+        themeBtn.textContent = theme === "dark" ? "☀" : "☾";
+        themeBtn.title = theme === "dark" ? "Անցնել բաց թեմայի" : "Անցնել մուգ թեմայի";
     }
 }
 
-
-// Apply immediately
 applyTheme();
 
-
-// =========================================================
-// THEME BUTTON
-// =========================================================
-
-if (themeBtn) {
-
-    themeBtn.addEventListener(
-        "click",
-        () => {
-
-            const current =
-                localStorage.getItem(
-                    "ecofarm-theme"
-                ) || "light";
-
-
-            const next =
-                current === "light"
-                    ? "dark"
-                    : "light";
-
-
-            localStorage.setItem(
-                "ecofarm-theme",
-                next
-            );
-
-
-            applyTheme();
-
-        }
-    );
-
-}
-
+document.addEventListener("click", (e) => {
+    if (e.target.closest("#themeBtn")) {
+        const current = localStorage.getItem("ecofarm-theme") || "light";
+        localStorage.setItem("ecofarm-theme", current === "light" ? "dark" : "light");
+        applyTheme();
+    }
+});
 
 // =========================================================
 // AUTH STATE
 // =========================================================
 
-onAuthStateChanged(
-    auth,
-    async (user) => {
+onAuthStateChanged(auth, async (user) => {
+    const loginLink = $("loginLink");
+    const registerLink = $("registerLink");
+    const logoutBtn = $("logoutBtn");
 
-        if (user) {
+    if (user) {
+        loginLink?.classList.add("hidden");
+        registerLink?.classList.add("hidden");
+        logoutBtn?.classList.remove("hidden");
 
-            console.log(
-                "✅ User logged in:",
-                user.email
-            );
-
-
-            // ========================================
-            // HIDE LOGIN / REGISTER
-            // ========================================
-
-            if (loginLink) {
-
-                loginLink.classList.add(
-                    "hidden"
-                );
-
-            }
-
-
-            if (registerLink) {
-
-                registerLink.classList.add(
-                    "hidden"
-                );
-
-            }
-
-
-            // ========================================
-            // SHOW LOGOUT
-            // ========================================
-
-            if (logoutBtn) {
-
-                logoutBtn.classList.remove(
-                    "hidden"
-                );
-
-            }
-
-
-            // ========================================
-            // LOAD USER INFO
-            // ========================================
-
-            try {
-
-                const snapshot =
-                    await getDoc(
-                        doc(
-                            db,
-                            "users",
-                            user.uid
-                        )
-                    );
-
-
-                if (snapshot.exists()) {
-
-                    const data =
-                        snapshot.data();
-
-                    console.log(
-                        "👤 Profile:",
-                        data
-                    );
-
-                }
-
-            } catch (error) {
-
-                console.warn(
-                    "Profile loading failed:",
-                    error
-                );
-
-            }
-
-        } else {
-
-            console.log(
-                "ℹ️ User is logged out"
-            );
-
-
-            // ========================================
-            // SHOW LOGIN / REGISTER
-            // ========================================
-
-            if (loginLink) {
-
-                loginLink.classList.remove(
-                    "hidden"
-                );
-
-            }
-
-
-            if (registerLink) {
-
-                registerLink.classList.remove(
-                    "hidden"
-                );
-
-            }
-
-
-            // ========================================
-            // HIDE LOGOUT
-            // ========================================
-
-            if (logoutBtn) {
-
-                logoutBtn.classList.add(
-                    "hidden"
-                );
-
-            }
-
-
-            // ========================================
-            // PROTECTED PAGES
-            // ========================================
-
-            const page =
-                location.pathname
-                    .split("/")
-                    .pop()
-                    .toLowerCase();
-
-
-            const protectedPages = [
-                "home.html",
-                "profile.html",
-                "announcements.html",
-                "payment.html"
-            ];
-
-
-            if (
-                protectedPages.includes(page)
-            ) {
-
-                location.replace(
-                    "login.html"
-                );
-
-            }
-
+        try {
+            const snap = await getDoc(doc(db, "users", user.uid));
+            if (snap.exists()) window.__ecofarmProfile = snap.data();
+        } catch (err) {
+            console.warn("Profile load failed:", err);
         }
+    } else {
+        loginLink?.classList.remove("hidden");
+        registerLink?.classList.remove("hidden");
+        logoutBtn?.classList.add("hidden");
 
+        const page = location.pathname.split("/").pop().toLowerCase() || "home.html";
+        const protectedPages = ["home.html", "profile.html", "announcements.html", "payment.html"];
+        if (protectedPages.includes(page)) {
+            location.replace("login.html");
+        }
     }
-);
-
+});
 
 // =========================================================
 // LOGOUT
 // =========================================================
 
-if (logoutBtn) {
+document.addEventListener("click", async (e) => {
+    const btn = e.target.closest("#logoutBtn");
+    if (!btn) return;
 
-    logoutBtn.addEventListener(
-        "click",
-        async () => {
+    try {
+        btn.disabled = true;
+        btn.textContent = "Ելք...";
+        await signOut(auth);
+        localStorage.removeItem("selectedPlan");
+        localStorage.removeItem("paymentStatus");
+        location.replace("login.html");
+    } catch (err) {
+        console.error("Logout error:", err);
+        btn.disabled = false;
+        btn.textContent = "↪ Ելք";
+        alert("Դուրս գալ չհաջողվեց։");
+    }
+});
 
-            try {
-
-                logoutBtn.disabled =
-                    true;
-
-                logoutBtn.textContent =
-                    "Ելք...";
-
-
-                await signOut(auth);
-
-
-                localStorage.removeItem(
-                    "selectedPlan"
-                );
-
-
-                localStorage.removeItem(
-                    "paymentStatus"
-                );
-
-
-                location.replace(
-                    "login.html"
-                );
-
-            } catch (error) {
-
-                console.error(
-                    "Logout error:",
-                    error
-                );
-
-
-                logoutBtn.disabled =
-                    false;
-
-                logoutBtn.textContent =
-                    "↪ Ելք";
-
-
-                alert(
-                    "Դուրս գալ չհաջողվեց։"
-                );
-
-            }
-
-        }
-    );
-
-}
+console.log("🌱 EcoFarm App initialized");

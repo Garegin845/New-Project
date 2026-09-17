@@ -1,0 +1,542 @@
+<!doctype html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>EcoFarm Connect — Սակագներ</title>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="pricing-premium.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        document.documentElement.dataset.theme =
+            localStorage.getItem("ecofarm-theme") || "light";
+    </script>
+</head>
+<body>
+
+<!-- ============ BACKGROUND ============ -->
+<div class="pricing-bg">
+    <div class="pricing-bg-orb pricing-bg-orb-1"></div>
+    <div class="pricing-bg-orb pricing-bg-orb-2"></div>
+    <div class="pricing-bg-orb pricing-bg-orb-3"></div>
+    <div class="pricing-bg-grid"></div>
+</div>
+
+<header class="navbar">
+    <a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a>
+    <nav>
+        <a href="home.html">Գլխավոր</a>
+        <a href="announcements.html">Հայտարարություններ</a>
+        <a href="news.html">Նորություններ</a>
+        <a href="profile.html">👤 Պրոֆիլ</a>
+        <a class="active" href="pricing.html">Սակագներ</a>
+    </nav>
+    <div class="nav-actions">
+        <a id="loginLink" class="ghost small" href="login.html">Մուտք</a>
+        <a id="registerLink" class="primary small" href="index.html">Գրանցվել</a>
+        <button id="logoutBtn" class="logout-btn hidden" type="button">↪ Ելք</button>
+        <button id="themeBtn" class="icon-btn" type="button">☼</button>
+    </div>
+</header>
+
+<main class="pricing-main">
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+    <section class="pricing-hero">
+        <div class="pricing-hero-badge">
+            <span class="pulse-dot"></span>
+            <span>ՓՈՓՈԽԵՔ ՑԱՆԿԱՑԱԾ ՊԱՀԻ</span>
+        </div>
+
+        <h1 class="pricing-hero-title">
+            Սակագին, որը <span class="gradient-text">աճում է ձեզ հետ</span>
+        </h1>
+
+        <p class="pricing-hero-sub">
+            Սկսեք անվճար։ Ակտիվացրեք պրեմիում՝ առանց պարտավորությունների։
+            Ցանկացած պահի կարող եք փոխել կամ չեղարկել։
+        </p>
+
+        <!-- Billing toggle -->
+        <div class="billing-toggle">
+            <button class="billing-btn active" data-billing="monthly">
+                Ամսական
+            </button>
+            <button class="billing-btn" data-billing="yearly">
+                Տարեկան
+                <span class="save-badge">-20%</span>
+            </button>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         CURRENT PLAN BANNER
+    ===================================================== -->
+    <div id="currentPlanBanner" class="current-plan-banner hidden">
+        <div class="current-plan-icon">✓</div>
+        <div class="current-plan-text">
+            <strong>Ձեր ընթացիկ պլանը՝ <span id="currentPlanName">Free</span></strong>
+            <span id="currentPlanDesc">Դուք օգտվում եք Free պլանից</span>
+        </div>
+        <a href="profile.html" class="current-plan-link">Կառավարել →</a>
+    </div>
+
+    <!-- =====================================================
+         PRICING GRID
+    ===================================================== -->
+    <section class="pricing-container">
+
+        <!-- FREE -->
+        <article class="plan-card" data-plan="Free">
+            <div class="plan-header">
+                <div class="plan-icon" style="background: linear-gradient(135deg, #94a3b8, #64748b);">
+                    🌱
+                </div>
+                <div>
+                    <h3 class="plan-name">Eco Free</h3>
+                    <p class="plan-tagline">Փորձարկելու համար</p>
+                </div>
+            </div>
+
+            <div class="plan-price-block">
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount" data-monthly="0" data-yearly="0">0</span>
+                    <span class="period">/ ամիս</span>
+                </div>
+                <p class="plan-price-note">Ընդմիշտ անվճար</p>
+            </div>
+
+            <button class="plan-cta plan-cta-secondary" data-plan="Free">
+                Սկսել անվճար
+            </button>
+
+            <div class="plan-divider"></div>
+
+            <ul class="plan-features">
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Դիտել հայտարարությունները
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Ընթերցել նորությունները
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Ստեղծել պրոֆիլ
+                </li>
+                <li class="feature-no">
+                    <span class="feature-x">✕</span>
+                    Տեղադրել հայտարարություն
+                </li>
+                <li class="feature-no">
+                    <span class="feature-x">✕</span>
+                    Առաջնահերթ ցուցադրում
+                </li>
+                <li class="feature-no">
+                    <span class="feature-x">✕</span>
+                    Անալիտիկա և վիճակագրություն
+                </li>
+            </ul>
+        </article>
+
+        <!-- ECO START — FEATURED -->
+        <article class="plan-card plan-featured" data-plan="Eco Start">
+            <div class="plan-ribbon">
+                <span>🔥</span>
+                <span>ԱՄԵՆԱՀԱՅՏՆԻ</span>
+            </div>
+
+            <div class="plan-header">
+                <div class="plan-icon" style="background: linear-gradient(135deg, #23864c, #31a45e);">
+                    🚀
+                </div>
+                <div>
+                    <h3 class="plan-name">Eco Start</h3>
+                    <p class="plan-tagline">Փոքր ֆերմաների համար</p>
+                </div>
+            </div>
+
+            <div class="plan-price-block">
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount" data-monthly="9" data-yearly="7">9</span>
+                    <span class="period">/ ամիս</span>
+                </div>
+                <p class="plan-price-note" data-note-monthly="Ամսական վճարում" data-note-yearly="Տարեկան՝ $86 ($7/ամիս)">Ամսական վճարում</p>
+            </div>
+
+            <button class="plan-cta plan-cta-primary" data-plan="Eco Start">
+                Ընտրել սակագինը →
+            </button>
+
+            <div class="plan-divider"></div>
+
+            <ul class="plan-features">
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Ամեն ինչ Free-ից
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    <strong>Մինչև 10</strong> հայտարարություն
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Հիմնական վիճակագրություն
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Email աջակցություն
+                </li>
+                <li class="feature-no">
+                    <span class="feature-x">✕</span>
+                    Առաջնահերթ ցուցադրում
+                </li>
+                <li class="feature-no">
+                    <span class="feature-x">✕</span>
+                    API հասանելիություն
+                </li>
+            </ul>
+        </article>
+
+        <!-- ECO GROW -->
+        <article class="plan-card" data-plan="Eco Grow">
+            <div class="plan-header">
+                <div class="plan-icon" style="background: linear-gradient(135deg, #1a7a42, #2d9e58);">
+                    ⚡
+                </div>
+                <div>
+                    <h3 class="plan-name">Eco Grow</h3>
+                    <p class="plan-tagline">Ակտիվ վաճառողների համար</p>
+                </div>
+            </div>
+
+            <div class="plan-price-block">
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount" data-monthly="24" data-yearly="19">24</span>
+                    <span class="period">/ ամիս</span>
+                </div>
+                <p class="plan-price-note" data-note-monthly="Ամսական վճարում" data-note-yearly="Տարեկան՝ $228 ($19/ամիս)">Ամսական վճարում</p>
+            </div>
+
+            <button class="plan-cta plan-cta-primary" data-plan="Eco Grow">
+                Ընտրել սակագինը →
+            </button>
+
+            <div class="plan-divider"></div>
+
+            <ul class="plan-features">
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Ամեն ինչ Start-ից
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    <strong>Անսահմանափակ</strong> հայտարարություն
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Առաջնահերթ ցուցադրում
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Ամսական վերլուծություն
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    24/7 աջակցություն
+                </li>
+                <li class="feature-no">
+                    <span class="feature-x">✕</span>
+                    Անհատական մենեջեր
+                </li>
+            </ul>
+        </article>
+
+        <!-- ECO PREMIUM -->
+        <article class="plan-card" data-plan="Eco Premium">
+            <div class="plan-header">
+                <div class="plan-icon" style="background: linear-gradient(135deg, #0f5c2e, #1a7a42);">
+                    👑
+                </div>
+                <div>
+                    <h3 class="plan-name">Eco Premium</h3>
+                    <p class="plan-tagline">Խոշոր ֆերմաների համար</p>
+                </div>
+            </div>
+
+            <div class="plan-price-block">
+                <div class="plan-price">
+                    <span class="currency">$</span>
+                    <span class="amount" data-monthly="49" data-yearly="39">49</span>
+                    <span class="period">/ ամիս</span>
+                </div>
+                <p class="plan-price-note" data-note-monthly="Ամսական վճարում" data-note-yearly="Տարեկան՝ $468 ($39/ամիս)">Ամսական վճարում</p>
+            </div>
+
+            <button class="plan-cta plan-cta-primary" data-plan="Eco Premium">
+                Ընտրել սակագինը →
+            </button>
+
+            <div class="plan-divider"></div>
+
+            <ul class="plan-features">
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Ամեն ինչ Grow-ից
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    <strong>Անհատական</strong> մենեջեր
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    API հասանելիություն
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Կորպորատիվ հաշիվ
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    Անհատական ինտեգրացիաներ
+                </li>
+                <li class="feature-yes">
+                    <span class="feature-check">✓</span>
+                    SLA 99.9% երաշխիք
+                </li>
+            </ul>
+        </article>
+
+    </section>
+
+    <!-- =====================================================
+         GUARANTEE STRIP
+    ===================================================== -->
+    <section class="guarantee-strip">
+        <div class="guarantee-item">
+            <div class="guarantee-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <div>
+                <strong>14 օր երաշխիք</strong>
+                <span>Փողի վերադարձ</span>
+            </div>
+        </div>
+        <div class="guarantee-item">
+            <div class="guarantee-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>
+            </div>
+            <div>
+                <strong>Առանց պարտավորությունների</strong>
+                <span>Չեղարկեք ցանկացած պահի</span>
+            </div>
+        </div>
+        <div class="guarantee-item">
+            <div class="guarantee-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <div>
+                <strong>Անվտանգ վճարում</strong>
+                <span>SSL + 3-D Secure</span>
+            </div>
+        </div>
+        <div class="guarantee-item">
+            <div class="guarantee-icon">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+            </div>
+            <div>
+                <strong>24/7 Աջակցություն</strong>
+                <span>Միշտ պատրաստ ենք օգնել</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         COMPARISON TABLE
+    ===================================================== -->
+    <section class="compare-section">
+        <div class="compare-head">
+            <span class="eyebrow">ՀԱՄԵՄԱՏՈՒԹՅՈՒՆ</span>
+            <h2>Ինչ է ներառված յուրաքանչյուր պլանում</h2>
+        </div>
+
+        <div class="compare-table-wrap">
+            <table class="compare-table">
+                <thead>
+                    <tr>
+                        <th>Ֆունկցիա</th>
+                        <th>Free</th>
+                        <th class="col-featured">Start</th>
+                        <th>Grow</th>
+                        <th>Premium</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Դիտել հայտարարությունները</td>
+                        <td class="check">✓</td>
+                        <td class="check col-featured">✓</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Տեղադրել հայտարարություն</td>
+                        <td class="x">—</td>
+                        <td class="check col-featured">✓ <small>10/ամիս</small></td>
+                        <td class="check">✓ <small>∞</small></td>
+                        <td class="check">✓ <small>∞</small></td>
+                    </tr>
+                    <tr>
+                        <td>Առաջնահերթ ցուցադրում</td>
+                        <td class="x">—</td>
+                        <td class="x col-featured">—</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Ամսական վերլուծություն</td>
+                        <td class="x">—</td>
+                        <td class="x col-featured">—</td>
+                        <td class="check">✓</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>API հասանելիություն</td>
+                        <td class="x">—</td>
+                        <td class="x col-featured">—</td>
+                        <td class="x">—</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Անհատական մենեջեր</td>
+                        <td class="x">—</td>
+                        <td class="x col-featured">—</td>
+                        <td class="x">—</td>
+                        <td class="check">✓</td>
+                    </tr>
+                    <tr>
+                        <td>Աջակցություն</td>
+                        <td class="x">Email</td>
+                        <td class="x col-featured">Email</td>
+                        <td class="check">24/7</td>
+                        <td class="check">24/7 + Dedicated</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         FAQ
+    ===================================================== -->
+    <section class="faq-section">
+        <div class="faq-head">
+            <span class="eyebrow">FAQ</span>
+            <h2>Հաճախ տրվող հարցեր</h2>
+            <p>Ամեն ինչ, ինչ պետք է իմանաք սակագների մասին</p>
+        </div>
+
+        <div class="faq-grid">
+            <details class="faq-item">
+                <summary>
+                    <span>Կարո՞ղ եմ ցանկացած պահի փոխել պլանը</span>
+                    <span class="faq-toggle">+</span>
+                </summary>
+                <div class="faq-answer">
+                    Այո՛, ցանկացած պահի կարող եք բարձրացնել կամ իջեցնել ձեր պլանը։ Փոփոխությունը անմիջապես ուժի մեջ է մտնում։
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>
+                    <span>Կա՞ անվճար փորձարկում</span>
+                    <span class="faq-toggle">+</span>
+                </summary>
+                <div class="faq-answer">
+                    Free պլանը մշտապես հասանելի է առանց քարտի տվյալների։ Կարող եք փորձարկել բոլոր հիմնական ֆունկցիաները։
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>
+                    <span>Ինչ վճարման մեթոդներ եք ընդունում</span>
+                    <span class="faq-toggle">+</span>
+                </summary>
+                <div class="faq-answer">
+                    Ընդունում ենք Visa, Mastercard, ArCa և American Express։ Բոլոր վճարումները պաշտպանված են 3-D Secure-ով։
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>
+                    <span>Կարո՞ղ եմ չեղարկել բաժանորդագրությունը</span>
+                    <span class="faq-toggle">+</span>
+                </summary>
+                <div class="faq-answer">
+                    Այո՛, ցանկացած պահի առանց լրացուցիչ վճարի։ Եթե չեղարկեք 14 օրվա ընթացքում, կվերադարձնենք գումարը։
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>
+                    <span>Կտրվի՞ հաշիվ-ապրանքագիր</span>
+                    <span class="faq-toggle">+</span>
+                </summary>
+                <div class="faq-answer">
+                    Այո՛, վճարումից հետո ավտոմատ ուղարկվում է հաշիվ-ապրանքագիր ձեր email-ին։ Կորպորատիվ հաճախորդների համար կա հատուկ պայմաններ։
+                </div>
+            </details>
+
+            <details class="faq-item">
+                <summary>
+                    <span>Ինչ տեղի կունենա եթե գերազանցեմ Free-ի սահմանները</span>
+                    <span class="faq-toggle">+</span>
+                </summary>
+                <div class="faq-answer">
+                    Ձեզ կառաջարկվի ավտոմատ կերպով բարձրացնել պլանը։ Մինչև այդ ձեր հին հայտարարությունները կմնան ակտիվ, բայց նորերը չեք կարողանա տեղադրել։
+                </div>
+            </details>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         FINAL CTA
+    ===================================================== -->
+    <section class="final-cta">
+        <div class="final-cta-glow"></div>
+        <div class="final-cta-content">
+            <span class="eyebrow" style="color: #a7efbd;">🌱 ՍԿՍԵՔ ՀԻՄԱ</span>
+            <h2>Պատրա՞ստ եք աճել ձեր բիզնեսը</h2>
+            <p>Միացեք 1,200+ ֆերմերների, ովքեր արդեն օգտվում են EcoFarm Connect-ից։</p>
+
+            <div class="final-cta-actions">
+                <button class="final-btn primary" data-plan="Eco Start">
+                    Սկսել Eco Start →
+                </button>
+                <a href="home.html" class="final-btn ghost-light">
+                    Տեսնել հնարավորությունները
+                </a>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <span>🌱 <b>EcoFarm Connect</b></span>
+    <span>© 2026 — Բոլոր իրավունքները պաշտպանված են։</span>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script type="module" src="app.js"></script>
+<script type="module" src="pricing.js"></script>
+</body>
+</html>

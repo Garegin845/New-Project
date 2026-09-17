@@ -1,13 +1,267 @@
 <!doctype html>
 <html lang="hy">
-<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EcoFarm Connect — Հայտարարություններ</title><link rel="stylesheet" href="app.css"></head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>EcoFarm Connect — Հայտարարություններ</title>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="announcements-premium.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        document.documentElement.dataset.theme =
+            localStorage.getItem("ecofarm-theme") || "light";
+    </script>
+</head>
 <body>
-<header class="navbar"><a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a><nav><a href="home.html">Գլխավոր</a><a class="active" href="announcements.html">Հայտարարություններ</a><a href="news.html">Նորություններ</a><a href="profile.html">👤 Պրոֆիլ</a><a href="index.html#pricing">Սակագներ</a></nav><div class="nav-actions"><a id="loginLink" class="ghost small" href="login.html">Մուտք</a><a id="registerLink" class="primary small" href="index.html">Գրանցվել</a><button id="logoutBtn" class="ghost small hidden">Դուրս գալ</button><button id="themeBtn" class="icon-btn">☼</button></div></header>
-<main class="page">
-<section class="page-hero"><span class="eyebrow">📢 ECOFARM MARKETPLACE</span><h1>Հայտարարություններ</h1><p>Գտեք գյուղատնտեսական հողատարածքներ, տեխնիկա, բերք, կենդանիներ, աշխատանք և համագործակցության առաջարկներ։</p></section>
-<section class="market-toolbar"><input id="search" type="search" placeholder="🔎 Որոնել հայտարարություն..."><select id="category"><option value="all">Բոլոր կատեգորիաները</option><option value="land">Հողատարածք</option><option value="equipment">Գյուղտեխնիկա</option><option value="products">Բերք և արտադրանք</option><option value="animals">Կենդանիներ</option><option value="jobs">Աշխատանք</option><option value="services">Ծառայություններ</option></select><button id="addAnnouncement" class="primary">＋ Տեղադրել հայտարարություն</button></section>
-<div id="subscriptionNotice" class="notice hidden"></div>
-<section id="announcementGrid" class="announcement-grid"></section>
+
+<!-- Background -->
+<div class="ann-bg">
+    <div class="ann-bg-orb ann-bg-orb-1"></div>
+    <div class="ann-bg-orb ann-bg-orb-2"></div>
+    <div class="ann-bg-grid"></div>
+</div>
+
+<header class="navbar">
+    <a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a>
+    <nav>
+        <a href="home.html">Գլխավոր</a>
+        <a class="active" href="announcements.html">Հայտարարություններ</a>
+        <a href="news.html">Նորություններ</a>
+        <a href="profile.html">👤 Պրոֆիլ</a>
+        <a href="pricing.html">Սակագներ</a>
+    </nav>
+    <div class="nav-actions">
+        <a id="loginLink" class="ghost small" href="login.html">Մուտք</a>
+        <a id="registerLink" class="primary small" href="index.html">Գրանցվել</a>
+        <button id="logoutBtn" class="logout-btn hidden" type="button">↪ Ելք</button>
+        <button id="themeBtn" class="icon-btn" type="button">☼</button>
+    </div>
+</header>
+
+<main class="ann-page">
+
+    <!-- =====================================================
+         HERO
+    ===================================================== -->
+    <section class="ann-hero">
+        <div class="ann-hero-badge">
+            <span class="pulse-dot"></span>
+            <span>ECOFARM MARKETPLACE</span>
+        </div>
+
+        <h1 class="ann-hero-title">
+            Հայտարարություններ
+        </h1>
+
+        <p class="ann-hero-sub">
+            Գտեք գյուղատնտեսական հողատարածքներ, տեխնիկա, բերք, կենդանիներ, աշխատանք
+            և համագործակցության առաջարկներ։
+        </p>
+    </section>
+
+    <!-- =====================================================
+         TOOLBAR
+    ===================================================== -->
+    <section class="ann-toolbar">
+        <div class="ann-search-wrap">
+            <svg class="ann-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.3-4.3"/>
+            </svg>
+            <input id="search" type="search" placeholder="Որոնել հայտարարություն, վայր, գին...">
+            <button class="ann-search-clear hidden" id="searchClear" type="button" aria-label="Մաքրել">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M18 6 6 18M6 6l12 12"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="ann-filter-group">
+            <select id="category" class="ann-select">
+                <option value="all">Բոլոր կատեգորիաները</option>
+                <option value="land">🌾 Հողատարածք</option>
+                <option value="equipment">🚜 Գյուղտեխնիկա</option>
+                <option value="products">🥬 Բերք և արտադրանք</option>
+                <option value="animals">🐄 Կենդանիներ</option>
+                <option value="jobs">👨‍🌾 Աշխատանք</option>
+                <option value="services">🛠️ Ծառայություններ</option>
+            </select>
+        </div>
+
+        <button id="addAnnouncement" class="ann-add-btn" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M12 5v14M5 12h14"/>
+            </svg>
+            <span>Տեղադրել հայտարարություն</span>
+        </button>
+    </section>
+
+    <!-- Subscription Notice -->
+    <div id="subscriptionNotice" class="ann-notice hidden">
+        <div class="ann-notice-icon">🔒</div>
+        <div class="ann-notice-text">
+            <strong>Հայտարարություն տեղադրելու համար ակտիվացրեք սակագին</strong>
+            <span>Սկսած $9/ամսական։ Բոլոր պլանները ներառում են 14-օրյա երաշխիք։</span>
+        </div>
+        <a href="pricing.html" class="ann-notice-cta">Տեսնել սակագները →</a>
+    </div>
+
+    <!-- =====================================================
+         RESULTS HEADER + SORT
+    ===================================================== -->
+    <div class="ann-results-bar">
+        <div class="ann-results-count">
+            <strong id="resultsCount">0</strong>
+            <span id="resultsText">հայտարարություն</span>
+        </div>
+        <div class="ann-sort-wrap">
+            <label>Դասավորել՝</label>
+            <select id="sortBy" class="ann-select ann-select-sm">
+                <option value="newest">Նորերը սկզբում</option>
+                <option value="price-low">Գին՝ ցածրից բարձր</option>
+                <option value="price-high">Գին՝ բարձրից ցածր</option>
+                <option value="title">Անվանումով</option>
+            </select>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         GRID
+    ===================================================== -->
+    <section id="announcementGrid" class="ann-grid"></section>
+
+    <!-- Empty State -->
+    <div id="annEmpty" class="ann-empty hidden">
+        <div class="ann-empty-icon">🔍</div>
+        <h3>Ոչ մի հայտարարություն չի գտնվել</h3>
+        <p>Փորձեք փոխել որոնման պայմանները կամ կատեգորիան</p>
+        <button class="ann-empty-btn" id="resetFilters" type="button">
+            Վերականգնել ֆիլտրերը
+        </button>
+    </div>
+
 </main>
-<div id="modal" class="modal hidden"><div class="modal-card"><button class="modal-close" id="closeModal">×</button><span class="eyebrow">NEW LISTING</span><h2>Տեղադրել հայտարարություն</h2><p>Լրացրեք հնարավորինս մանրամասն տեղեկություն։</p><form id="announcementForm"><label>Անվանում<input id="aTitle" required placeholder="Օր․ Օրգանական լոլիկ"></label><div class="two"><label>Կատեգորիա<select id="aCategory" required><option value="land">Հողատարածք</option><option value="equipment">Գյուղտեխնիկա</option><option value="products">Բերք և արտադրանք</option><option value="animals">Կենդանիներ</option><option value="jobs">Աշխատանք</option><option value="services">Ծառայություններ</option></select></label><label>Գին<input id="aPrice" placeholder="Օր․ 750 ֏ / կգ"></label></div><label>Գտնվելու վայր<input id="aLocation" required placeholder="Մարզ, քաղաք / գյուղ"></label><label>Նկարագրություն<textarea id="aDescription" required rows="5" placeholder="Մանրամասն նկարագրեք առաջարկը..."></textarea></label><label>Նկար<input id="aImage" type="file" accept="image/*"></label><div id="imagePreview" class="image-preview"></div><button class="primary" type="submit">Տեղադրել հայտարարությունը →</button></form></div></div>
-<div id="toast" class="toast"></div><script type="module" src="announcements.js"></script></body></html>
+
+<footer>
+    <span>🌱 <b>EcoFarm Connect</b></span>
+    <span>© 2026 — Բոլոր իրավունքները պաշտպանված են։</span>
+</footer>
+
+<!-- =====================================================
+     MODAL — Add Announcement
+===================================================== -->
+<div id="modal" class="ann-modal hidden">
+    <div class="ann-modal-backdrop" id="modalBackdrop"></div>
+
+    <div class="ann-modal-card">
+        <button class="ann-modal-close" id="closeModal" type="button" aria-label="Փակել">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                <path d="M18 6 6 18M6 6l12 12"/>
+            </svg>
+        </button>
+
+        <div class="ann-modal-header">
+            <div class="ann-modal-icon">📢</div>
+            <div>
+                <span class="eyebrow">NEW LISTING</span>
+                <h2>Տեղադրել հայտարարություն</h2>
+                <p>Լրացրեք հնարավորինս մանրամասն տեղեկություն</p>
+            </div>
+        </div>
+
+        <form id="announcementForm" class="ann-form">
+            <div class="ann-form-field">
+                <label for="aTitle">
+                    Անվանում <span class="req">*</span>
+                </label>
+                <input id="aTitle" required maxlength="100" placeholder="Օր․ Օրգանական լոլիկ 10 հա">
+                <span class="char-count"><span id="titleCount">0</span>/100</span>
+            </div>
+
+            <div class="ann-form-row">
+                <div class="ann-form-field">
+                    <label for="aCategory">
+                        Կատեգորիա <span class="req">*</span>
+                    </label>
+                    <select id="aCategory" required>
+                        <option value="">Ընտրեք կատեգորիա</option>
+                        <option value="land">🌾 Հողատարածք</option>
+                        <option value="equipment">🚜 Գյուղտեխնիկա</option>
+                        <option value="products">🥬 Բերք և արտադրանք</option>
+                        <option value="animals">🐄 Կենդանիներ</option>
+                        <option value="jobs">👨‍🌾 Աշխատանք</option>
+                        <option value="services">🛠️ Ծառայություններ</option>
+                    </select>
+                </div>
+
+                <div class="ann-form-field">
+                    <label for="aPrice">Գին</label>
+                    <input id="aPrice" placeholder="Օր․ 750 ֏ / կգ">
+                </div>
+            </div>
+
+            <div class="ann-form-field">
+                <label for="aLocation">
+                    Գտնվելու վայր <span class="req">*</span>
+                </label>
+                <input id="aLocation" required placeholder="Մարզ, քաղաք / գյուղ">
+            </div>
+
+            <div class="ann-form-field">
+                <label for="aDescription">
+                    Նկարագրություն <span class="req">*</span>
+                </label>
+                <textarea id="aDescription" required rows="5" maxlength="1000"
+                          placeholder="Մանրամասն նկարագրեք առաջարկը..."></textarea>
+                <span class="char-count"><span id="descCount">0</span>/1000</span>
+            </div>
+
+            <div class="ann-form-field">
+                <label>Նկար</label>
+                <div class="ann-upload" id="uploadZone">
+                    <input id="aImage" type="file" accept="image/*" hidden>
+                    <div class="ann-upload-icon">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                            <polyline points="17 8 12 3 7 8"/>
+                            <line x1="12" y1="3" x2="12" y2="15"/>
+                        </svg>
+                    </div>
+                    <div class="ann-upload-text">
+                        <strong>Սեղմեք՝ նկար վերբեռնելու համար</strong>
+                        <span>PNG, JPG, WEBP · Մինչև 5MB</span>
+                    </div>
+                </div>
+                <div id="imagePreview" class="ann-image-preview hidden">
+                    <img id="previewImg" src="" alt="Preview">
+                    <button type="button" class="ann-image-remove" id="removeImage" aria-label="Հեռացնել">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M18 6 6 18M6 6l12 12"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="ann-form-actions">
+                <button type="button" class="ann-btn-secondary" id="cancelModal">
+                    Չեղարկել
+                </button>
+                <button type="submit" class="ann-btn-primary">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                    </svg>
+                    Տեղադրել հայտարարությունը
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div id="toast" class="toast"></div>
+
+<script type="module" src="app.js"></script>
+<script type="module" src="announcements.js"></script>
+</body>
+</html>

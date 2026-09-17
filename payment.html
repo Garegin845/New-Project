@@ -1,242 +1,255 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="hy">
-
 <head>
-
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <title>EcoFarm Connect — Payment</title>
-
-    <link rel="stylesheet"
-          href="./payment.css">
-
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>EcoFarm Connect — Անվտանգ Վճարում</title>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="payment-premium.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        document.documentElement.dataset.theme =
+            localStorage.getItem("ecofarm-theme") || "light";
+    </script>
 </head>
-
-<body>
-
-<div class="payment-page">
-
-    <div class="payment-card">
-
-        <div class="payment-top">
-
-            <div class="payment-logo">
-                🌱
-            </div>
-
-            <span class="secure">
-                🔒 Secure Payment
-            </span>
-
-        </div>
-
-
-        <div class="payment-title">
-
-            <span class="step">
-                STEP 2 OF 2
-            </span>
-
-            <h1>
-                Ընտրեք վճարման եղանակը
-            </h1>
-
-            <p>
-                Ավարտեք վճարումը՝ EcoFarm Connect-ը
-                օգտագործելու համար։
-            </p>
-
-        </div>
-
-
-        <div class="order-card">
-
-            <div>
-
-                <span>
-                    Ընտրված պլան
-                </span>
-
-                <strong id="selected-plan">
-                    Eco Start
-                </strong>
-
-            </div>
-
-
-            <strong id="selected-price">
-                $9 / ամիս
-            </strong>
-
-        </div>
-
-
-        <div
-            id="payment-status"
-            class="payment-status">
-        </div>
-
-
-        <div class="payment-methods">
-
-
-            <button
-                class="payment-method"
-                onclick="payWith('Google Pay')">
-
-                <div class="method-icon google">
-                    G
-                </div>
-
-                <div class="method-info">
-
-                    <strong>
-                        Google Pay
-                    </strong>
-
-                    <span>
-                        Վճարել Google Pay-ով
-                    </span>
-
-                </div>
-
-                <b>›</b>
-
-            </button>
-
-
-            <button
-                class="payment-method"
-                onclick="payWith('Apple Pay')">
-
-                <div class="method-icon apple">
-                    
-                </div>
-
-                <div class="method-info">
-
-                    <strong>
-                        Apple Pay
-                    </strong>
-
-                    <span>
-                        Արագ և անվտանգ վճարում
-                    </span>
-
-                </div>
-
-                <b>›</b>
-
-            </button>
-
-
-            <button
-                class="payment-method"
-                onclick="payWith('Visa')">
-
-                <div class="method-icon visa">
-                    VISA
-                </div>
-
-                <div class="method-info">
-
-                    <strong>
-                        Visa
-                    </strong>
-
-                    <span>
-                        Վճարում քարտով
-                    </span>
-
-                </div>
-
-                <b>›</b>
-
-            </button>
-
-
-            <button
-                class="payment-method"
-                onclick="payWith('Mastercard')">
-
-                <div class="method-icon mastercard">
-                    MC
-                </div>
-
-                <div class="method-info">
-
-                    <strong>
-                        Mastercard
-                    </strong>
-
-                    <span>
-                        Վճարում Mastercard քարտով
-                    </span>
-
-                </div>
-
-                <b>›</b>
-
-            </button>
-
-
-            <button
-                class="payment-method"
-                onclick="payWith('ArCa')">
-
-                <div class="method-icon arca">
-                    ArCa
-                </div>
-
-                <div class="method-info">
-
-                    <strong>
-                        ArCa
-                    </strong>
-
-                    <span>
-                        Վճարում ArCa քարտով
-                    </span>
-
-                </div>
-
-                <b>›</b>
-
-            </button>
-
-        </div>
-
-
-        <div class="payment-security">
-
-            🔐 Ձեր տվյալները պաշտպանված են
-
-            <span>
-                •
-            </span>
-
-            EcoFarm Connect Secure Checkout
-
-        </div>
-
-
-        <button
-            class="back-btn"
-            onclick="history.back()">
-
-            ← Վերադառնալ
-
-        </button>
-
-    </div>
-
+<body class="payment-page">
+
+<!-- ============ BACKGROUND DECOR ============ -->
+<div class="pay-bg">
+    <div class="pay-bg-orb pay-bg-orb-1"></div>
+    <div class="pay-bg-orb pay-bg-orb-2"></div>
+    <div class="pay-bg-grid"></div>
 </div>
 
+<main class="payment-shell-premium">
 
-<script src="./payment.js"></script>
+    <!-- =====================================================
+         LEFT — VISUAL
+    ===================================================== -->
+    <div class="pay-visual">
 
+        <!-- Brand -->
+        <div class="pay-brand">
+            <a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a>
+            <div class="pay-steps">
+                <span class="pay-step done">1</span>
+                <span class="pay-step-line"></span>
+                <span class="pay-step active">2</span>
+            </div>
+        </div>
+
+        <!-- Title -->
+        <div class="pay-visual-head">
+            <span class="eyebrow">SECURE CHECKOUT · STEP 2 OF 2</span>
+            <h2>Անվտանգ վճարում</h2>
+            <p>Ձեր տվյալները պաշտպանված են 256-bit SSL գաղտնագրմամբ։</p>
+        </div>
+
+        <!-- 3D CARD -->
+        <div class="card-3d" id="card3d">
+
+            <!-- FRONT -->
+            <div class="card-face card-front">
+                <div class="card-top">
+                    <div class="card-chip">
+                        <span></span><span></span><span></span>
+                    </div>
+                    <div class="card-brand-logo" id="cardBrand">ECOFARM</div>
+                </div>
+
+                <b class="card-number" id="visualNumber">•••• •••• •••• ••••</b>
+
+                <div class="card-bottom">
+                    <div class="card-holder-block">
+                        <small>CARD HOLDER</small>
+                        <strong id="visualName">YOUR NAME</strong>
+                    </div>
+                    <div class="card-expiry-block">
+                        <small>VALID THRU</small>
+                        <strong id="visualExpiry">MM/YY</strong>
+                    </div>
+                </div>
+
+                <!-- Decorative light -->
+                <div class="card-light"></div>
+            </div>
+
+            <!-- BACK -->
+            <div class="card-face card-back">
+                <div class="magnetic-strip"></div>
+                <div class="cvv-row">
+                    <div class="cvv-signature"></div>
+                    <div class="cvv-label">CVV</div>
+                    <div class="cvv-box" id="visualCvv">•••</div>
+                </div>
+                <div class="card-back-brand">ECOFARM</div>
+            </div>
+        </div>
+
+        <!-- Trust badges -->
+        <div class="pay-trust">
+            <div class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                <span>SSL</span>
+            </div>
+            <div class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                <span>3-D Secure</span>
+            </div>
+            <div class="trust-item">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                <span>PCI DSS</span>
+            </div>
+        </div>
+
+        <!-- Card brand logos -->
+        <div class="pay-card-logos">
+            <div class="cc-logo cc-visa">VISA</div>
+            <div class="cc-logo cc-mc"><span></span><span></span></div>
+            <div class="cc-logo cc-arca">ArCa</div>
+            <div class="cc-logo cc-amex">AMEX</div>
+        </div>
+    </div>
+
+    <!-- =====================================================
+         RIGHT — FORM
+    ===================================================== -->
+    <div class="pay-form-side">
+
+        <a class="pay-back" href="pricing.html">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+            Փոխել սակագինը
+        </a>
+
+        <div class="pay-form-head">
+            <span class="eyebrow">PAYMENT DETAILS</span>
+            <h1>Վճարման տվյալներ</h1>
+            <p class="pay-subtitle">Լրացրեք ձեր քարտի տվյալները անվտանգ վճարման համար։</p>
+        </div>
+
+        <!-- ORDER SUMMARY -->
+        <div class="order-card">
+            <div class="order-row">
+                <div class="order-left">
+                    <div class="order-icon">💎</div>
+                    <div>
+                        <div class="order-plan" id="planName">Eco Start</div>
+                        <div class="order-desc">Ամսական բաժանորդագրություն</div>
+                    </div>
+                </div>
+                <div class="order-price" id="planPrice">$9</div>
+            </div>
+            <div class="order-divider"></div>
+            <div class="order-row order-total">
+                <div>Ընդհանուր</div>
+                <div class="order-total-price" id="totalPrice">$9</div>
+            </div>
+        </div>
+
+        <!-- FORM -->
+        <form id="cardForm" class="pay-form" novalidate>
+
+            <div class="form-group">
+                <label for="cardNumber">
+                    <span>Քարտի համար</span>
+                    <span class="card-brand-badge" id="brandBadge"></span>
+                </label>
+                <div class="input-wrap">
+                    <input
+                        id="cardNumber"
+                        type="text"
+                        inputmode="numeric"
+                        autocomplete="cc-number"
+                        placeholder="1234 5678 9012 3456"
+                        maxlength="19"
+                        required>
+                    <svg class="input-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="1" y="4" width="22" height="16" rx="3"/><line x1="1" y1="10" x2="23" y2="10"/></svg>
+                </div>
+                <span class="input-error" id="errCardNumber"></span>
+            </div>
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="expiry"><span>Ժամկետ</span></label>
+                    <div class="input-wrap">
+                        <input
+                            id="expiry"
+                            type="text"
+                            inputmode="numeric"
+                            autocomplete="cc-exp"
+                            placeholder="MM / YY"
+                            maxlength="7"
+                            required>
+                        <svg class="input-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    </div>
+                    <span class="input-error" id="errExpiry"></span>
+                </div>
+
+                <div class="form-group">
+                    <label for="cvv">
+                        <span>CVV</span>
+                        <span class="cvv-hint" title="3-4 թվանշան քարտի հետևի մասում">?</span>
+                    </label>
+                    <div class="input-wrap">
+                        <input
+                            id="cvv"
+                            type="password"
+                            inputmode="numeric"
+                            autocomplete="cc-csc"
+                            placeholder="•••"
+                            maxlength="4"
+                            required>
+                        <svg class="input-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    </div>
+                    <span class="input-error" id="errCvv"></span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="cardHolder"><span>Քարտապանի անունը</span></label>
+                <div class="input-wrap">
+                    <input
+                        id="cardHolder"
+                        type="text"
+                        autocomplete="cc-name"
+                        placeholder="ARAM PETROSYAN"
+                        required>
+                    <svg class="input-icon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                </div>
+                <span class="input-error" id="errCardHolder"></span>
+            </div>
+
+            <label class="form-check">
+                <input type="checkbox" id="saveCard" checked>
+                <span class="form-check-box"></span>
+                <span class="form-check-label">
+                    Պահպանել քարտը ապագա վճարումների համար
+                </span>
+            </label>
+
+            <button type="submit" class="pay-btn" id="payBtn">
+                <span class="pay-btn-content">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                    <span>Վճարել</span>
+                    <span class="pay-amount" id="payAmount">$9</span>
+                </span>
+                <span class="pay-btn-spinner"></span>
+            </button>
+
+            <div class="pay-security-note">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+                Ձեր վճարումը պաշտպանված է 256-bit SSL գաղտնագրմամբ և 3-D Secure-ով
+            </div>
+
+        </form>
+    </div>
+</main>
+
+<div id="toast" class="toast"></div>
+
+<script type="module" src="app.js"></script>
+<script type="module" src="payment.js"></script>
 </body>
 </html>

@@ -1,11 +1,484 @@
 <!doctype html>
-<html lang="hy"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>EcoFarm Connect — Պրոֆիլ</title><link rel="stylesheet" href="app.css"></head>
-<body><header class="navbar"><a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a><nav><a href="home.html">Գլխավոր</a><a href="announcements.html">Հայտարարություններ</a><a href="news.html">Նորություններ</a><a class="active" href="profile.html">👤 Պրոֆիլ</a><a href="index.html#pricing">Սակագներ</a></nav><div class="nav-actions"><a id="loginLink" class="ghost small" href="login.html">Մուտք</a><a id="registerLink" class="primary small" href="index.html">Գրանցվել</a><button id="logoutBtn" class="ghost small hidden">Դուրս գալ</button><button id="themeBtn" class="icon-btn">☼</button></div></header>
-<main class="page"><section class="profile-layout"><aside class="profile-side"><div id="avatar" class="avatar">👤</div><button id="avatarBtn" class="secondary">Փոխել նկարը</button><input id="avatarInput" type="file" accept="image/*" hidden><h2 id="profileName">Բեռնում...</h2><p id="profileEmail">—</p><span id="planBadge" class="badge">Free</span><hr><a class="side-active" href="#account">Հաշիվ</a><a href="#security">Անվտանգություն</a><a href="#settings">Կարգավորումներ</a></aside>
-<section class="profile-main"><div class="section-head"><span class="eyebrow">MY PROFILE</span><h1>Պրոֆիլ և կարգավորումներ</h1><p>Կառավարեք ձեր անձնական տվյալները և անվտանգության հաստատումները։</p></div>
-<div class="profile-card"><h3>Անձնական տվյալներ</h3><form id="profileForm"><div class="two"><label>Անուն / ֆերմա<input id="pName" required></label><label>Երկիր<input id="pCountry"></label></div><label>Էլ․ փոստ<div class="verify-field"><input id="pEmail" type="email" disabled><button type="button" id="emailVerifyBtn" class="secondary">Հաստատել</button></div></label><label>Հեռախոս<div class="verify-field"><input id="pPhone" type="tel"><button type="button" id="phoneVerifyBtn" class="secondary">Հաստատել</button></div></label><button class="primary" type="submit">Պահպանել փոփոխությունները</button></form></div>
-<div class="profile-card" id="security"><h3>Անվտանգություն</h3><div class="security-row"><div><b>Գաղտնաբառ</b><p>Փոխեք ձեր հաշվի գաղտնաբառը։</p></div><button id="passwordReset" class="secondary">Փոխել գաղտնաբառը</button></div></div>
-<div class="profile-card" id="settings"><h3>Կարգավորումներ</h3><div class="security-row"><div><b>Թեմա</b><p>Փոխեք հավելվածի տեսքը բացից մուգի և հակառակը։</p></div><button id="themeToggle" class="secondary">Փոխել թեման</button></div><div class="security-row"><div><b>Ծանուցումներ</b><p>Կառավարեք marketplace-ի ծանուցումները։</p></div><label class="switch"><input id="notifications" type="checkbox" checked><span></span></label></div></div>
-<div class="profile-card"><h3>Ձեր սակագինը</h3><div class="plan-display"><div><span class="eyebrow">CURRENT PLAN</span><h2 id="currentPlan">Free</h2><p id="planStatus">Հայտարարություն տեղադրելու համար ակտիվացրեք պլան։</p></div><a class="primary" href="index.html#pricing">Կառավարել պլանը</a></div></div>
-</section></section></main>
-<div id="toast" class="toast"></div><script type="module" src="profile.js"></script></body></html>
+<html lang="hy">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>EcoFarm Connect — Պրոֆիլ</title>
+    <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="profile-premium.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <script>
+        document.documentElement.dataset.theme =
+            localStorage.getItem("ecofarm-theme") || "light";
+    </script>
+</head>
+<body>
+
+<!-- Background decor -->
+<div class="profile-bg">
+    <div class="profile-bg-orb profile-bg-orb-1"></div>
+    <div class="profile-bg-orb profile-bg-orb-2"></div>
+    <div class="profile-bg-grid"></div>
+</div>
+
+<header class="navbar">
+    <a class="brand" href="home.html">🌱 <span>EcoFarm <b>Connect</b></span></a>
+    <nav>
+        <a href="home.html">Գլխավոր</a>
+        <a href="announcements.html">Հայտարարություններ</a>
+        <a href="news.html">Նորություններ</a>
+        <a class="active" href="profile.html">👤 Պրոֆիլ</a>
+        <a href="pricing.html">Սակագներ</a>
+    </nav>
+    <div class="nav-actions">
+        <a id="loginLink" class="ghost small" href="login.html">Մուտք</a>
+        <a id="registerLink" class="primary small" href="index.html">Գրանցվել</a>
+        <button id="logoutBtn" class="logout-btn hidden" type="button">↪ Ելք</button>
+        <button id="themeBtn" class="icon-btn" type="button">☼</button>
+    </div>
+</header>
+
+<main class="profile-page">
+
+    <!-- =====================================================
+         HERO COVER + AVATAR
+    ===================================================== -->
+    <section class="profile-hero">
+        <div class="profile-cover">
+            <div class="cover-pattern"></div>
+            <div class="cover-glow"></div>
+        </div>
+
+        <div class="profile-identity">
+            <div class="avatar-wrap">
+                <div class="avatar" id="avatar">
+                    <span class="avatar-initial" id="avatarInitial">G</span>
+                </div>
+                <button class="avatar-edit" id="avatarBtn" title="Փոխել նկարը" type="button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                        <circle cx="12" cy="13" r="4"/>
+                    </svg>
+                </button>
+                <input id="avatarInput" type="file" accept="image/*" hidden>
+            </div>
+
+            <div class="identity-info">
+                <h1 id="profileName">Բեռնում...</h1>
+                <p class="identity-email" id="profileEmail">—</p>
+
+                <div class="identity-badges">
+                    <span class="plan-badge" id="planBadge">
+                        <span class="plan-dot"></span>
+                        Free
+                    </span>
+                    <span class="verified-badge hidden" id="verifiedBadge">
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                        </svg>
+                        Հաստատված
+                    </span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         STATS STRIP
+    ===================================================== -->
+    <section class="profile-stats">
+        <div class="stat-card">
+            <div class="stat-icon">📢</div>
+            <div>
+                <div class="stat-value" id="statAnnouncements">0</div>
+                <div class="stat-label">Հայտարարություններ</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">👁️</div>
+            <div>
+                <div class="stat-value" id="statViews">0</div>
+                <div class="stat-label">Դիտումներ</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div>
+                <div class="stat-value" id="statRating">—</div>
+                <div class="stat-label">Վարկանիշ</div>
+            </div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">📅</div>
+            <div>
+                <div class="stat-value" id="statMember">2026</div>
+                <div class="stat-label">Անդամ է</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- =====================================================
+         MAIN LAYOUT
+    ===================================================== -->
+    <div class="profile-layout">
+
+        <!-- ============ SIDEBAR NAV ============ -->
+        <aside class="profile-side">
+
+            <div class="side-section">
+                <div class="side-title">ՀԱՇԻՎ</div>
+                <a class="side-link active" href="#account" data-target="account">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                        <circle cx="12" cy="7" r="4"/>
+                    </svg>
+                    <span>Անձնական տվյալներ</span>
+                </a>
+                <a class="side-link" href="#security" data-target="security">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="11" width="18" height="11" rx="2"/>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                    </svg>
+                    <span>Անվտանգություն</span>
+                </a>
+                <a class="side-link" href="#plan" data-target="plan">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/>
+                    </svg>
+                    <span>Սակագին</span>
+                </a>
+                <a class="side-link" href="#settings" data-target="settings">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+                    </svg>
+                    <span>Կարգավորումներ</span>
+                </a>
+            </div>
+
+            <div class="side-divider"></div>
+
+            <div class="side-section">
+                <div class="side-title">ՊԼԱՆ</div>
+                <div class="side-plan-card">
+                    <div class="side-plan-header">
+                        <span class="side-plan-icon">💎</span>
+                        <span class="side-plan-name" id="sidePlanName">Free</span>
+                    </div>
+                    <p class="side-plan-desc" id="sidePlanDesc">Հայտարարություն տեղադրելու համար ակտիվացրեք պլան։</p>
+                    <a href="pricing.html" class="side-plan-cta">Բարելավել →</a>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- ============ MAIN CONTENT ============ -->
+        <div class="profile-content">
+
+            <!-- ================= ACCOUNT ================= -->
+            <section class="content-section" id="section-account">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <span class="section-eyebrow">ՀԱՇԻՎ</span>
+                        <h2>Անձնական տվյալներ</h2>
+                        <p>Կառավարեք ձեր հիմնական տվյալները և կապի միջոցները</p>
+                    </div>
+                </div>
+
+                <form id="profileForm" class="premium-form">
+                    <div class="form-row">
+                        <div class="form-field">
+                            <label for="pName">
+                                Անուն / ֆերմայի անուն
+                                <span class="field-req">*</span>
+                            </label>
+                            <div class="input-wrap">
+                                <input id="pName" type="text" required placeholder="Օր․ Green Farm">
+                                <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                    <circle cx="12" cy="7" r="4"/>
+                                </svg>
+                            </div>
+                        </div>
+
+                        <div class="form-field">
+                            <label for="pCountry">Երկիր</label>
+                            <div class="input-wrap">
+                                <input id="pCountry" type="text" placeholder="Հայաստան">
+                                <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="2" y1="12" x2="22" y2="12"/>
+                                    <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Էլ․ փոստ</label>
+                        <div class="input-wrap verified">
+                            <input id="pEmail" type="email" disabled>
+                            <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                            <span class="verify-tag" id="emailVerifyTag">
+                                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                </svg>
+                                Հաստատված
+                            </span>
+                        </div>
+                    </div>
+
+                    <div class="form-field">
+                        <label>Հեռախոս</label>
+                        <div class="input-wrap verified-group">
+                            <div class="input-wrap-inner">
+                                <input id="pPhone" type="tel" placeholder="+374 XX XX XX XX">
+                                <svg class="input-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                                </svg>
+                            </div>
+                            <button type="button" id="phoneVerifyBtn" class="verify-btn">
+                                Հաստատել
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button class="btn-primary" type="submit">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                                <polyline points="17 21 17 13 7 13 7 21"/>
+                                <polyline points="7 3 7 8 15 8"/>
+                            </svg>
+                            Պահպանել փոփոխությունները
+                        </button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- ================= SECURITY ================= -->
+            <section class="content-section" id="section-security">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <span class="section-eyebrow">ԱՆՎՏԱՆԳՈՒԹՅՈՒՆ</span>
+                        <h2>Անվտանգություն</h2>
+                        <p>Պաշտպանեք ձեր հաշիվը և կառավարեք մուտքի եղանակները</p>
+                    </div>
+                </div>
+
+                <div class="settings-list">
+
+                    <div class="setting-item">
+                        <div class="setting-icon blue">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2"/>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                            </svg>
+                        </div>
+                        <div class="setting-info">
+                            <h3>Գաղտնաբառ</h3>
+                            <p>Վերջին փոփոխությունը՝ անհայտ</p>
+                        </div>
+                        <button class="btn-secondary" id="passwordReset" type="button">
+                            Փոխել գաղտնաբառը
+                        </button>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-icon green">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <div class="setting-info">
+                            <h3>Էլ․ փոստ</h3>
+                            <p id="securityEmail">—</p>
+                        </div>
+                        <span class="status-badge success">
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            Հաստատված
+                        </span>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-icon orange">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/>
+                            </svg>
+                        </div>
+                        <div class="setting-info">
+                            <h3>Հեռախոս</h3>
+                            <p id="securityPhone">—</p>
+                        </div>
+                        <button class="btn-secondary" id="phoneVerifyBtn2" type="button">
+                            Հաստատել
+                        </button>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-icon purple">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+                                <path d="M2 17l10 5 10-5M2 12l10 5 10-5"/>
+                            </svg>
+                        </div>
+                        <div class="setting-info">
+                            <h3>Երկգործոն նույնականացում</h3>
+                            <p>Ավելի բարձր անվտանգություն</p>
+                        </div>
+                        <span class="status-badge muted">
+                            Շուտով
+                        </span>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- ================= PLAN ================= -->
+            <section class="content-section" id="section-plan">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <span class="section-eyebrow">ՍԱԿԱԳԻՆ</span>
+                        <h2>Ձեր սակագինը</h2>
+                        <p>Կառավարեք ձեր բաժանորդագրությունը</p>
+                    </div>
+                </div>
+
+                <div class="plan-showcase" id="planShowcase">
+                    <div class="plan-showcase-left">
+                        <div class="plan-showcase-badge" id="planShowcaseBadge">FREE</div>
+                        <h3 class="plan-showcase-name" id="currentPlan">Free</h3>
+                        <p class="plan-showcase-desc" id="planStatus">
+                            Հայտարարություն տեղադրելու համար ակտիվացրեք պլան։
+                        </p>
+
+                        <div class="plan-features-preview">
+                            <div class="preview-item" id="previewItem1">
+                                <span class="preview-check">✓</span>
+                                Դիտել հայտարարությունները
+                            </div>
+                            <div class="preview-item" id="previewItem2">
+                                <span class="preview-check">✓</span>
+                                Ընթերցել նորությունները
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="plan-showcase-right">
+                        <a href="pricing.html" class="btn-primary plan-upgrade-btn">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <path d="M12 2l3 6 6 1-4.5 4.5L18 20l-6-3-6 3 1.5-6.5L3 9l6-1z"/>
+                            </svg>
+                            <span id="planUpgradeText">Բարելավել սակագինը</span>
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- ================= SETTINGS ================= -->
+            <section class="content-section" id="section-settings">
+                <div class="section-header">
+                    <div class="section-header-left">
+                        <span class="section-eyebrow">ԿԱՐԳԱՎՈՐՈՒՄՆԵՐ</span>
+                        <h2>Կարգավորումներ</h2>
+                        <p>Հարմարեցրեք ձեր փորձառությունը</p>
+                    </div>
+                </div>
+
+                <div class="settings-list">
+
+                    <div class="setting-item">
+                        <div class="setting-icon teal">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="5"/>
+                                <path d="M12 1v6m0 6v6M5.6 5.6l4.2 4.2m4.2 4.2l4.2 4.2M1 12h6m6 0h6M5.6 18.4l4.2-4.2m4.2-4.2l4.2-4.2"/>
+                            </svg>
+                        </div>
+                        <div class="setting-info">
+                            <h3>Թեմա</h3>
+                            <p>Փոխեք հավելվածի տեսքը բացից մուգի</p>
+                        </div>
+                        <label class="switch">
+                            <input id="themeSwitch" type="checkbox">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-icon blue">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                            </svg>
+                        </div>
+                        <div class="setting-info">
+                            <h3>Էլ. փոստի ծանուցումներ</h3>
+                            <p>Ստանալ նոր հայտարարությունների և հաղորդագրությունների մասին</p>
+                        </div>
+                        <label class="switch">
+                            <input id="notificationsSwitch" type="checkbox" checked>
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+
+                    <div class="setting-item">
+                        <div class="setting-icon green">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16v16H4z"/>
+                                <path d="M22 6l-10 7L2 6"/>
+                            </svg>
+                        </div>
+                        <div class="setting-info">
+                            <h3>Շուկայական նամակ</h3>
+                            <p>Շաբաթական ամփոփում և հուշումներ</p>
+                        </div>
+                        <label class="switch">
+                            <input id="newsletterSwitch" type="checkbox">
+                            <span class="switch-slider"></span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <!-- DANGER ZONE -->
+                <div class="danger-zone">
+                    <div class="danger-header">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                            <line x1="12" y1="9" x2="12" y2="13"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <div>
+                            <h3>Վտանգավոր գոտի</h3>
+                            <p>Այս գործողությունները անշրջելի են</p>
+                        </div>
+                    </div>
+                    <button class="btn-danger" id="deleteAccountBtn" type="button">
+                        Ջնջել հաշիվը
+                    </button>
+                </div>
+            </section>
+
+        </div>
+    </div>
+</main>
+
+<footer>
+    <span>🌱 <b>EcoFarm Connect</b></span>
+    <span>© 2026 — Բոլոր իրավունքները պաշտպանված են։</span>
+</footer>
+
+<div id="toast" class="toast"></div>
+
+<script type="module" src="app.js"></script>
+<script type="module" src="profile.js"></script>
+</body>
+</html>
